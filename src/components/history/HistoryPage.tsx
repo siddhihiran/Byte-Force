@@ -4,11 +4,7 @@ import {
   Trash2, 
   ArrowRight, 
   FileText, 
-  Clock, 
   Layers, 
-  Sparkles, 
-  BookOpen, 
-  CheckCircle2, 
   Search 
 } from 'lucide-react';
 import { HistoryEntry } from '../../types';
@@ -36,7 +32,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
   );
 
   return (
-    <div style={{ maxWidth: 1140, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 24 }}>
+    <div style={{ maxWidth: 1180, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 24 }}>
       {/* Page Header */}
       <div style={{
         display: 'flex',
@@ -50,24 +46,26 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
             <div style={{
-              width: 32,
-              height: 32,
-              borderRadius: 8,
-              background: 'var(--brand-cyan-glow)',
+              width: 36,
+              height: 36,
+              borderRadius: 10,
+              background: 'rgba(56, 189, 248, 0.12)',
+              border: '1px solid rgba(56, 189, 248, 0.25)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              color: 'var(--brand-cyan)'
             }}>
-              <History size={16} color="var(--brand-cyan)" />
+              <History size={18} />
             </div>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 800 }}>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em', margin: 0 }}>
               Transformation History
             </h1>
-            <span className="badge badge-cyan">
+            <span className="badge badge-cyan" style={{ fontSize: '0.72rem', padding: '3px 9px' }}>
               {historyEntries.length} Saved Run{historyEntries.length !== 1 ? 's' : ''}
             </span>
           </div>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: 0 }}>
             Inspect past source documents, transformed assets, and reload any previous session.
           </p>
         </div>
@@ -97,21 +95,21 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
       {/* Search Bar */}
       {historyEntries.length > 0 && (
         <div style={{ position: 'relative' }}>
-          <Search size={16} color="var(--text-muted)" style={{ position: 'absolute', left: 14, top: 12 }} />
+          <Search size={16} color="var(--text-muted)" style={{ position: 'absolute', left: 14, top: 13 }} />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search history by document title or purpose (e.g. 'Renewable', 'Quiz', 'Flashcards')..."
             className="input-control"
-            style={{ paddingLeft: 40, height: 42, fontSize: '0.875rem' }}
+            style={{ paddingLeft: 42, height: 42, fontSize: '0.875rem' }}
           />
         </div>
       )}
 
       {/* History Grid */}
       {filteredEntries.length === 0 ? (
-        <div className="glass-panel" style={{
+        <div className="bf-card" style={{
           padding: '60px 24px',
           textAlign: 'center',
           display: 'flex',
@@ -120,10 +118,11 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
           gap: 16
         }}>
           <div style={{
-            width: 54,
-            height: 54,
-            borderRadius: 12,
+            width: 56,
+            height: 56,
+            borderRadius: 14,
             background: 'rgba(255, 255, 255, 0.03)',
+            border: '1px solid var(--border-subtle)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
@@ -131,10 +130,10 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
             <History size={26} color="var(--text-muted)" />
           </div>
           <div>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, marginBottom: 6 }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', marginBottom: 6 }}>
               {searchTerm ? 'No Matching Transformations Found' : 'No Transformation History Yet'}
             </h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', maxWidth: 420 }}>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', maxWidth: 420, margin: 0, lineHeight: 1.5 }}>
               {searchTerm ? 'Try a different search term or clear the filter.' : 'When you ingest a source and transform it into assets, it will be automatically saved here for instant re-opening.'}
             </p>
           </div>
@@ -147,9 +146,9 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
           {filteredEntries.map((entry) => (
             <div
               key={entry.id}
-              className="glass-card"
+              className="bf-card"
               style={{
-                padding: '18px',
+                padding: '20px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
@@ -159,7 +158,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
             >
               {/* Header */}
               <div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10, marginBottom: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10, marginBottom: 10 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <FileText size={16} color="var(--brand-cyan)" />
                     <span className="badge badge-cyan" style={{ fontSize: '0.65rem' }}>
@@ -167,8 +166,8 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                     </span>
                   </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
                       {entry.timestamp}
                     </span>
                     <button
@@ -177,7 +176,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                         onDeleteEntry(entry.id);
                       }}
                       className="btn btn-ghost btn-sm"
-                      style={{ padding: '2px 4px', color: 'var(--brand-rose)' }}
+                      style={{ padding: '2px 6px', color: 'var(--brand-rose)' }}
                       title="Delete entry"
                     >
                       <Trash2 size={13} />
@@ -185,18 +184,18 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                   </div>
                 </div>
 
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#ffffff', marginBottom: 4 }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', marginBottom: 6, lineHeight: 1.3 }}>
                   {entry.sourceTitle}
                 </h3>
 
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
                   <span>{entry.wordCount} words</span>
                   <span>•</span>
                   <span>{entry.assets.length} Generated Output Asset{entry.assets.length !== 1 ? 's' : ''}</span>
                 </div>
 
                 {/* Purpose Tags */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
                   {entry.purposes.map((p, i) => (
                     <span key={i} className="badge badge-muted" style={{ fontSize: '0.65rem' }}>
                       {p.replace('_', ' ').toUpperCase()}
@@ -209,7 +208,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
               <button
                 onClick={() => onReopenEntry(entry)}
                 className="btn btn-secondary btn-sm"
-                style={{ width: '100%', justifyContent: 'space-between', marginTop: 4 }}
+                style={{ width: '100%', justifyContent: 'space-between', marginTop: 6 }}
               >
                 <span>Reopen Assets in Workspace</span>
                 <ArrowRight size={13} />

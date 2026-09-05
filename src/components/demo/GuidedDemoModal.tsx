@@ -9,8 +9,7 @@ import {
   Cpu, 
   Sliders, 
   ShieldCheck, 
-  Layers, 
-  Sparkles 
+  Layers 
 } from 'lucide-react';
 
 interface GuidedDemoModalProps {
@@ -127,7 +126,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
       <div 
         className="modal-content animate-fade-in" 
         onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: 620, padding: '28px' }}
+        style={{ maxWidth: 640, padding: '28px', border: '1px solid rgba(56, 189, 248, 0.25)' }}
       >
         {/* Header */}
         <div style={{
@@ -138,21 +137,22 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
           paddingBottom: 16,
           marginBottom: 20
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{
-              width: 34,
-              height: 34,
-              borderRadius: 8,
+              width: 36,
+              height: 36,
+              borderRadius: 10,
               background: 'linear-gradient(135deg, #0284c7 0%, #10b981 100%)',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              boxShadow: '0 0 16px rgba(56, 189, 248, 0.3)'
             }}>
               <Zap size={18} color="#ffffff" />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.1rem', fontWeight: 800 }}>
-                Guided Architecture Walkthrough
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
+                Architecture Walkthrough
               </h2>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                 SIH26154: Content Transformation Operating Layer
@@ -160,7 +160,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
             </div>
           </div>
 
-          <button onClick={onClose} className="btn btn-ghost btn-sm" style={{ padding: 4 }}>
+          <button onClick={onClose} className="btn btn-ghost btn-sm" style={{ padding: 6 }}>
             <X size={18} />
           </button>
         </div>
@@ -181,7 +181,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
                   ? 'rgba(255, 255, 255, 0.3)' 
                   : 'rgba(255, 255, 255, 0.08)',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.25s ease'
               }}
             />
           ))}
@@ -198,14 +198,15 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
           gap: 16
         }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '0.725rem', fontWeight: 800, color: active.color, letterSpacing: '0.04em' }}>
+            <span style={{ fontSize: '0.725rem', fontWeight: 800, color: active.color, letterSpacing: '0.05em' }}>
               {active.badge}
             </span>
             <div style={{
-              width: 32,
-              height: 32,
+              width: 34,
+              height: 34,
               borderRadius: 8,
-              background: `${active.color}20`,
+              background: `${active.color}15`,
+              border: `1px solid ${active.color}35`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -215,26 +216,26 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
             </div>
           </div>
 
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.3 }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.35, letterSpacing: '-0.01em', margin: 0 }}>
             {active.title}
           </h3>
 
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.65, margin: 0 }}>
             {active.summary}
           </p>
 
           <div style={{
             background: 'var(--bg-surface)',
             borderRadius: 'var(--radius-sm)',
-            padding: '14px',
+            padding: '16px',
             border: '1px solid var(--border-subtle)',
             display: 'flex',
             flexDirection: 'column',
-            gap: 8
+            gap: 10
           }}>
             {active.details.map((detail, dIdx) => (
-              <div key={dIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                <CheckCircle2 size={14} color={active.color} style={{ marginTop: 2, flexShrink: 0 }} />
+              <div key={dIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: '0.825rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>
+                <CheckCircle2 size={15} color={active.color} style={{ marginTop: 2, flexShrink: 0 }} />
                 <span>{detail}</span>
               </div>
             ))}
@@ -247,7 +248,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
           alignItems: 'center',
           justifyContent: 'space-between',
           borderTop: '1px solid var(--border-subtle)',
-          paddingTop: 16,
+          paddingTop: 18,
           marginTop: 20
         }}>
           <button

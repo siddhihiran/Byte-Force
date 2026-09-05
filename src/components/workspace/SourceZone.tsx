@@ -11,7 +11,8 @@ import {
   ChevronDown,
   ChevronUp,
   CheckCircle2,
-  AlertCircle
+  Layers,
+  ArrowRight
 } from 'lucide-react';
 import { SourceDocument } from '../../types';
 import { analyzeContent } from '../../services/ContentAnalyzer';
@@ -101,7 +102,7 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
       padding: '20px',
       height: '100%'
     }}>
-      {/* Zone Header & SOURCE READY state indicator */}
+      {/* Zone Header Strip */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -109,32 +110,38 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
         borderBottom: '1px solid var(--border-subtle)',
         paddingBottom: 12
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
           <div style={{
-            width: 22,
-            height: 22,
+            width: 24,
+            height: 24,
             borderRadius: 6,
             background: 'var(--brand-cyan-glow)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            border: '1px solid rgba(56, 189, 248, 0.25)'
           }}>
             <FileText size={13} color="var(--brand-cyan)" />
           </div>
-          <span style={{ fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.02em' }}>
-            01 • SOURCE CONTENT
-          </span>
+          <div>
+            <div style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '0.02em', color: '#ffffff' }}>
+              01 • SOURCE INTAKE
+            </div>
+            <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>
+              Authoritative input document
+            </div>
+          </div>
         </div>
 
-        {/* Phase 3: Content Status Indicator */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        {/* Live Content Status Badge */}
+        <div>
           {isProcessing ? (
             <span className="badge badge-indigo" style={{ fontSize: '0.65rem' }}>
-              PROCESSING...
+              ANALYZING...
             </span>
           ) : source.wordCount > 0 ? (
             <span className="badge badge-emerald" style={{ fontSize: '0.65rem' }}>
-              <CheckCircle2 size={11} /> SOURCE READY ✓
+              <CheckCircle2 size={11} /> READY ✓
             </span>
           ) : (
             <span className="badge badge-muted" style={{ fontSize: '0.65rem' }}>
@@ -144,7 +151,7 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
         </div>
       </div>
 
-      {/* Ingestion Mode Switcher */}
+      {/* Intake Method Tabs */}
       <div className="tab-list">
         <button
           onClick={() => setActiveTab('sample')}
@@ -168,100 +175,81 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
           style={{ flex: 1, justifyContent: 'center' }}
         >
           <Upload size={13} />
-          Upload File
+          Upload
         </button>
       </div>
 
-      {/* Tab Panels */}
+      {/* Tab 1: Curated Verified Samples */}
       {activeTab === 'sample' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <div style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
-            Select verified sample document (Clearly labeled DEMO CONTENT):
+            Select verified sample document:
           </div>
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {/* FEATURED DEMO SOURCE: AI in Healthcare */}
-            <button
+            {/* Primary Demo: AI in Healthcare */}
+            <div
               onClick={() => handleSampleClick('healthcare')}
-              className={`glass-card ${source.title.includes('Healthcare') ? 'active' : ''}`}
-              style={{
-                padding: '10px 12px',
-                textAlign: 'left',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                cursor: 'pointer'
-              }}
+              className={`bf-card interactive ${source.title.includes('Healthcare') ? 'active' : ''}`}
+              style={{ padding: '10px 12px' }}
             >
-              <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#ffffff' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#ffffff' }}>
                   AI in Healthcare — Research Brief.pdf
-                </div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                  Diagnostic Precision • Ambient Workflows • FDA SaMD
-                </div>
+                </span>
+                <span className="badge badge-cyan" style={{ fontSize: '0.6rem' }}>Primary</span>
               </div>
-              <span className="badge badge-cyan" style={{ fontSize: '0.65rem' }}>Primary Demo</span>
-            </button>
+              <div style={{ fontSize: '0.685rem', color: 'var(--text-muted)' }}>
+                1,180 Words • Diagnostic Sensitivity & Ambient Workflows
+              </div>
+            </div>
 
-            {/* Alternate Demo: Renewable Energy */}
-            <button
+            {/* Alternate 1: Renewable Energy */}
+            <div
               onClick={() => handleSampleClick('renewable-energy')}
-              className={`glass-card ${source.title.includes('Renewable') ? 'active' : ''}`}
-              style={{
-                padding: '10px 12px',
-                textAlign: 'left',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                cursor: 'pointer'
-              }}
+              className={`bf-card interactive ${source.title.includes('Renewable') ? 'active' : ''}`}
+              style={{ padding: '10px 12px' }}
             >
-              <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#ffffff' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#ffffff' }}>
                   Renewable Energy: Grid Parity.pdf
-                </div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                  LCOE • Intermittency • Battery Storage
-                </div>
+                </span>
+                <span className="badge badge-muted" style={{ fontSize: '0.6rem' }}>Alternate</span>
               </div>
-              <span className="badge badge-muted" style={{ fontSize: '0.65rem' }}>Alternate</span>
-            </button>
+              <div style={{ fontSize: '0.685rem', color: 'var(--text-muted)' }}>
+                1,240 Words • Levelized Cost, Intermittency & Storage
+              </div>
+            </div>
 
-            {/* Deep Tech: Autonomous AI Agents */}
-            <button
+            {/* Alternate 2: AI Agents */}
+            <div
               onClick={() => handleSampleClick('ai-agents')}
-              className={`glass-card ${source.title.includes('Agent') ? 'active' : ''}`}
-              style={{
-                padding: '10px 12px',
-                textAlign: 'left',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                cursor: 'pointer'
-              }}
+              className={`bf-card interactive ${source.title.includes('Agent') ? 'active' : ''}`}
+              style={{ padding: '10px 12px' }}
             >
-              <div>
-                <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#ffffff' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
+                <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#ffffff' }}>
                   Autonomous AI Agents.docx
-                </div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-                  Tool Calling • ReAct • Memory Loops
-                </div>
+                </span>
+                <span className="badge badge-indigo" style={{ fontSize: '0.6rem' }}>Deep Tech</span>
               </div>
-              <span className="badge badge-indigo" style={{ fontSize: '0.65rem' }}>Deep Tech</span>
-            </button>
+              <div style={{ fontSize: '0.685rem', color: 'var(--text-muted)' }}>
+                1,090 Words • Tool Calling, ReAct & Reflection Loops
+              </div>
+            </div>
           </div>
         </div>
       )}
 
+      {/* Tab 2: Raw Text Ingestion */}
       {activeTab === 'paste' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <textarea
             value={pastedText}
             onChange={(e) => setPastedText(e.target.value)}
-            placeholder="Paste your source document, article, notes, or transcript here..."
+            placeholder="Paste raw notes, research summaries, conference papers, or articles..."
             className="input-control input-textarea"
-            style={{ height: 110, fontSize: '0.8rem', fontFamily: 'inherit' }}
+            style={{ height: 115, fontSize: '0.8rem', lineHeight: 1.5 }}
           />
           <button
             onClick={handleApplyPasted}
@@ -269,12 +257,13 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
             className="btn btn-primary btn-sm"
             style={{ alignSelf: 'flex-end' }}
           >
-            <RefreshCw size={13} />
-            {isProcessing ? 'Analyzing...' : 'Ingest & Analyze Source'}
+            <RefreshCw size={12} />
+            <span>{isProcessing ? 'Ingesting...' : 'Ingest & Analyze Source'}</span>
           </button>
         </div>
       )}
 
+      {/* Tab 3: File Upload */}
       {activeTab === 'upload' && (
         <label style={{
           border: '1.5px dashed var(--border-medium)',
@@ -286,13 +275,13 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
           justifyContent: 'center',
           gap: 10,
           cursor: 'pointer',
-          background: 'rgba(255, 255, 255, 0.02)',
-          transition: 'border-color 0.2s ease'
+          background: 'rgba(255, 255, 255, 0.015)',
+          transition: 'all 0.2s ease'
         }}>
-          <Upload size={24} color="var(--brand-cyan)" />
+          <Upload size={22} color="var(--brand-cyan)" />
           <div style={{ textAlign: 'center' }}>
-            <div style={{ fontSize: '0.825rem', fontWeight: 600 }}>Drop source file here</div>
-            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.825rem', fontWeight: 700, color: '#ffffff' }}>Upload Source Document</div>
+            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: 2 }}>
               Supports PDF, DOCX, TXT, MD
             </div>
           </div>
@@ -305,79 +294,71 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
         </label>
       )}
 
-      {/* Ingested Source Overview Card (Phase 3) */}
-      <div style={{
-        background: 'var(--bg-surface)',
-        border: '1px solid var(--border-subtle)',
-        borderRadius: 'var(--radius-md)',
-        padding: '12px'
-      }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'flex-start',
-          justifyContent: 'space-between',
-          gap: 10,
-          marginBottom: 8
-        }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ fontSize: '0.875rem', fontWeight: 700, color: '#ffffff' }}>
+      {/* Active Source Metadata Summary */}
+      <div className="bf-card" style={{ padding: '12px 14px' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10 }}>
+          <div style={{ overflow: 'hidden' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
+              <span style={{
+                fontSize: '0.85rem',
+                fontWeight: 800,
+                color: '#ffffff',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}>
                 {source.title}
               </span>
-              <span className="badge badge-cyan" style={{ fontSize: '0.6rem' }}>
+              <span className="badge badge-cyan" style={{ fontSize: '0.6rem', padding: '1px 5px' }}>
                 {source.type.toUpperCase()}
               </span>
             </div>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 12,
-              marginTop: 4,
-              fontSize: '0.725rem',
-              color: 'var(--text-muted)'
-            }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.725rem', color: 'var(--text-muted)' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                <BookOpen size={12} /> {source.wordCount} words
+                <BookOpen size={12} color="var(--text-dim)" /> {source.wordCount} words
               </span>
+              <span>•</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                <Clock size={12} /> {source.readingTime}
+                <Clock size={12} color="var(--text-dim)" /> {source.readingTime}
               </span>
             </div>
           </div>
+
           <button
             onClick={() => setShowFullSource(!showFullSource)}
             className="btn btn-ghost btn-sm"
-            style={{ padding: '3px 6px', fontSize: '0.7rem' }}
+            style={{ padding: '3px 8px', fontSize: '0.7rem', flexShrink: 0 }}
             title="Inspect source text"
           >
             <Eye size={12} />
-            {showFullSource ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+            <span>{showFullSource ? 'Hide' : 'Inspect'}</span>
           </button>
         </div>
 
-        {/* Collapsible clean source preview */}
+        {/* Collapsible raw content inspector */}
         {showFullSource && (
           <div style={{
             background: 'var(--bg-canvas)',
             borderRadius: 'var(--radius-xs)',
-            padding: '10px',
-            fontSize: '0.75rem',
+            padding: '10px 12px',
+            fontSize: '0.725rem',
             color: 'var(--text-secondary)',
             maxHeight: 160,
             overflowY: 'auto',
             border: '1px solid var(--border-subtle)',
             whiteSpace: 'pre-wrap',
-            marginTop: 8
+            marginTop: 10,
+            lineHeight: 1.55
           }}>
             {source.content}
           </div>
         )}
       </div>
 
-      {/* CONTENT INTELLIGENCE & EXTRACTED SECTIONS PANEL */}
+      {/* Content Intelligence & Structural Extraction */}
       <div style={{
-        background: 'rgba(14, 18, 26, 0.7)',
-        border: '1px solid rgba(56, 189, 248, 0.15)',
+        background: 'rgba(10, 14, 22, 0.85)',
+        border: '1px solid var(--border-subtle)',
         borderRadius: 'var(--radius-md)',
         padding: '14px',
         display: 'flex',
@@ -392,25 +373,25 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
           paddingBottom: 6
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <FileCheck size={14} color="#38bdf8" />
-            <span style={{ fontSize: '0.775rem', fontWeight: 700, color: 'var(--brand-cyan)' }}>
+            <FileCheck size={13} color="var(--brand-cyan)" />
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--brand-cyan)', letterSpacing: '0.04em' }}>
               CONTENT INTELLIGENCE
             </span>
           </div>
-          <span style={{ fontSize: '0.675rem', color: '#10b981', fontWeight: 600 }}>
+          <span style={{ fontSize: '0.675rem', color: '#10b981', fontWeight: 700 }}>
             Source Ready ✓
           </span>
         </div>
 
-        {/* Extracted Sections List (Phase 3 Requirement) */}
+        {/* Detected Structure / Sections */}
         <div>
-          <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)', marginBottom: 4, fontWeight: 600 }}>
+          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.04em', marginBottom: 4 }}>
             EXTRACTED SECTIONS
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-            {source.detectedStructure.sections.map((section, i) => (
-              <span key={i} className="badge badge-muted" style={{ fontSize: '0.65rem' }}>
-                § {section}
+            {source.detectedStructure.sections.map((sec, i) => (
+              <span key={i} className="badge badge-muted" style={{ fontSize: '0.625rem' }}>
+                § {sec}
               </span>
             ))}
           </div>
@@ -418,22 +399,22 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
 
         {/* Core Concepts */}
         <div>
-          <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)', marginBottom: 4, fontWeight: 600 }}>
+          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.04em', marginBottom: 4 }}>
             KEY TOPICS & CONCEPTS
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
             {source.detectedStructure.keyConcepts.map((concept, i) => (
-              <span key={i} className="badge badge-indigo" style={{ fontSize: '0.65rem' }}>
+              <span key={i} className="badge badge-indigo" style={{ fontSize: '0.625rem' }}>
                 {concept}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Technical Entities / Terms */}
+        {/* Technical Terminology */}
         <div>
-          <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)', marginBottom: 4, fontWeight: 600 }}>
-            ENTITIES & TERMINOLOGY
+          <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.04em', marginBottom: 4 }}>
+            TERMINOLOGY & ENTITIES
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
             {source.detectedStructure.technicalTerms.map((term, i) => (
@@ -442,8 +423,9 @@ export const SourceZone: React.FC<SourceZoneProps> = ({
                 fontFamily: 'var(--font-mono)',
                 color: 'var(--brand-cyan)',
                 background: 'rgba(56, 189, 248, 0.08)',
-                padding: '1px 5px',
-                borderRadius: 4
+                padding: '2px 6px',
+                borderRadius: 4,
+                border: '1px solid rgba(56, 189, 248, 0.15)'
               }}>
                 {term}
               </span>

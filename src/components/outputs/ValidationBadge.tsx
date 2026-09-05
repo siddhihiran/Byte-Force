@@ -26,11 +26,11 @@ export const ValidationBadge: React.FC<ValidationBadgeProps> = ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      background: 'rgba(16, 185, 129, 0.05)',
+      background: 'rgba(16, 185, 129, 0.04)',
       border: '1px solid rgba(16, 185, 129, 0.22)',
       borderRadius: 'var(--radius-sm)',
       padding: '8px 14px',
-      fontSize: '0.75rem',
+      fontSize: '0.725rem',
       color: '#34d399',
       flexWrap: 'wrap',
       gap: 12
@@ -45,31 +45,31 @@ export const ValidationBadge: React.FC<ValidationBadgeProps> = ({
           color: '#10b981',
           letterSpacing: '0.04em'
         }}>
-          <ShieldCheck size={15} color="#10b981" />
-          <span>QUALITY CHECK</span>
+          <ShieldCheck size={14} color="#10b981" />
+          <span>QUALITY AUDIT</span>
         </div>
 
         {sourceTitle && (
-          <span style={{ color: 'var(--text-secondary)', fontSize: '0.725rem' }}>
+          <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem' }}>
             Based on: <strong style={{ color: '#ffffff' }}>{sourceTitle}</strong>
           </span>
         )}
       </div>
 
       {/* Right: Truthful Heuristic Verification Indicators */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <CheckCircle2 size={13} color="#10b981" />
+          <CheckCircle2 size={12} color="#10b981" />
           <span>Source Context: Verified</span>
         </span>
 
         <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <CheckCircle2 size={13} color="#10b981" />
+          <CheckCircle2 size={12} color="#10b981" />
           <span>Structure: Compliant</span>
         </span>
 
         <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <CheckCircle2 size={13} color="#10b981" />
+          <CheckCircle2 size={12} color="#10b981" />
           <span>Requested Format: Valid</span>
         </span>
 
@@ -78,10 +78,10 @@ export const ValidationBadge: React.FC<ValidationBadgeProps> = ({
           alignItems: 'center',
           gap: 4,
           background: 'rgba(16, 185, 129, 0.1)',
-          padding: '2px 8px',
+          padding: '2px 7px',
           borderRadius: 4,
           fontFamily: 'var(--font-mono)',
-          fontSize: '0.7rem'
+          fontSize: '0.675rem'
         }}>
           <span>Missing Sections: {current.missingSections}</span>
         </span>
@@ -93,7 +93,7 @@ export const ValidationBadge: React.FC<ValidationBadgeProps> = ({
           color: 'var(--brand-cyan)',
           fontWeight: 700
         }}>
-          <FileCheck size={13} color="var(--brand-cyan)" />
+          <FileCheck size={12} color="var(--brand-cyan)" />
           <span>Source-grounded ✓</span>
         </span>
       </div>

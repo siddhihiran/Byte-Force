@@ -7,12 +7,10 @@ import {
   HelpCircle, 
   ArrowRight, 
   BookOpen, 
-  Sparkles, 
-  Download 
+  Sparkles 
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { OutputAsset, QuizData } from '../../types';
-import { ValidationBadge } from './ValidationBadge';
 
 interface QuizRunnerProps {
   asset: OutputAsset;
@@ -73,7 +71,7 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
   const percentage = Math.round((score / questions.length) * 100);
 
   return (
-    <div className="glass-card animate-fade-in" style={{
+    <div className="bf-card animate-fade-in" style={{
       padding: '24px',
       display: 'flex',
       flexDirection: 'column',
@@ -91,18 +89,14 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <span className="badge badge-purple" style={{
-              background: 'rgba(168, 85, 247, 0.15)',
-              color: '#c084fc',
-              border: '1px solid rgba(168, 85, 247, 0.3)'
-            }}>
-              TEST • DIAGNOSTIC ASSESSMENT
+            <span className="badge badge-indigo">
+              ASSESS • DIAGNOSTIC ASSESSMENT
             </span>
             <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
               {asset.format}
             </span>
           </div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800 }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
             {asset.title}
           </h2>
         </div>
@@ -125,8 +119,6 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
         </div>
       </div>
 
-      <ValidationBadge signals={asset.validationSignals} />
-
       {!quizFinished ? (
         <>
           {/* Progress Indicator */}
@@ -138,7 +130,7 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
             color: 'var(--text-muted)'
           }}>
             <span>Question <strong style={{ color: '#ffffff' }}>{currentQuestionIndex + 1}</strong> of {questions.length}</span>
-            <span style={{ color: 'var(--brand-cyan)' }}>
+            <span style={{ color: 'var(--brand-cyan)', fontWeight: 600 }}>
               Target: {currentQ?.concept}
             </span>
           </div>
@@ -152,7 +144,7 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
             <div style={{
               height: '100%',
               width: `${((currentQuestionIndex + 1) / questions.length) * 100}%`,
-              background: 'linear-gradient(90deg, #a855f7, #38bdf8)',
+              background: 'linear-gradient(90deg, #6366f1, #38bdf8)',
               transition: 'width 0.2s ease'
             }} />
           </div>
@@ -189,7 +181,7 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                transition: 'all 0.15s ease',
+                transition: 'all var(--transition-fast)',
                 textAlign: 'left'
               };
 
@@ -221,12 +213,12 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
                       height: 26,
                       borderRadius: '50%',
                       background: isSelected ? 'var(--brand-cyan)' : 'rgba(255, 255, 255, 0.05)',
-                      color: isSelected ? '#000000' : 'var(--text-secondary)',
+                      color: isSelected ? '#06080c' : 'var(--text-secondary)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       fontSize: '0.75rem',
-                      fontWeight: 700,
+                      fontWeight: 800,
                       flexShrink: 0
                     }}>
                       {String.fromCharCode(65 + idx)}
@@ -247,10 +239,10 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
             })}
           </div>
 
-          {/* Rationale / Explanation Box (reveals after submission) */}
+          {/* Rationale / Explanation Box */}
           {isAnswerSubmitted && (
             <div className="animate-fade-in" style={{
-              background: 'rgba(15, 23, 42, 0.8)',
+              background: 'rgba(15, 23, 42, 0.85)',
               border: '1px solid rgba(56, 189, 248, 0.25)',
               borderRadius: 'var(--radius-sm)',
               padding: '16px',
@@ -263,7 +255,7 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
                 alignItems: 'center',
                 gap: 6,
                 fontSize: '0.75rem',
-                fontWeight: 700,
+                fontWeight: 800,
                 color: selectedOption === currentQ.correctIndex ? '#34d399' : '#fb7185'
               }}>
                 <HelpCircle size={14} />
@@ -273,7 +265,7 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
                     : 'INCORRECT • SOURCE RATIONALE'}
                 </span>
               </div>
-              <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
                 {currentQ.explanation}
               </p>
             </div>
@@ -333,10 +325,10 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
           </div>
 
           <div>
-            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: 4 }}>
+            <h3 style={{ fontSize: '1.65rem', fontWeight: 800, marginBottom: 4, color: '#ffffff' }}>
               Diagnostic Assessment Complete
             </h3>
-            <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
               Evaluated against source document facts
             </div>
           </div>
@@ -367,7 +359,7 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
             </span>
           </div>
 
-          {/* Concepts to Revise (Required by Spec #20) */}
+          {/* Concepts to Revise */}
           <div style={{
             width: '100%',
             maxWidth: 480,

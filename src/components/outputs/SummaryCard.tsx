@@ -11,7 +11,6 @@ import {
   BookMarked 
 } from 'lucide-react';
 import { OutputAsset, SummaryData } from '../../types';
-import { ValidationBadge } from './ValidationBadge';
 
 interface SummaryCardProps {
   asset: OutputAsset;
@@ -55,7 +54,7 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
   };
 
   return (
-    <div className="glass-card animate-fade-in" style={{
+    <div className="bf-card animate-fade-in" style={{
       padding: '24px',
       display: 'flex',
       flexDirection: 'column',
@@ -73,24 +72,24 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <span className="badge badge-cyan">LEARN • SYNTHESIS</span>
+            <span className="badge badge-cyan">LEARN • EXECUTIVE SYNTHESIS</span>
             <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
               {asset.format}
             </span>
           </div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800 }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
             {asset.title}
           </h2>
         </div>
 
         {/* Actions Toolbar */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
           <button
             onClick={() => setIsEditing(!isEditing)}
             className={`btn btn-sm ${isEditing ? 'btn-primary' : 'btn-secondary'}`}
           >
             <Edit3 size={13} />
-            <span>{isEditing ? 'Done Editing' : 'Edit'}</span>
+            <span>{isEditing ? 'Done' : 'Edit'}</span>
           </button>
           <button
             onClick={handleCopy}
@@ -117,9 +116,6 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
         </div>
       </div>
 
-      {/* Quality signals */}
-      <ValidationBadge signals={asset.validationSignals} />
-
       {/* SECTION 1: OVERVIEW */}
       <div style={{
         background: 'var(--bg-canvas)',
@@ -132,11 +128,12 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
           alignItems: 'center',
           gap: 8,
           marginBottom: 8,
-          fontSize: '0.8rem',
-          fontWeight: 700,
-          color: 'var(--brand-cyan)'
+          fontSize: '0.785rem',
+          fontWeight: 800,
+          color: 'var(--brand-cyan)',
+          letterSpacing: '0.04em'
         }}>
-          <FileText size={15} />
+          <FileText size={14} />
           <span>EXECUTIVE OVERVIEW</span>
         </div>
         {isEditing ? (
@@ -147,7 +144,7 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
             style={{ minHeight: 90 }}
           />
         ) : (
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>
             {data.overview}
           </p>
         )}
@@ -160,12 +157,13 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
           alignItems: 'center',
           gap: 8,
           marginBottom: 10,
-          fontSize: '0.8rem',
-          fontWeight: 700,
-          color: '#ffffff'
+          fontSize: '0.785rem',
+          fontWeight: 800,
+          color: '#ffffff',
+          letterSpacing: '0.04em'
         }}>
-          <Sparkles size={15} color="#38bdf8" />
-          <span>KEY INSIGHTS</span>
+          <Sparkles size={14} color="#38bdf8" />
+          <span>KEY STRATEGIC INSIGHTS</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {data.keyInsights.map((insight, idx) => (
@@ -191,13 +189,13 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: '0.75rem',
-                fontWeight: 700,
+                fontWeight: 800,
                 flexShrink: 0,
                 marginTop: 1
               }}>
                 {idx + 1}
               </div>
-              <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
                 {insight}
               </p>
             </div>
@@ -212,11 +210,12 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
           alignItems: 'center',
           gap: 8,
           marginBottom: 10,
-          fontSize: '0.8rem',
-          fontWeight: 700,
-          color: '#ffffff'
+          fontSize: '0.785rem',
+          fontWeight: 800,
+          color: '#ffffff',
+          letterSpacing: '0.04em'
         }}>
-          <BookMarked size={15} color="#818cf8" />
+          <BookMarked size={14} color="#818cf8" />
           <span>CORE CONCEPT LEXICON</span>
         </div>
         <div style={{
@@ -257,11 +256,12 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
           alignItems: 'center',
           gap: 8,
           marginBottom: 10,
-          fontSize: '0.8rem',
-          fontWeight: 700,
-          color: '#10b981'
+          fontSize: '0.785rem',
+          fontWeight: 800,
+          color: '#34d399',
+          letterSpacing: '0.04em'
         }}>
-          <ListChecks size={15} />
+          <ListChecks size={14} />
           <span>ACTIONABLE TAKEAWAYS</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -273,7 +273,8 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
                 alignItems: 'flex-start',
                 gap: 10,
                 fontSize: '0.85rem',
-                color: 'var(--text-secondary)'
+                color: 'var(--text-secondary)',
+                lineHeight: 1.5
               }}
             >
               <span style={{ color: '#10b981', fontWeight: 800 }}>→</span>

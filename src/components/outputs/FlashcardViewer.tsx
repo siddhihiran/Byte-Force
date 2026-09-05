@@ -5,14 +5,11 @@ import {
   RotateCw, 
   Shuffle, 
   CheckCircle, 
-  HelpCircle, 
   Copy, 
   Check, 
-  Download, 
   Layers 
 } from 'lucide-react';
 import { OutputAsset, FlashcardData, FlashcardItem } from '../../types';
-import { ValidationBadge } from './ValidationBadge';
 
 interface FlashcardViewerProps {
   asset: OutputAsset;
@@ -33,14 +30,14 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
     setIsFlipped(false);
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % cards.length);
-    }, 150);
+    }, 140);
   };
 
   const handlePrev = () => {
     setIsFlipped(false);
     setTimeout(() => {
       setCurrentIndex((prev) => (prev - 1 + cards.length) % cards.length);
-    }, 150);
+    }, 140);
   };
 
   const toggleMastered = (id: string) => {
@@ -64,7 +61,7 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
   };
 
   return (
-    <div className="glass-card animate-fade-in" style={{
+    <div className="bf-card animate-fade-in" style={{
       padding: '24px',
       display: 'flex',
       flexDirection: 'column',
@@ -82,12 +79,12 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <span className="badge badge-indigo">ACTIVE RECALL • FLASHCARDS</span>
+            <span className="badge badge-indigo">ACTIVE RECALL • 3D FLASHCARDS</span>
             <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
               Card {currentIndex + 1} of {cards.length}
             </span>
           </div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800 }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
             {asset.title}
           </h2>
         </div>
@@ -119,8 +116,6 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
         </div>
       </div>
 
-      <ValidationBadge signals={asset.validationSignals} />
-
       {/* Progress & Mastery Header */}
       <div style={{
         display: 'flex',
@@ -150,11 +145,11 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
           height: '100%',
           width: `${((currentIndex + 1) / cards.length) * 100}%`,
           background: 'linear-gradient(90deg, #6366f1, #38bdf8)',
-          transition: 'width 0.2s ease'
+          transition: 'width 0.25s ease'
         }} />
       </div>
 
-      {/* 3D INTERACTIVE FLIP CARD CONTAINER */}
+      {/* 3D INTERACTIVE FLIP CARD */}
       <div
         className="perspective-1000"
         style={{
@@ -181,8 +176,8 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(145deg, #131824 0%, #0d111a 100%)',
-              border: '1.5px solid rgba(99, 102, 241, 0.3)',
+              background: 'linear-gradient(145deg, #131926 0%, #0c1018 100%)',
+              border: '1.5px solid rgba(99, 102, 241, 0.35)',
               borderRadius: 'var(--radius-lg)',
               padding: '32px 28px',
               display: 'flex',
@@ -196,18 +191,18 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
                 {currentCard?.category || 'CONCEPT TEST'}
               </span>
               <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
-                Click to reveal answer ⮐
+                Click card to reveal answer ⮐
               </span>
             </div>
 
             <div style={{ textAlign: 'center', padding: '16px 8px' }}>
-              <div style={{ fontSize: '0.8rem', color: 'var(--brand-cyan)', fontWeight: 700, marginBottom: 8 }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--brand-cyan)', fontWeight: 800, letterSpacing: '0.04em', marginBottom: 8 }}>
                 QUESTION {currentIndex + 1}
               </div>
               <h3 style={{
                 fontSize: '1.25rem',
                 fontWeight: 700,
-                lineHeight: 1.4,
+                lineHeight: 1.45,
                 color: '#ffffff'
               }}>
                 {currentCard?.question}
@@ -222,8 +217,8 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
               fontSize: '0.75rem',
               color: 'var(--text-dim)'
             }}>
-              <RotateCw size={13} />
-              <span>Tap card to flip</span>
+              <RotateCw size={12} />
+              <span>Click to flip</span>
             </div>
           </div>
 
@@ -233,8 +228,8 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
             style={{
               position: 'absolute',
               inset: 0,
-              background: 'linear-gradient(145deg, #0f1c2b 0%, #0b131e 100%)',
-              border: '1.5px solid rgba(56, 189, 248, 0.4)',
+              background: 'linear-gradient(145deg, #0e1a28 0%, #0a111b 100%)',
+              border: '1.5px solid rgba(56, 189, 248, 0.45)',
               borderRadius: 'var(--radius-lg)',
               padding: '32px 28px',
               display: 'flex',
@@ -248,7 +243,7 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
                 VERIFIED ANSWER
               </span>
               <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
-                Click to see question
+                Click to return to question
               </span>
             </div>
 
@@ -294,7 +289,7 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: 8
+        marginTop: 4
       }}>
         <button
           onClick={handlePrev}
@@ -310,7 +305,7 @@ export const FlashcardViewer: React.FC<FlashcardViewerProps> = ({ asset, onRegen
           className="btn btn-ghost btn-sm"
           style={{ color: 'var(--brand-cyan)' }}
         >
-          <RotateCw size={14} />
+          <RotateCw size={13} />
           <span>Flip Card</span>
         </button>
 

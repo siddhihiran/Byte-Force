@@ -5,7 +5,9 @@ import {
   Info,
   Presentation,
   Mic,
-  TrendingUp
+  TrendingUp,
+  Zap,
+  Sparkles
 } from 'lucide-react';
 import { 
   TransformationId, 
@@ -53,7 +55,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
       padding: '20px',
       height: '100%'
     }}>
-      {/* Header */}
+      {/* Zone Header Strip */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -61,23 +63,30 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
         borderBottom: '1px solid var(--border-subtle)',
         paddingBottom: 12
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
           <div style={{
-            width: 22,
-            height: 22,
+            width: 24,
+            height: 24,
             borderRadius: 6,
             background: 'var(--brand-indigo-glow)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            border: '1px solid rgba(99, 102, 241, 0.25)'
           }}>
             <Sliders size={13} color="#818cf8" />
           </div>
-          <span style={{ fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.02em' }}>
-            03 • TRANSFORMATION TUNING
-          </span>
+          <div>
+            <div style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '0.02em', color: '#ffffff' }}>
+              03 • TUNING & CONTROLS
+            </div>
+            <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>
+              Parameters for active purpose
+            </div>
+          </div>
         </div>
-        <span className="badge badge-indigo" style={{ fontSize: '0.65rem' }}>
+
+        <span className="badge badge-indigo" style={{ fontSize: '0.625rem' }}>
           {activePurpose.toUpperCase().replace('_', ' ')}
         </span>
       </div>
@@ -88,27 +97,28 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
         flexDirection: 'column',
         gap: 16,
         overflowY: 'auto',
-        maxHeight: 'calc(100vh - 380px)'
+        maxHeight: 'calc(100vh - 380px)',
+        paddingRight: 3
       }}>
         {/* SUMMARY / EXECUTIVE BRIEF CONFIG */}
         {(activePurpose === 'summary' || activePurpose === 'executive_brief') && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
                 Synthesis Depth & Format
               </label>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
                 {[
                   { id: 'quick', label: 'Quick Executive' },
                   { id: 'detailed', label: 'Deep Technical' },
-                  { id: 'exam', label: 'Exam High-Yield' },
+                  { id: 'exam', label: 'High-Yield' },
                   { id: 'executive', label: 'Decision Brief' }
                 ].map(opt => (
                   <button
                     key={opt.id}
                     onClick={() => onUpdateSummaryConfig({ format: opt.id as any })}
                     className={`btn btn-sm ${configs.summary.format === opt.id ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ justifyContent: 'center' }}
+                    style={{ justifyContent: 'center', fontSize: '0.75rem' }}
                   >
                     {opt.label}
                   </button>
@@ -117,7 +127,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
                 Tone Profile
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -126,7 +136,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={tone}
                     onClick={() => onUpdateSummaryConfig({ tone })}
                     className={`btn btn-sm ${configs.summary.tone === tone ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center' }}
+                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center', fontSize: '0.75rem' }}
                   >
                     {tone}
                   </button>
@@ -136,25 +146,27 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
 
             <div style={{
               background: 'rgba(56, 189, 248, 0.05)',
-              border: '1px solid rgba(56, 189, 248, 0.15)',
+              border: '1px solid rgba(56, 189, 248, 0.18)',
               borderRadius: 'var(--radius-sm)',
-              padding: '10px',
+              padding: '10px 12px',
               fontSize: '0.725rem',
-              color: 'var(--text-secondary)'
+              color: 'var(--text-secondary)',
+              lineHeight: 1.5
             }}>
-              <Info size={14} color="#38bdf8" style={{ marginBottom: 4 }} />
-              <div>
-                Emits 4 structured sections: Executive Overview, Key Insights, Concept Dictionary, and Actionable Takeaways.
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'var(--brand-cyan)', fontWeight: 700, marginBottom: 3 }}>
+                <Info size={13} />
+                <span>Structural Guarantee</span>
               </div>
+              Generates 4 structured blocks: Overview, Key Insights, Concept Dictionary, and Actionable Takeaways.
             </div>
           </div>
         )}
 
-        {/* PRESENTATION OUTLINE CONFIG (Required by Prompt #2 & #3) */}
+        {/* PRESENTATION OUTLINE CONFIG */}
         {activePurpose === 'presentation_outline' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
                 Slide Deck Length
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -163,7 +175,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={cnt}
                     onClick={() => onUpdateOutlineConfig({ slideCount: cnt as any })}
                     className={`btn btn-sm ${configs.outline?.slideCount === cnt ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, justifyContent: 'center' }}
+                    style={{ flex: 1, justifyContent: 'center', fontSize: '0.75rem' }}
                   >
                     {cnt} Slides
                   </button>
@@ -172,7 +184,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
                 Presentation Archetype
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -181,7 +193,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={fmt}
                     onClick={() => onUpdateOutlineConfig({ format: fmt })}
                     className={`btn btn-sm ${configs.outline?.format === fmt ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center' }}
+                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center', fontSize: '0.75rem' }}
                   >
                     {fmt}
                   </button>
@@ -191,16 +203,18 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
 
             <div style={{
               background: 'rgba(56, 189, 248, 0.05)',
-              border: '1px solid rgba(56, 189, 248, 0.15)',
+              border: '1px solid rgba(56, 189, 248, 0.18)',
               borderRadius: 'var(--radius-sm)',
-              padding: '10px',
+              padding: '10px 12px',
               fontSize: '0.725rem',
-              color: 'var(--text-secondary)'
+              color: 'var(--text-secondary)',
+              lineHeight: 1.5
             }}>
-              <Presentation size={14} color="#38bdf8" style={{ marginBottom: 4 }} />
-              <div>
-                Produces title slides, core bullet points, and talking points speaker notes for every slide.
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'var(--brand-cyan)', fontWeight: 700, marginBottom: 3 }}>
+                <Presentation size={13} />
+                <span>Deck Visualizer</span>
               </div>
+              Generates slide titles, structured bullet points, and speaking notes for each slide.
             </div>
           </div>
         )}
@@ -209,8 +223,8 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
         {activePurpose === 'quiz' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
-                Number of Diagnostic Questions
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+                Diagnostic Questions
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
                 {[5, 10].map(count => (
@@ -218,7 +232,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={count}
                     onClick={() => onUpdateQuizConfig({ questionCount: count as any })}
                     className={`btn btn-sm ${configs.quiz.questionCount === count ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, justifyContent: 'center' }}
+                    style={{ flex: 1, justifyContent: 'center', fontSize: '0.75rem' }}
                   >
                     {count} Questions
                   </button>
@@ -227,7 +241,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
                 Cognitive Difficulty
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -236,7 +250,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={diff}
                     onClick={() => onUpdateQuizConfig({ difficulty: diff })}
                     className={`btn btn-sm ${configs.quiz.difficulty === diff ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center' }}
+                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center', fontSize: '0.75rem' }}
                   >
                     {diff}
                   </button>
@@ -248,23 +262,25 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
               background: 'rgba(168, 85, 247, 0.05)',
               border: '1px solid rgba(168, 85, 247, 0.2)',
               borderRadius: 'var(--radius-sm)',
-              padding: '10px',
+              padding: '10px 12px',
               fontSize: '0.725rem',
-              color: 'var(--text-secondary)'
+              color: 'var(--text-secondary)',
+              lineHeight: 1.5
             }}>
-              <CheckCircle size={14} color="#a855f7" style={{ marginBottom: 4 }} />
-              <div>
-                Functional test engine with instant answer validation, detailed rationale, score reporting, and revision recommendations.
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: '#a855f7', fontWeight: 700, marginBottom: 3 }}>
+                <CheckCircle size={13} />
+                <span>Playable Test Engine</span>
               </div>
+              Real interactive MCQ quiz with instant answer validation, detailed rationale, and scorecard.
             </div>
           </div>
         )}
 
-        {/* FLASHCARDS / KEY CONCEPTS CONFIG */}
+        {/* FLASHCARDS CONFIG */}
         {(activePurpose === 'flashcards' || activePurpose === 'key_concepts') && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
                 Deck Size
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -273,17 +289,17 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={cnt}
                     onClick={() => onUpdateFlashcardsConfig({ cardCount: cnt })}
                     className={`btn btn-sm ${configs.flashcards.cardCount === cnt ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, justifyContent: 'center' }}
+                    style={{ flex: 1, justifyContent: 'center', fontSize: '0.75rem' }}
                   >
-                    {cnt} Flashcards
+                    {cnt} Cards
                   </button>
                 ))}
               </div>
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
-                Recall Mode
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+                Recall Focus
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
                 {(['definitions', 'applications'] as const).map(mode => (
@@ -291,9 +307,9 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={mode}
                     onClick={() => onUpdateFlashcardsConfig({ mode })}
                     className={`btn btn-sm ${configs.flashcards.mode === mode ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center' }}
+                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center', fontSize: '0.75rem' }}
                   >
-                    {mode === 'definitions' ? 'Core Terms' : 'Scenario Practice'}
+                    {mode === 'definitions' ? 'Key Terms' : 'Scenarios'}
                   </button>
                 ))}
               </div>
@@ -305,8 +321,8 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
         {activePurpose === 'speaking_script' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
-                Target Spoken Duration
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+                Spoken Duration
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
                 {[2, 3, 5].map(min => (
@@ -314,16 +330,16 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={min}
                     onClick={() => onUpdateScriptConfig({ estimatedMinutes: min })}
                     className={`btn btn-sm ${configs.script.estimatedMinutes === min ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, justifyContent: 'center' }}
+                    style={{ flex: 1, justifyContent: 'center', fontSize: '0.75rem' }}
                   >
-                    {min} Minutes
+                    {min} Mins
                   </button>
                 ))}
               </div>
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
                 Delivery Style
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
@@ -332,7 +348,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={st}
                     onClick={() => onUpdateScriptConfig({ style: st })}
                     className={`btn btn-sm ${configs.script.style === st ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center' }}
+                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center', fontSize: '0.75rem' }}
                   >
                     {st}
                   </button>
@@ -344,14 +360,16 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
               background: 'rgba(244, 114, 182, 0.05)',
               border: '1px solid rgba(244, 114, 182, 0.2)',
               borderRadius: 'var(--radius-sm)',
-              padding: '10px',
+              padding: '10px 12px',
               fontSize: '0.725rem',
-              color: 'var(--text-secondary)'
+              color: 'var(--text-secondary)',
+              lineHeight: 1.5
             }}>
-              <Mic size={14} color="#f472b6" style={{ marginBottom: 4 }} />
-              <div>
-                Calculates speaking pace (~130 words/min) with oral cues and provides full Teleprompter Reader Mode.
+              <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: '#f472b6', fontWeight: 700, marginBottom: 3 }}>
+                <Mic size={13} />
+                <span>Teleprompter Ready</span>
               </div>
+              Calculates pacing (~130 wpm) with spoken oral transitions and fullscreen prompter mode.
             </div>
           </div>
         )}
@@ -360,8 +378,8 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
         {(activePurpose === 'linkedin_post' || activePurpose === 'x_post' || activePurpose === 'instagram_caption') && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
-                Target Distribution Platform
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+                Platform
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
                 {(['linkedin', 'x', 'instagram'] as const).map(plt => (
@@ -369,7 +387,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={plt}
                     onClick={() => onUpdateSocialConfig({ platform: plt })}
                     className={`btn btn-sm ${configs.social.platform === plt ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center' }}
+                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center', fontSize: '0.75rem' }}
                   >
                     {plt === 'x' ? 'X / Twitter' : plt}
                   </button>
@@ -378,8 +396,8 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
-                Social Voice
+              <label style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
+                Tone of Voice
               </label>
               <div style={{ display: 'flex', gap: 6 }}>
                 {(['professional', 'conversational', 'bold'] as const).map(voice => (
@@ -387,7 +405,7 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
                     key={voice}
                     onClick={() => onUpdateSocialConfig({ tone: voice })}
                     className={`btn btn-sm ${configs.social.tone === voice ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center' }}
+                    style={{ flex: 1, textTransform: 'capitalize', justifyContent: 'center', fontSize: '0.75rem' }}
                   >
                     {voice}
                   </button>
@@ -398,20 +416,20 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
         )}
       </div>
 
-      {/* Execution Callout */}
+      {/* Execution Callout Card */}
       <div style={{
         marginTop: 'auto',
         background: 'var(--bg-canvas)',
         borderRadius: 'var(--radius-md)',
-        padding: '12px',
+        padding: '12px 14px',
         border: '1px solid var(--border-subtle)',
         display: 'flex',
         flexDirection: 'column',
         gap: 8
       }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>Engine Pipeline:</span>
-          <span style={{ fontSize: '0.725rem', fontWeight: 700, color: '#10b981' }}>7 Stages Ready</span>
+          <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>Pipeline Status:</span>
+          <span style={{ fontSize: '0.725rem', fontWeight: 700, color: '#10b981' }}>7 Stages Configured</span>
         </div>
         <button
           onClick={onStartTransform}
@@ -419,7 +437,8 @@ export const ConfigPanel: React.FC<ConfigPanelProps> = ({
           className="btn btn-primary"
           style={{ width: '100%', fontSize: '0.85rem' }}
         >
-          Execute Transformations →
+          <Zap size={14} />
+          <span>Execute Transformations →</span>
         </button>
       </div>
     </div>

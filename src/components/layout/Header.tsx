@@ -6,7 +6,6 @@ import {
   Settings, 
   Zap, 
   Compass, 
-  BookOpen, 
   HelpCircle 
 } from 'lucide-react';
 import { AppSettings } from '../../services/StorageService';
@@ -35,32 +34,33 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigate
 }) => {
   return (
-    <header className="glass-panel" style={{
+    <header style={{
       position: 'sticky',
       top: 0,
       zIndex: 50,
-      borderRadius: 0,
-      borderTop: 'none',
-      borderLeft: 'none',
-      borderRight: 'none',
-      padding: '12px 24px',
+      background: 'rgba(9, 12, 19, 0.85)',
+      backdropFilter: 'blur(24px)',
+      WebkitBackdropFilter: 'blur(24px)',
+      borderBottom: '1px solid var(--border-subtle)',
+      padding: '0 24px',
+      height: 64,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      background: 'rgba(8, 10, 15, 0.9)',
-      backdropFilter: 'blur(20px)'
+      gap: 16
     }}>
-      {/* Brand & Main App Navigation */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      {/* Brand & Main View Navigation */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
         <button 
           onClick={() => onNavigate('workspace')}
           style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: 10, 
+            gap: 11, 
             background: 'none', 
             border: 'none', 
             cursor: 'pointer',
+            padding: '4px 0',
             textAlign: 'left'
           }}
           aria-label="ByteForce Home"
@@ -68,122 +68,133 @@ export const Header: React.FC<HeaderProps> = ({
           <div style={{
             width: 34,
             height: 34,
-            borderRadius: 10,
-            background: 'linear-gradient(135deg, #0284c7 0%, #6366f1 100%)',
+            borderRadius: 9,
+            background: 'linear-gradient(135deg, #0284c7 0%, #4f46e5 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 0 15px rgba(56, 189, 248, 0.4)',
-            border: '1px solid rgba(255, 255, 255, 0.25)'
+            boxShadow: '0 0 20px rgba(56, 189, 248, 0.35)',
+            border: '1px solid rgba(255, 255, 255, 0.2)'
           }}>
-            <Zap size={19} color="#ffffff" fill="#ffffff" />
+            <Zap size={18} color="#ffffff" fill="#ffffff" />
           </div>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
               <span style={{ 
-                fontSize: '1.15rem', 
+                fontSize: '1.05rem', 
                 fontWeight: 800, 
                 letterSpacing: '-0.03em', 
                 color: '#ffffff' 
               }}>
                 BYTEFORCE
               </span>
-              <span className="badge badge-cyan" style={{ fontSize: '0.65rem', padding: '1px 6px' }}>
+              <span className="badge badge-cyan" style={{ fontSize: '0.625rem', padding: '1px 5px' }}>
                 SIH26154
               </span>
             </div>
-            <div style={{ fontSize: '0.725rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+            <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)', fontWeight: 500, letterSpacing: '0.01em' }}>
               Transform Once. Create Everywhere.
             </div>
           </div>
         </button>
 
-        {/* Primary View Navigation Pills */}
-        <div style={{ display: 'flex', gap: 4, marginLeft: 16 }}>
+        {/* View Switcher Tabs */}
+        <nav style={{
+          display: 'flex',
+          alignItems: 'center',
+          background: 'rgba(0, 0, 0, 0.35)',
+          padding: 3,
+          borderRadius: 'var(--radius-sm)',
+          border: '1px solid var(--border-subtle)',
+          gap: 2
+        }} aria-label="Main Navigation">
           <button
             onClick={() => onNavigate('workspace')}
-            className={`btn btn-sm ${activeView === 'workspace' ? 'btn-secondary' : 'btn-ghost'}`}
-            style={{ fontSize: '0.8rem' }}
+            className={`tab-btn ${activeView === 'workspace' ? 'active' : ''}`}
+            style={{ fontSize: '0.775rem', padding: '5px 12px' }}
           >
-            <Layers size={14} color={activeView === 'workspace' ? 'var(--brand-cyan)' : undefined} />
+            <Layers size={13} color={activeView === 'workspace' ? 'var(--brand-cyan)' : 'var(--text-dim)'} />
             <span>Workspace</span>
           </button>
+          
           <button
             onClick={() => onNavigate('history')}
-            className={`btn btn-sm ${activeView === 'history' ? 'btn-secondary' : 'btn-ghost'}`}
-            style={{ fontSize: '0.8rem' }}
+            className={`tab-btn ${activeView === 'history' ? 'active' : ''}`}
+            style={{ fontSize: '0.775rem', padding: '5px 12px' }}
           >
-            <History size={14} />
+            <History size={13} color={activeView === 'history' ? 'var(--brand-cyan)' : 'var(--text-dim)'} />
             <span>History</span>
             {historyCount > 0 && (
               <span style={{
                 background: 'var(--brand-cyan)',
-                color: '#000000',
+                color: '#07090d',
                 fontWeight: 700,
-                fontSize: '0.65rem',
+                fontSize: '0.625rem',
                 padding: '1px 5px',
-                borderRadius: 8
+                borderRadius: 99
               }}>
                 {historyCount}
               </span>
             )}
           </button>
+
           <button
             onClick={() => onNavigate('landing')}
-            className={`btn btn-sm ${activeView === 'landing' ? 'btn-secondary' : 'btn-ghost'}`}
-            style={{ fontSize: '0.8rem' }}
+            className={`tab-btn ${activeView === 'landing' ? 'active' : ''}`}
+            style={{ fontSize: '0.775rem', padding: '5px 12px' }}
           >
-            <Compass size={14} />
-            <span>Product Overview</span>
+            <Compass size={13} color={activeView === 'landing' ? 'var(--brand-cyan)' : 'var(--text-dim)'} />
+            <span>Overview</span>
           </button>
-        </div>
+        </nav>
       </div>
 
-      {/* Action Controls & Demo Launcher */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        {/* Guided Demo Tour for Judges */}
+      {/* Action Controls & Fast Demo Launcher */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        {/* Guided Tour Modal Trigger */}
         <button
           onClick={onOpenGuidedDemo}
           className="btn btn-secondary btn-sm"
-          title="Step-by-Step Guided Architecture Tour"
+          title="Step-by-Step Architecture Tour for Evaluators"
+          style={{ height: 32 }}
         >
-          <HelpCircle size={14} color="#818cf8" />
+          <HelpCircle size={13} color="#818cf8" />
           <span>Guided Tour</span>
         </button>
 
-        {/* Template Packs */}
+        {/* Curated Templates */}
         <button
           onClick={onOpenTemplates}
           className="btn btn-secondary btn-sm"
-          title="Curated Transformation Packs"
+          title="Curated Purpose Packs"
+          style={{ height: 32 }}
         >
-          <Sparkles size={14} color="#38bdf8" />
+          <Sparkles size={13} color="#38bdf8" />
           <span>Templates</span>
         </button>
 
-        {/* 1-Click Fast Live Demo for Judges */}
+        {/* 1-Click Zero-Friction Demo */}
         <button
           onClick={onQuickDemo}
           className="btn btn-primary btn-sm"
-          style={{
-            background: 'linear-gradient(135deg, #0ea5e9 0%, #4f46e5 100%)',
-            boxShadow: '0 0 16px rgba(56, 189, 248, 0.3)'
-          }}
+          style={{ height: 32, padding: '0 14px' }}
+          title="Launch Deterministic Demo with AI in Healthcare"
         >
-          <Zap size={14} />
-          <span>Live Demo (1-Click)</span>
+          <Zap size={13} />
+          <span>1-Click Demo</span>
         </button>
 
-        {/* Engine Status / Mode Pill */}
+        {/* Engine Status / Settings */}
         <button
           onClick={onOpenSettings}
           className="btn btn-ghost btn-sm"
           style={{
+            height: 32,
             border: '1px solid var(--border-subtle)',
-            fontSize: '0.75rem',
-            padding: '5px 8px'
+            padding: '0 10px',
+            gap: 7
           }}
-          title="Engine Configuration & API Settings"
+          title="Configure Engine Provider & API Keys"
         >
           <div style={{
             width: 7,
@@ -192,10 +203,10 @@ export const Header: React.FC<HeaderProps> = ({
             background: settings.useDemoMode ? '#10b981' : '#38bdf8',
             boxShadow: settings.useDemoMode ? '0 0 8px #10b981' : '0 0 8px #38bdf8'
           }} />
-          <span style={{ color: 'var(--text-secondary)' }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             {settings.useDemoMode ? 'Demo Engine' : 'Live API'}
           </span>
-          <Settings size={13} color="var(--text-muted)" />
+          <Settings size={12} color="var(--text-dim)" />
         </button>
       </div>
     </header>

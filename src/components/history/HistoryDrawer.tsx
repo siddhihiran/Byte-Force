@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, History, Trash2, ArrowRight, FileText, CheckCircle2 } from 'lucide-react';
+import { X, History, Trash2, ArrowRight, FileText } from 'lucide-react';
 import { HistoryEntry } from '../../types';
 
 interface HistoryDrawerProps {
@@ -29,17 +29,19 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
           top: 0,
           right: 0,
           bottom: 0,
-          maxWidth: 440,
+          maxWidth: 460,
           width: '100%',
           height: '100%',
           borderRadius: 0,
           borderRight: 'none',
           borderTop: 'none',
           borderBottom: 'none',
+          borderLeft: '1px solid var(--border-subtle)',
+          background: 'var(--bg-surface-elevated)',
           padding: '24px',
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.7)'
+          boxShadow: '-16px 0 50px rgba(0, 0, 0, 0.8)'
         }}
       >
         {/* Drawer Header */}
@@ -52,10 +54,27 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
           marginBottom: 16
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <History size={18} color="var(--brand-cyan)" />
-            <h2 style={{ fontSize: '1.05rem', fontWeight: 700 }}>
-              Transformation History
-            </h2>
+            <div style={{
+              width: 32,
+              height: 32,
+              borderRadius: 8,
+              background: 'rgba(56, 189, 248, 0.1)',
+              border: '1px solid rgba(56, 189, 248, 0.2)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--brand-cyan)'
+            }}>
+              <History size={16} />
+            </div>
+            <div>
+              <h2 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-primary)' }}>
+                Transformation History
+              </h2>
+              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                {historyEntries.length} Saved Run{historyEntries.length !== 1 ? 's' : ''}
+              </span>
+            </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -63,7 +82,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
               <button
                 onClick={onClearHistory}
                 className="btn btn-ghost btn-sm"
-                title="Clear History"
+                title="Clear All History"
                 style={{ color: 'var(--brand-rose)' }}
               >
                 <Trash2 size={14} />
@@ -72,7 +91,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
             <button
               onClick={onClose}
               className="btn btn-ghost btn-sm"
-              style={{ padding: 4 }}
+              style={{ padding: 6 }}
             >
               <X size={18} />
             </button>
@@ -84,25 +103,41 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
           {historyEntries.length === 0 ? (
             <div style={{
               textAlign: 'center',
-              padding: '60px 20px',
-              color: 'var(--text-muted)'
+              padding: '80px 20px',
+              color: 'var(--text-muted)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 12
             }}>
-              <History size={32} style={{ margin: '0 auto 12px', opacity: 0.4 }} />
-              <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>No Transformations Yet</div>
-              <div style={{ fontSize: '0.75rem', marginTop: 4 }}>
-                Your completed transformation runs will automatically save here for fast retrieval.
+              <div style={{
+                width: 48,
+                height: 48,
+                borderRadius: 12,
+                background: 'rgba(255, 255, 255, 0.03)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <History size={24} style={{ opacity: 0.4 }} />
+              </div>
+              <div>
+                <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#ffffff' }}>No Transformations Yet</div>
+                <div style={{ fontSize: '0.78rem', marginTop: 4, lineHeight: 1.5, maxWidth: 280 }}>
+                  Your completed transformation runs will automatically save here for fast retrieval.
+                </div>
               </div>
             </div>
           ) : (
             historyEntries.map((entry) => (
               <div
                 key={entry.id}
-                className="glass-card"
+                className="bf-card interactive"
                 style={{
                   padding: '14px',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 8,
+                  gap: 10,
                   cursor: 'pointer'
                 }}
                 onClick={() => {
@@ -110,14 +145,14 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                   onClose();
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <FileText size={15} color="var(--brand-cyan)" />
-                    <span style={{ fontSize: '0.825rem', fontWeight: 700, color: '#ffffff' }}>
+                    <FileText size={15} color="var(--brand-cyan)" style={{ flexShrink: 0 }} />
+                    <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', lineHeight: 1.3 }}>
                       {entry.sourceTitle}
                     </span>
                   </div>
-                  <span className="badge badge-emerald" style={{ fontSize: '0.6rem' }}>
+                  <span className="badge badge-emerald" style={{ fontSize: '0.62rem', flexShrink: 0 }}>
                     Completed
                   </span>
                 </div>
@@ -135,13 +170,13 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-                  paddingTop: 6,
-                  fontSize: '0.7rem',
+                  paddingTop: 8,
+                  fontSize: '0.72rem',
                   color: 'var(--text-dim)'
                 }}>
                   <span>{entry.timestamp}</span>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: 3, color: 'var(--brand-cyan)', fontWeight: 600 }}>
-                    Restore <ArrowRight size={11} />
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: 'var(--brand-cyan)', fontWeight: 700 }}>
+                    Restore <ArrowRight size={12} />
                   </span>
                 </div>
               </div>

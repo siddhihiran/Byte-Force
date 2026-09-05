@@ -9,11 +9,9 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Sparkles, 
-  Layers, 
   UserCheck 
 } from 'lucide-react';
-import { OutputAsset, PresentationOutlineData, SlideItem } from '../../types';
-import { ValidationBadge } from './ValidationBadge';
+import { OutputAsset, PresentationOutlineData } from '../../types';
 
 interface PresentationOutlineCardProps {
   asset: OutputAsset;
@@ -61,7 +59,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
   };
 
   return (
-    <div className="glass-card animate-fade-in" style={{
+    <div className="bf-card animate-fade-in" style={{
       padding: '24px',
       display: 'flex',
       flexDirection: 'column',
@@ -86,7 +84,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
               {data.slides.length} Keynote Slides • Audience: {data.targetAudience}
             </span>
           </div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800 }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
             {data.title}
           </h2>
         </div>
@@ -124,8 +122,6 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
         </div>
       </div>
 
-      <ValidationBadge signals={asset.validationSignals} />
-
       {/* Theme & Audience Bar */}
       <div style={{
         display: 'grid',
@@ -153,7 +149,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
       {/* Slide Thumbnails / Selector */}
       <div style={{
         display: 'flex',
-        gap: 8,
+        gap: 6,
         overflowX: 'auto',
         paddingBottom: 4
       }}>
@@ -174,10 +170,10 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
         background: 'linear-gradient(145deg, #0d121c 0%, #080b11 100%)',
         border: '1.5px solid rgba(56, 189, 248, 0.3)',
         borderRadius: 'var(--radius-lg)',
-        padding: '28px',
+        padding: '26px',
         display: 'flex',
         flexDirection: 'column',
-        gap: 18,
+        gap: 16,
         boxShadow: 'var(--shadow-md)'
       }}>
         {/* Slide Title */}
@@ -193,7 +189,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
               background: 'var(--brand-cyan)',
               color: '#07090d',
               fontWeight: 800,
-              fontSize: '0.75rem',
+              fontSize: '0.725rem',
               padding: '2px 8px',
               borderRadius: 4
             }}>
@@ -223,7 +219,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
         </div>
 
         {/* Slide Bullet Points */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {activeSlide.bullets.map((bullet, bIdx) => (
             <div
               key={bIdx}
@@ -238,8 +234,8 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
               }}
             >
               <div style={{
-                width: 8,
-                height: 8,
+                width: 7,
+                height: 7,
                 borderRadius: '50%',
                 background: 'var(--brand-cyan)',
                 marginTop: 6,
@@ -258,7 +254,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
                   style={{ fontSize: '0.85rem' }}
                 />
               ) : (
-                <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                   {bullet}
                 </span>
               )}
@@ -268,7 +264,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
 
         {/* Speaker Notes */}
         <div style={{
-          marginTop: 10,
+          marginTop: 6,
           background: 'rgba(99, 102, 241, 0.06)',
           border: '1px solid rgba(99, 102, 241, 0.2)',
           borderRadius: 'var(--radius-sm)',
@@ -300,7 +296,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
               style={{ minHeight: 70, fontSize: '0.8rem' }}
             />
           ) : (
-            <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.5, fontStyle: 'italic' }}>
+            <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.55, fontStyle: 'italic' }}>
               "{activeSlide.speakerNotes}"
             </p>
           )}

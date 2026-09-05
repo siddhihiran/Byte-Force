@@ -11,7 +11,10 @@ import {
   CheckCircle2, 
   Cpu, 
   Sparkles,
-  ShieldCheck
+  ShieldCheck,
+  Flame,
+  Clock,
+  BookOpen
 } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -41,7 +44,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     quiz: {
       badge: 'ASSESS / DIAGNOSTIC MCQ',
       title: 'Diagnostic Assessment Quiz',
-      snippet: 'Q: By approximately what percentage does ambient clinical documentation reduce after-hours clinician paperwork?\n✓ Around 45% (Correct: Verified directly against source research brief)',
+      snippet: 'Q: By approximately what percentage does ambient clinical documentation reduce after-hours clinician paperwork?\n✓ Around 45% (Verified directly against source research brief)',
       meta: '4 Questions • Instant Rationale • Score 100%'
     },
     outline: {
@@ -68,44 +71,47 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     <section style={{
       maxWidth: 1240,
       margin: '0 auto',
-      padding: '40px 24px 64px',
+      padding: '40px 20px 80px',
       position: 'relative'
     }}>
-      {/* Top Badge: Positioning */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
-        <div className="badge badge-cyan animate-fade-in" style={{
-          padding: '6px 14px',
-          fontSize: '0.78rem',
-          display: 'flex',
+      {/* Eyebrow Pill */}
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
+        <div style={{
+          display: 'inline-flex',
           alignItems: 'center',
           gap: 8,
+          padding: '6px 14px',
+          borderRadius: 'var(--radius-full)',
           background: 'rgba(56, 189, 248, 0.08)',
-          border: '1px solid rgba(56, 189, 248, 0.3)'
-        }}>
-          <Sparkles size={13} color="#38bdf8" />
-          <span>SIH26154 • GEN AI PLATFORM FOR AUTOMATED CONTENT TRANSFORMATION</span>
+          border: '1px solid rgba(56, 189, 248, 0.25)',
+          boxShadow: '0 0 20px rgba(56, 189, 248, 0.1)'
+        }} className="animate-fade-in">
+          <div style={{
+            width: 6,
+            height: 6,
+            borderRadius: '50%',
+            background: 'var(--brand-cyan)',
+            boxShadow: '0 0 8px var(--brand-cyan)'
+          }} />
+          <span style={{
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            letterSpacing: '0.04em',
+            color: 'var(--brand-cyan)'
+          }}>
+            SIH26154 • GEN AI PLATFORM FOR AUTOMATED CONTENT TRANSFORMATION
+          </span>
         </div>
       </div>
 
-      {/* Main Hero Typography */}
-      <div style={{ textAlign: 'center', maxWidth: 880, margin: '0 auto 32px' }}>
-        <div style={{
-          fontSize: '1rem',
-          fontWeight: 800,
-          color: 'var(--brand-cyan)',
-          letterSpacing: '0.12em',
-          textTransform: 'uppercase',
-          marginBottom: 8
-        }}>
-          BYTEFORCE
-        </div>
-
+      {/* Main Hero Header */}
+      <div style={{ textAlign: 'center', maxWidth: 840, margin: '0 auto 40px' }}>
         <h1 style={{
-          fontSize: 'clamp(2.4rem, 4.8vw, 4rem)',
+          fontSize: 'clamp(2.5rem, 5.2vw, 4.2rem)',
           fontWeight: 800,
           lineHeight: 1.1,
-          marginBottom: 16,
-          letterSpacing: '-0.035em'
+          letterSpacing: '-0.04em',
+          marginBottom: 18
         }}>
           Transform Once.{' '}
           <span className="text-gradient-cyan">Create Everywhere.</span>
@@ -116,9 +122,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           color: 'var(--text-secondary)',
           lineHeight: 1.6,
           maxWidth: 680,
-          margin: '0 auto'
+          margin: '0 auto 32px'
         }}>
-          Turn one source into purpose-specific content without repeatedly rewriting prompts.
+          Turn one authoritative source into study decks, quizzes, slide outlines, keynote scripts, and social articles without repeatedly rewriting prompts.
         </p>
 
         {/* Hero CTAs */}
@@ -126,43 +132,37 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 16,
-          marginTop: 28,
+          gap: 14,
           flexWrap: 'wrap'
         }}>
           <button
             onClick={onStartTransforming}
             className="btn btn-accent-glow btn-lg"
-            style={{ padding: '14px 28px', fontSize: '1rem' }}
+            style={{ padding: '14px 28px' }}
           >
             <span>TRANSFORM MY CONTENT</span>
-            <ArrowRight size={18} />
+            <ArrowRight size={17} />
           </button>
+
           <button
             onClick={onExploreDemo}
             className="btn btn-secondary btn-lg"
-            style={{
-              padding: '14px 24px',
-              fontSize: '1rem',
-              background: 'rgba(255, 255, 255, 0.04)'
-            }}
+            style={{ padding: '14px 24px' }}
           >
-            <Zap size={18} color="#38bdf8" />
-            <span>TRY DEMO</span>
+            <Zap size={16} color="var(--brand-cyan)" />
+            <span>TRY DEMO (AI in Healthcare)</span>
           </button>
         </div>
       </div>
 
-      {/* SIGNATURE VISUAL MOTIF: ONE SOURCE → BYTEFORCE → 5 PURPOSES → MULTIPLE OUTPUTS */}
+      {/* SIGNATURE INTERACTION CANVAS: Live Product Preview */}
       <div className="glass-panel" style={{
-        marginTop: 40,
-        padding: '28px',
-        border: '1px solid rgba(56, 189, 248, 0.2)',
-        boxShadow: '0 20px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px -10px rgba(56, 189, 248, 0.15)',
-        position: 'relative',
-        overflow: 'hidden'
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        padding: '24px',
+        boxShadow: 'var(--shadow-lg), 0 0 50px -10px rgba(56, 189, 248, 0.12)',
+        borderRadius: 'var(--radius-xl)'
       }}>
-        {/* Header line for signature visual */}
+        {/* Workspace Canvas Header Strip */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -181,50 +181,67 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               background: '#10b981',
               boxShadow: '0 0 10px #10b981'
             }} />
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-secondary)' }}>
-              CORE ENGINE: ONE SOURCE → BYTEFORCE → LEARN | ASSESS | PRESENT | PUBLISH | SUMMARIZE → MULTIPLE OUTPUTS
+            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.02em' }}>
+              ORCHESTRATION PIPELINE: ONE SOURCE → UNDERSTAND → CHOOSE PURPOSE → MULTIPLE ASSETS
             </span>
           </div>
-          <div style={{ fontSize: '0.725rem', color: 'var(--brand-cyan)', fontWeight: 600 }}>
-            Orchestration, not Chat
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span className="badge badge-cyan" style={{ fontSize: '0.65rem' }}>
+              Deterministic Fallback Ready
+            </span>
           </div>
         </div>
 
-        {/* 3-Part Pipeline Visual Flow */}
+        {/* 3-Column Interactive Orchestration Stage */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'minmax(240px, 1fr) auto minmax(280px, 1.4fr)',
+          gridTemplateColumns: 'minmax(260px, 1fr) auto minmax(320px, 1.45fr)',
           gap: 20,
           alignItems: 'center'
         }}>
-          {/* Node 1: Source Document */}
-          <div style={{
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-medium)',
-            borderRadius: 'var(--radius-md)',
-            padding: '18px',
-            position: 'relative'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-              <FileText size={17} color="#38bdf8" />
-              <span style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--brand-cyan)' }}>
-                ONE SOURCE DOCUMENT
-              </span>
+          {/* Node 1: Ingested Source Document Card */}
+          <div className="bf-card" style={{ padding: '20px', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <div style={{
+                  width: 28,
+                  height: 28,
+                  borderRadius: 7,
+                  background: 'var(--brand-cyan-glow)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <FileText size={15} color="var(--brand-cyan)" />
+                </div>
+                <span style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--brand-cyan)', letterSpacing: '0.04em' }}>
+                  SOURCE DOCUMENT
+                </span>
+              </div>
+              <span className="badge badge-emerald" style={{ fontSize: '0.625rem' }}>READY ✓</span>
             </div>
-            <div style={{ fontWeight: 700, fontSize: '0.925rem', marginBottom: 4, color: '#ffffff' }}>
+
+            <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#ffffff', marginBottom: 6 }}>
               AI in Healthcare — Research Brief.pdf
             </div>
-            <div style={{ fontSize: '0.725rem', color: 'var(--text-muted)', marginBottom: 10 }}>
-              1,180 Words • 5 Sections • Diagnostic Precision & Workflows
+
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+              <span>1,180 Words</span>
+              <span>•</span>
+              <span>5 Sections</span>
+              <span>•</span>
+              <span>Clinical AI & Diagnostics</span>
             </div>
+
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              <span className="badge badge-muted" style={{ fontSize: '0.625rem' }}>Multimodal Fusion</span>
-              <span className="badge badge-muted" style={{ fontSize: '0.625rem' }}>Ambient Scribing</span>
-              <span className="badge badge-muted" style={{ fontSize: '0.625rem' }}>FDA SaMD</span>
+              <span className="badge badge-muted" style={{ fontSize: '0.65rem' }}>Multimodal Fusion</span>
+              <span className="badge badge-muted" style={{ fontSize: '0.65rem' }}>Ambient Scribing</span>
+              <span className="badge badge-muted" style={{ fontSize: '0.65rem' }}>FDA SaMD</span>
             </div>
           </div>
 
-          {/* Central Connecting Node: ByteForce Engine */}
+          {/* Center Connector: Transformation Node */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -233,54 +250,40 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             gap: 10,
             padding: '0 8px'
           }}>
-            <div className="animate-pulse-glow" style={{
-              width: 52,
-              height: 52,
+            <div style={{
+              width: 50,
+              height: 50,
               borderRadius: '50%',
               background: 'linear-gradient(135deg, #0284c7 0%, #6366f1 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              border: '2px solid rgba(255, 255, 255, 0.4)',
-              boxShadow: '0 0 25px rgba(56, 189, 248, 0.5)'
-            }}>
-              <Cpu size={26} color="#ffffff" />
+              boxShadow: '0 0 25px rgba(56, 189, 248, 0.45)',
+              border: '2px solid rgba(255, 255, 255, 0.3)'
+            }} className="animate-pulse-glow">
+              <Cpu size={24} color="#ffffff" />
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '0.725rem', fontWeight: 800, letterSpacing: '0.05em' }}>
-                BYTEFORCE
-              </div>
-              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>
-                Transformation Engine
-              </div>
+              <div style={{ fontSize: '0.725rem', fontWeight: 800, color: '#ffffff' }}>BYTEFORCE</div>
+              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>7-Stage Engine</div>
             </div>
           </div>
 
-          {/* Node 3: Purpose-driven Outputs Selector & Live Teaser */}
-          <div style={{
-            background: 'var(--bg-surface-elevated)',
-            border: '1px solid var(--border-medium)',
-            borderRadius: 'var(--radius-md)',
-            padding: '18px'
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: 10
-            }}>
-              <span style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--brand-indigo)' }}>
-                PURPOSE-BUILT READY ASSETS
+          {/* Node 3: Transformed Assets Interactive Showcase */}
+          <div className="bf-card" style={{ padding: '20px', background: 'var(--bg-surface-elevated)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+              <span style={{ fontSize: '0.725rem', fontWeight: 700, color: '#a5b4fc', letterSpacing: '0.04em' }}>
+                PURPOSE-BUILT ASSETS (LIVE PREVIEW)
               </span>
               <span style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>
-                Click to preview output
+                Click tab to switch output
               </span>
             </div>
 
-            {/* Purpose switch tabs */}
+            {/* Purpose tabs */}
             <div style={{
               display: 'flex',
-              gap: 5,
+              gap: 4,
               marginBottom: 12,
               overflowX: 'auto',
               paddingBottom: 4
@@ -304,13 +307,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       color: active ? 'var(--brand-cyan)' : 'var(--text-muted)',
                       border: active ? '1px solid var(--brand-cyan)' : '1px solid var(--border-subtle)',
                       borderRadius: 6,
-                      padding: '4px 8px',
-                      fontSize: '0.725rem',
+                      padding: '5px 9px',
+                      fontSize: '0.75rem',
                       fontWeight: active ? 700 : 500,
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 4,
+                      gap: 5,
                       whiteSpace: 'nowrap',
                       transition: 'all 0.15s ease'
                     }}
@@ -322,31 +325,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               })}
             </div>
 
-            {/* Live Teaser Content Box */}
+            {/* Teaser Preview Box */}
             <div style={{
               background: 'var(--bg-canvas)',
               borderRadius: 'var(--radius-sm)',
-              padding: '12px',
+              padding: '14px',
               border: '1px solid var(--border-subtle)',
-              minHeight: 105
+              minHeight: 110
             }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: 6
-              }}>
-                <span style={{ fontSize: '0.675rem', fontWeight: 700, color: 'var(--brand-cyan)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+                <span style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--brand-cyan)' }}>
                   {teaserData[activeTeaserOutput].badge}
                 </span>
-                <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>
+                <span style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>
                   {teaserData[activeTeaserOutput].meta}
                 </span>
               </div>
               <p style={{
-                fontSize: '0.8rem',
+                fontSize: '0.825rem',
                 color: 'var(--text-secondary)',
-                lineHeight: 1.5,
+                lineHeight: 1.55,
                 whiteSpace: 'pre-line'
               }}>
                 {teaserData[activeTeaserOutput].snippet}
@@ -355,39 +353,41 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </div>
 
-        {/* Value Prop Banner */}
+        {/* Feature Highlights Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
           gap: 16,
           marginTop: 24,
-          paddingTop: 18,
+          paddingTop: 20,
           borderTop: '1px solid var(--border-subtle)'
         }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
             <CheckCircle2 size={16} color="#10b981" style={{ flexShrink: 0, marginTop: 2 }} />
             <div>
-              <div style={{ fontSize: '0.825rem', fontWeight: 600 }}>Decoupled from Prompts</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                Select intended outcomes instead of crafting prompt templates.
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff' }}>Prompt-Free Transformation</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                Choose intent-based outcomes rather than wrestling with prompt templates.
               </div>
             </div>
           </div>
+
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
             <CheckCircle2 size={16} color="#10b981" style={{ flexShrink: 0, marginTop: 2 }} />
             <div>
-              <div style={{ fontSize: '0.825rem', fontWeight: 600 }}>Multi-Purpose Generation</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                Create Summary, Quiz, Flashcards & Script simultaneously.
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff' }}>Multi-Asset Generation</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                Produce summaries, flashcards, diagnostic quizzes, and keynote scripts in one pass.
               </div>
             </div>
           </div>
+
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
             <ShieldCheck size={16} color="#10b981" style={{ flexShrink: 0, marginTop: 2 }} />
             <div>
-              <div style={{ fontSize: '0.825rem', fontWeight: 600 }}>Zero-Failure Architecture</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                Deterministic fallback engine ensures live pitch demo reliability.
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff' }}>Verifiable Grounding</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                Truthful structural validation tests completeness without fake AI scores.
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Settings, ShieldCheck, Key, Zap, Check, AlertCircle } from 'lucide-react';
-import { AppSettings, StorageService } from '../../services/StorageService';
+import { X, Settings, ShieldCheck, Key, Zap, Check } from 'lucide-react';
+import { AppSettings } from '../../services/StorageService';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -34,7 +34,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       <div 
         className="modal-content animate-fade-in" 
         onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: 520, padding: '24px' }}
+        style={{ maxWidth: 540, padding: '28px', border: '1px solid rgba(56, 189, 248, 0.25)' }}
       >
         {/* Header */}
         <div style={{
@@ -45,10 +45,22 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           paddingBottom: 16,
           marginBottom: 20
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <Settings size={18} color="var(--brand-cyan)" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{
+              width: 36,
+              height: 36,
+              borderRadius: 10,
+              background: 'rgba(56, 189, 248, 0.12)',
+              border: '1px solid rgba(56, 189, 248, 0.25)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--brand-cyan)'
+            }}>
+              <Settings size={18} />
+            </div>
             <div>
-              <h2 style={{ fontSize: '1.05rem', fontWeight: 700 }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
                 Transformation Engine Settings
               </h2>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -60,7 +72,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           <button
             onClick={onClose}
             className="btn btn-ghost btn-sm"
-            style={{ padding: 4 }}
+            style={{ padding: 6 }}
           >
             <X size={18} />
           </button>
@@ -73,30 +85,43 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             background: 'rgba(56, 189, 248, 0.05)',
             border: '1px solid rgba(56, 189, 248, 0.25)',
             borderRadius: 'var(--radius-md)',
-            padding: '16px',
+            padding: '18px',
             display: 'flex',
             alignItems: 'flex-start',
             justifyContent: 'space-between',
             gap: 16
           }}>
-            <div style={{ display: 'flex', gap: 12 }}>
-              <Zap size={22} color="#38bdf8" style={{ flexShrink: 0, marginTop: 2 }} />
+            <div style={{ display: 'flex', gap: 14 }}>
+              <div style={{
+                width: 36,
+                height: 36,
+                borderRadius: 8,
+                background: 'rgba(56, 189, 248, 0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#38bdf8',
+                flexShrink: 0
+              }}>
+                <Zap size={18} />
+              </div>
               <div>
-                <div style={{ fontSize: '0.875rem', fontWeight: 700, color: '#ffffff' }}>
+                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#ffffff' }}>
                   Deterministic Demo Engine
                 </div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginTop: 2 }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginTop: 4 }}>
                   Guarantees 100% fail-proof execution during live judge pitches. Uses pre-computed, internally consistent sample transformations without external API latency.
                 </div>
               </div>
             </div>
 
-            <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+            <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', marginTop: 4 }}>
               <input
                 type="checkbox"
                 checked={formData.useDemoMode}
                 onChange={(e) => setFormData({ ...formData, useDemoMode: e.target.checked })}
                 className="checkbox-custom"
+                style={{ width: 20, height: 20 }}
               />
             </label>
           </div>
@@ -106,15 +131,15 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             background: 'var(--bg-canvas)',
             border: '1px solid var(--border-subtle)',
             borderRadius: 'var(--radius-md)',
-            padding: '16px',
+            padding: '18px',
             display: 'flex',
             flexDirection: 'column',
-            gap: 12,
+            gap: 14,
             opacity: formData.useDemoMode ? 0.6 : 1
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <Key size={15} color="var(--brand-indigo)" />
-              <span style={{ fontSize: '0.825rem', fontWeight: 700 }}>
+              <Key size={16} color="var(--brand-indigo)" />
+              <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#ffffff' }}>
                 Live LLM Provider (Optional)
               </span>
             </div>
@@ -134,8 +159,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
 
             <div>
-              <label style={{ fontSize: '0.725rem', color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>
-                Client-Side API Key (Stored securely in your local browser only)
+              <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', marginBottom: 6 }}>
+                Client-Side API Key (Stored securely in local browser storage only)
               </label>
               <input
                 type="password"
@@ -143,7 +168,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 onChange={(e) => setFormData({ ...formData, apiKey: e.target.value })}
                 placeholder="AIzaSy... or sk-proj-..."
                 className="input-control"
-                style={{ fontSize: '0.8rem' }}
+                style={{ fontSize: '0.85rem' }}
                 disabled={formData.useDemoMode}
               />
             </div>
@@ -153,12 +178,16 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 8,
-            fontSize: '0.725rem',
-            color: '#10b981'
+            gap: 10,
+            fontSize: '0.75rem',
+            color: '#10b981',
+            background: 'rgba(16, 185, 129, 0.08)',
+            border: '1px solid rgba(16, 185, 129, 0.2)',
+            padding: '10px 14px',
+            borderRadius: 'var(--radius-sm)'
           }}>
-            <ShieldCheck size={14} />
-            <span>ByteForce architecture automatically falls back to Demo mode if network drops.</span>
+            <ShieldCheck size={16} style={{ flexShrink: 0 }} />
+            <span>ByteForce architecture automatically falls back to Demo mode if offline or network drops.</span>
           </div>
 
           {/* Action Footer */}
@@ -168,7 +197,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             justifyContent: 'flex-end',
             gap: 10,
             borderTop: '1px solid var(--border-subtle)',
-            paddingTop: 16
+            paddingTop: 18
           }}>
             <button
               onClick={onClose}
@@ -179,7 +208,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             <button
               onClick={handleSave}
               className="btn btn-primary btn-sm"
-              style={{ minWidth: 100 }}
+              style={{ minWidth: 120 }}
             >
               {savedToast ? <Check size={14} /> : null}
               <span>{savedToast ? 'Saved!' : 'Save Settings'}</span>
