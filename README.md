@@ -5,7 +5,7 @@
 > **Problem Statement ID**: SIH26154  
 > **Theme**: Smart Automation / Generative AI
 
----
+----
 
 ## 👥 Team Details
 
@@ -15,8 +15,9 @@
 - **Vansh Jain**
 - **Dhyan Patel**
 - **Devesh Kumar Singh**
+  
 
----
+----
 
 ## 🎯 Core Product Proposition
 
