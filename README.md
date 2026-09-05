@@ -142,6 +142,7 @@ npm run preview
    - Click **Speaking Script** → toggle **Teleprompter Mode** and test speed.
    - Inspect the **QUALITY CHECK** bar: `Source Context: Verified ✓ • Structure: Compliant ✓ • Missing Sections: 0 • Source-grounded ✓`.
 5. **0:50 - 1:00**: Click **`Switch Purpose / Generate Another Output`** at the bottom to demonstrate the continuous workflow from the same source!
+
 ---
 
 *Built with passion for Smart India Hackathon (SIH26154).*
