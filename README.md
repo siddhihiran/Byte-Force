@@ -45,7 +45,7 @@ Traditional AI chat interfaces force users into repetitive, manual cycles of pro
 
 ---
 
-## ✨ Key Capabilities
+### ✨ Key Capabilities
 
 ### 1. Source Intelligence (`SourceZone`)
 - **Multi-Format Ingestion**: Upload PDF, DOCX, TXT, or paste raw notes/reports.
