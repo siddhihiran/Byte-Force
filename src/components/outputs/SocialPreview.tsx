@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { 
-  Share2, 
   Copy, 
   Check, 
   ThumbsUp, 
@@ -9,7 +8,6 @@ import {
   Send, 
   Heart, 
   Bookmark, 
-  Sparkles, 
   RotateCw,
   MoreHorizontal
 } from 'lucide-react';

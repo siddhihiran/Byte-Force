@@ -8,11 +8,7 @@ import {
   Eye, 
   RefreshCw, 
   FileCheck,
-  ChevronDown,
-  ChevronUp,
-  CheckCircle2,
-  Layers,
-  ArrowRight
+  CheckCircle2
 } from 'lucide-react';
 import { SourceDocument } from '../../types';
 import { analyzeContent } from '../../services/ContentAnalyzer';

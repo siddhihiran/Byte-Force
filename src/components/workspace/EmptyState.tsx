@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, FileText, ArrowRight, Zap, Layers } from 'lucide-react';
+import { Sparkles, Zap, Layers } from 'lucide-react';
 
 interface EmptyStateProps {
   onLoadSample: () => void;

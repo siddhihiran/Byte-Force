@@ -260,7 +260,7 @@ export class DemoProvider {
     config: TransformationConfigs['flashcards'],
     isHealthcare: boolean,
     isRenewable: boolean,
-    isAgent: boolean
+    _isAgent: boolean
   ): OutputAsset {
     let cards: FlashcardData['cards'];
 
@@ -362,7 +362,7 @@ export class DemoProvider {
     config: TransformationConfigs['quiz'],
     isHealthcare: boolean,
     isRenewable: boolean,
-    isAgent: boolean
+    _isAgent: boolean
   ): OutputAsset {
     let questions: QuizData['questions'];
     let conceptsToRevise: string[];
@@ -487,7 +487,7 @@ export class DemoProvider {
     config: TransformationConfigs['outline'],
     isHealthcare: boolean,
     isRenewable: boolean,
-    isAgent: boolean
+    _isAgent: boolean
   ): OutputAsset {
     let data: PresentationOutlineData;
 
@@ -621,7 +621,7 @@ export class DemoProvider {
     config: TransformationConfigs['script'],
     isHealthcare: boolean,
     isRenewable: boolean,
-    isAgent: boolean
+    _isAgent: boolean
   ): OutputAsset {
     let sections: ScriptData['sections'];
 
@@ -729,7 +729,7 @@ export class DemoProvider {
     platformId: TransformationId,
     isHealthcare: boolean,
     isRenewable: boolean,
-    isAgent: boolean
+    _isAgent: boolean
   ): OutputAsset {
     const platform = config.platform;
     let data: SocialData;

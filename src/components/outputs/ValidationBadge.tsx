@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckCircle2, ShieldCheck, FileCheck, Layers } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, FileCheck } from 'lucide-react';
 import { ValidationSignals } from '../../types';
 
 interface ValidationBadgeProps {

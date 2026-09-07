@@ -12,7 +12,7 @@ interface PipelineModalProps {
 }
 
 export const PipelineModal: React.FC<PipelineModalProps> = ({
-  currentStage,
+  currentStage: _currentStage,
   currentStageIndex,
   isOpen,
   sourceTitle,

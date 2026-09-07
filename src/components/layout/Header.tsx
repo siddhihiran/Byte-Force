@@ -24,7 +24,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   onOpenTemplates,
-  onOpenHistory,
+  onOpenHistory: _onOpenHistory,
   onOpenSettings,
   onOpenGuidedDemo,
   onQuickDemo,

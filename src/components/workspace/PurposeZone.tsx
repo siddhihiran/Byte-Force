@@ -8,12 +8,10 @@ import {
   Presentation,
   TrendingUp, 
   Bookmark, 
-  Sparkles,
   CheckSquare,
   Square,
   PackageCheck,
-  Zap,
-  ArrowRight
+  Zap
 } from 'lucide-react';
 import { TransformationId, PurposeCategory } from '../../types';
 import { PURPOSE_CATEGORIES, PURPOSES } from '../../constants/purposes';

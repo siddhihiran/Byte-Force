@@ -6,8 +6,7 @@ import {
   Shuffle, 
   CheckCircle, 
   Copy, 
-  Check, 
-  Layers 
+  Check 
 } from 'lucide-react';
 import { OutputAsset, FlashcardData, FlashcardItem } from '../../types';
 

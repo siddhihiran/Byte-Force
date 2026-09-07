@@ -13,8 +13,7 @@ import {
   Trash2,
   Bookmark,
   BookmarkCheck,
-  ArrowLeft,
-  Sparkles
+  ArrowLeft
 } from 'lucide-react';
 import { OutputAsset, TransformationId } from '../../types';
 import { SummaryCard } from './SummaryCard';

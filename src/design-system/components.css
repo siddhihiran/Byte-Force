@@ -5,11 +5,120 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-canvas);
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(99, 102, 241, 0.10), transparent 30%),
+    var(--bg-canvas);
   color: var(--text-primary);
   font-family: var(--font-sans);
   position: relative;
   overflow-x: hidden;
+}
+
+.impact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  color: var(--brand-cyan);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-row span {
+  padding: 7px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto 16px;
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 18px 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(15, 20, 32, 0.8);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+}
+
+.metric-card strong {
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.metric-card span {
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.state-panel {
+  padding: 18px 18px 12px;
+  min-height: 270px;
+  background: linear-gradient(180deg, rgba(15, 20, 32, 0.9), rgba(15, 20, 32, 0.72));
+}
+
+.mini-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 14px 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.mini-stat-card.accent {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.09), rgba(99, 102, 241, 0.06));
+  border-color: rgba(56, 189, 248, 0.26);
+}
+
+.mini-stat-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.68rem;
+  color: var(--brand-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.mini-stat-card strong {
+  font-size: 1.08rem;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.mini-stat-card span {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
 /* Atmospheric Ambient Background */
@@ -54,13 +163,27 @@
 
 /* Glass Panels & Enterprise Cards */
 .glass-panel {
-  background: var(--bg-glass);
+  background: linear-gradient(180deg, rgba(15, 20, 32, 0.9), rgba(12, 16, 24, 0.8));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   position: relative;
+  overflow: hidden;
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(56, 189, 248, 0.06), transparent 30%, rgba(99, 102, 241, 0.08));
+  pointer-events: none;
+}
+
+.glass-panel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .bf-card {
@@ -69,11 +192,14 @@
   border-radius: var(--radius-md);
   transition: all var(--transition-normal);
   position: relative;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
 .bf-card:hover {
   border-color: var(--border-medium);
   background: var(--bg-surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .bf-card.interactive {
@@ -92,8 +218,8 @@
 
 .bf-card.active {
   border-color: var(--border-accent);
-  background: var(--bg-surface-elevated);
-  box-shadow: var(--shadow-glow-cyan);
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), rgba(15, 20, 32, 0.96));
+  box-shadow: var(--shadow-glow-cyan), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 /* Button System */

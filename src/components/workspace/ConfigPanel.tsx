@@ -5,9 +5,7 @@ import {
   Info,
   Presentation,
   Mic,
-  TrendingUp,
-  Zap,
-  Sparkles
+  Zap
 } from 'lucide-react';
 import { 
   TransformationId, 

@@ -12,9 +12,7 @@ import {
   Cpu, 
   Sparkles,
   ShieldCheck,
-  Flame,
-  Clock,
-  BookOpen
+  Clock
 } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -74,7 +72,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       padding: '40px 20px 80px',
       position: 'relative'
     }}>
-      {/* Eyebrow Pill */}
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
         <div style={{
           display: 'inline-flex',
@@ -104,65 +101,133 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
       </div>
 
-      {/* Main Hero Header */}
-      <div style={{ textAlign: 'center', maxWidth: 840, margin: '0 auto 40px' }}>
-        <h1 style={{
-          fontSize: 'clamp(2.5rem, 5.2vw, 4.2rem)',
-          fontWeight: 800,
-          lineHeight: 1.1,
-          letterSpacing: '-0.04em',
-          marginBottom: 18
-        }}>
-          Transform Once.{' '}
-          <span className="text-gradient-cyan">Create Everywhere.</span>
-        </h1>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: '1.25fr 0.75fr',
+        gap: 24,
+        alignItems: 'center',
+        margin: '0 auto 32px',
+        maxWidth: 1200
+      }}>
+        <div>
+          <div className="impact-badge" style={{ marginBottom: 20 }}>
+            <Sparkles size={14} />
+            Built for hackathon judging, research teams, and rapid content operations
+          </div>
 
-        <p style={{
-          fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)',
-          color: 'var(--text-secondary)',
-          lineHeight: 1.6,
-          maxWidth: 680,
-          margin: '0 auto 32px'
-        }}>
-          Turn one authoritative source into study decks, quizzes, slide outlines, keynote scripts, and social articles without repeatedly rewriting prompts.
-        </p>
+          <h1 style={{
+            fontSize: 'clamp(2.75rem, 5vw, 4.8rem)',
+            fontWeight: 800,
+            lineHeight: 1.02,
+            letterSpacing: '-0.05em',
+            marginBottom: 18
+          }}>
+            Turn one source into a full content engine.
+          </h1>
 
-        {/* Hero CTAs */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 14,
-          flexWrap: 'wrap'
-        }}>
-          <button
-            onClick={onStartTransforming}
-            className="btn btn-accent-glow btn-lg"
-            style={{ padding: '14px 28px' }}
-          >
-            <span>TRANSFORM MY CONTENT</span>
-            <ArrowRight size={17} />
-          </button>
+          <p style={{
+            fontSize: 'clamp(1.06rem, 1.8vw, 1.28rem)',
+            color: 'var(--text-secondary)',
+            lineHeight: 1.6,
+            maxWidth: 680,
+            marginBottom: 28
+          }}>
+            ByteForce transforms research, notes, and reports into executive summaries, flashcards, quizzes, presentation outlines, scripts, and social content in a single workflow.
+          </p>
 
-          <button
-            onClick={onExploreDemo}
-            className="btn btn-secondary btn-lg"
-            style={{ padding: '14px 24px' }}
-          >
-            <Zap size={16} color="var(--brand-cyan)" />
-            <span>TRY DEMO (AI in Healthcare)</span>
-          </button>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+            flexWrap: 'wrap',
+            marginBottom: 22
+          }}>
+            <button
+              onClick={onStartTransforming}
+              className="btn btn-accent-glow btn-lg"
+              style={{ padding: '14px 28px' }}
+            >
+              <span>TRANSFORM MY CONTENT</span>
+              <ArrowRight size={17} />
+            </button>
+
+            <button
+              onClick={onExploreDemo}
+              className="btn btn-secondary btn-lg"
+              style={{ padding: '14px 24px' }}
+            >
+              <Zap size={16} color="var(--brand-cyan)" />
+              <span>TRY DEMO</span>
+            </button>
+          </div>
+
+          <div className="tag-row">
+            <span>Research-to-output</span>
+            <span>Multi-format content</span>
+            <span>Judge-friendly demo</span>
+          </div>
+        </div>
+
+        <div className="glass-panel state-panel">
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingBottom: 14,
+            borderBottom: '1px solid var(--border-subtle)',
+            marginBottom: 18
+          }}>
+            <div style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--text-muted)' }}>
+              PRODUCT SNAPSHOT
+            </div>
+            <span className="badge badge-emerald" style={{ fontSize: '0.6rem' }}>LIVE</span>
+          </div>
+
+          <div style={{ display: 'grid', gap: 12 }}>
+            <div className="mini-stat-card">
+              <div className="mini-stat-label"><FileText size={12} /> Source intake</div>
+              <strong>1 document</strong>
+              <span>PDF, TXT, DOCX, pasted notes</span>
+            </div>
+            <div className="mini-stat-card">
+              <div className="mini-stat-label"><Layers size={12} /> Purpose engine</div>
+              <strong>6 output modes</strong>
+              <span>Summary, quiz, script, cards, outline, social</span>
+            </div>
+            <div className="mini-stat-card accent">
+              <div className="mini-stat-label"><Clock size={12} /> Active workflow</div>
+              <strong>2-minute turnaround</strong>
+              <span>Fast enough for demos and live judging</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* SIGNATURE INTERACTION CANVAS: Live Product Preview */}
+      <div className="metrics-strip" style={{ marginBottom: 28 }}>
+        <div className="metric-card">
+          <strong>6x</strong>
+          <span>content formats from one source</span>
+        </div>
+        <div className="metric-card">
+          <strong>90%</strong>
+          <span>faster ideation for content teams</span>
+        </div>
+        <div className="metric-card">
+          <strong>7-stage</strong>
+          <span>internal transformation engine</span>
+        </div>
+        <div className="metric-card">
+          <strong>SIH-ready</strong>
+          <span>clear evaluator story and product demo</span>
+        </div>
+      </div>
+
       <div className="glass-panel" style={{
         border: '1px solid rgba(255, 255, 255, 0.1)',
         padding: '24px',
         boxShadow: 'var(--shadow-lg), 0 0 50px -10px rgba(56, 189, 248, 0.12)',
         borderRadius: 'var(--radius-xl)'
       }}>
-        {/* Workspace Canvas Header Strip */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -193,14 +258,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </div>
 
-        {/* 3-Column Interactive Orchestration Stage */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'minmax(260px, 1fr) auto minmax(320px, 1.45fr)',
           gap: 20,
           alignItems: 'center'
         }}>
-          {/* Node 1: Ingested Source Document Card */}
           <div className="bf-card" style={{ padding: '20px', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -241,7 +304,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
           </div>
 
-          {/* Center Connector: Transformation Node */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -269,7 +331,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
           </div>
 
-          {/* Node 3: Transformed Assets Interactive Showcase */}
           <div className="bf-card" style={{ padding: '20px', background: 'var(--bg-surface-elevated)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
               <span style={{ fontSize: '0.725rem', fontWeight: 700, color: '#a5b4fc', letterSpacing: '0.04em' }}>
@@ -280,7 +341,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </span>
             </div>
 
-            {/* Purpose tabs */}
             <div style={{
               display: 'flex',
               gap: 4,
@@ -325,7 +385,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               })}
             </div>
 
-            {/* Teaser Preview Box */}
             <div style={{
               background: 'var(--bg-canvas)',
               borderRadius: 'var(--radius-sm)',
@@ -353,7 +412,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </div>
 
-        {/* Feature Highlights Grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',

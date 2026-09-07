@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { 
   SourceDocument, 
@@ -7,13 +7,12 @@ import {
   TransformationConfigs, 
   PipelineStage,
   TemplatePack,
-  HistoryEntry,
-  OutlineConfig
+  HistoryEntry
 } from './types';
 import { DemoProvider, SAMPLE_RENEWABLE_ENERGY_TEXT, SAMPLE_DOCUMENTS } from './services/DemoProvider';
 import { analyzeContent } from './services/ContentAnalyzer';
 import { TransformationService } from './services/TransformationService';
-import { StorageService, AppSettings, DEFAULT_SETTINGS } from './services/StorageService';
+import { StorageService, AppSettings } from './services/StorageService';
 
 // Layout & View Components
 import { Header } from './components/layout/Header';
@@ -85,13 +84,8 @@ export const App: React.FC = () => {
   const [isGuidedDemoOpen, setIsGuidedDemoOpen] = useState<boolean>(false);
 
   // Storage Persistence
-  const [settings, setSettings] = useState<AppSettings>(DEFAULT_SETTINGS);
-  const [historyEntries, setHistoryEntries] = useState<HistoryEntry[]>([]);
-
-  useEffect(() => {
-    setSettings(StorageService.getSettings());
-    setHistoryEntries(StorageService.getHistory());
-  }, []);
+  const [settings, setSettings] = useState<AppSettings>(() => StorageService.getSettings());
+  const [historyEntries, setHistoryEntries] = useState<HistoryEntry[]>(() => StorageService.getHistory());
 
   const refreshHistory = () => {
     setHistoryEntries(StorageService.getHistory());
