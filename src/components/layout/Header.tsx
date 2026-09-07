@@ -10,6 +10,8 @@ import {
 } from 'lucide-react';
 import { AppSettings } from '../../services/StorageService';
 
+export type AppPage = 'home' | 'workspace' | 'processing' | 'results' | 'history' | 'settings';
+
 interface HeaderProps {
   onOpenTemplates: () => void;
   onOpenHistory: () => void;
@@ -17,9 +19,10 @@ interface HeaderProps {
   onOpenGuidedDemo: () => void;
   onQuickDemo: () => void;
   historyCount: number;
+  hasResults?: boolean;
   settings: AppSettings;
-  activeView: 'workspace' | 'history' | 'landing';
-  onNavigate: (view: 'workspace' | 'history' | 'landing') => void;
+  activeView: AppPage;
+  onNavigate: (view: AppPage) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -29,6 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenGuidedDemo,
   onQuickDemo,
   historyCount,
+  hasResults = false,
   settings,
   activeView,
   onNavigate
@@ -38,7 +42,7 @@ export const Header: React.FC<HeaderProps> = ({
       position: 'sticky',
       top: 0,
       zIndex: 50,
-      background: 'rgba(255, 255, 255, 0.92)',
+      background: 'rgba(255, 255, 255, 0.94)',
       backdropFilter: 'blur(20px)',
       WebkitBackdropFilter: 'blur(20px)',
       borderBottom: '1px solid var(--border-subtle)',
@@ -52,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Brand & Main View Navigation */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
         <button 
-          onClick={() => onNavigate('workspace')}
+          onClick={() => onNavigate('home')}
           style={{ 
             display: 'flex', 
             alignItems: 'center', 
@@ -108,14 +112,47 @@ export const Header: React.FC<HeaderProps> = ({
           border: '1px solid var(--border-subtle)',
           gap: 2
         }} aria-label="Main Navigation">
+          {/* 1. Home / Landing */}
+          <button
+            onClick={() => onNavigate('home')}
+            className={`nav-pill ${activeView === 'home' ? 'active' : ''}`}
+          >
+            <Compass size={13} />
+            <span>Home</span>
+          </button>
+
+          {/* 2. New Document (Workspace) */}
           <button
             onClick={() => onNavigate('workspace')}
             className={`nav-pill ${activeView === 'workspace' ? 'active' : ''}`}
           >
             <Layers size={13} />
-            <span>Workspace</span>
+            <span>New Document</span>
           </button>
-          
+
+          {/* 3. Results (when available or active) */}
+          {hasResults && (
+            <button
+              onClick={() => onNavigate('results')}
+              className={`nav-pill ${activeView === 'results' ? 'active' : ''}`}
+            >
+              <Sparkles size={13} />
+              <span>Results</span>
+              <span style={{
+                background: '#EBFBF7',
+                color: '#1F7C67',
+                fontWeight: 700,
+                fontSize: '0.6rem',
+                padding: '1px 6px',
+                borderRadius: 99,
+                border: '1px solid #BFEFDE'
+              }}>
+                Ready
+              </span>
+            </button>
+          )}
+
+          {/* 4. History Dashboard */}
           <button
             onClick={() => onNavigate('history')}
             className={`nav-pill ${activeView === 'history' ? 'active' : ''}`}
@@ -136,12 +173,13 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </button>
 
+          {/* 5. Settings / Profile */}
           <button
-            onClick={() => onNavigate('landing')}
-            className={`nav-pill ${activeView === 'landing' ? 'active' : ''}`}
+            onClick={() => onNavigate('settings')}
+            className={`nav-pill ${activeView === 'settings' ? 'active' : ''}`}
           >
-            <Compass size={13} />
-            <span>Overview</span>
+            <Settings size={13} />
+            <span>Settings</span>
           </button>
         </nav>
       </div>

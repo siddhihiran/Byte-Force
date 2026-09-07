@@ -14,19 +14,18 @@ import { analyzeContent } from './services/ContentAnalyzer';
 import { TransformationService } from './services/TransformationService';
 import { StorageService, AppSettings } from './services/StorageService';
 
-// Layout & View Components
-import { Header } from './components/layout/Header';
+import { AppPage, Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
-import { HeroSection } from './components/landing/HeroSection';
-import { WorkflowStepper } from './components/workspace/WorkflowStepper';
-import { SourceZone } from './components/workspace/SourceZone';
-import { PurposeZone } from './components/workspace/PurposeZone';
-import { ConfigPanel } from './components/workspace/ConfigPanel';
-import { PipelineModal } from './components/workspace/PipelineModal';
-import { OutputWorkspace } from './components/outputs/OutputWorkspace';
+import { LandingPage } from './pages/LandingPage';
+import { WorkflowPage } from './pages/WorkflowPage';
+import { ProcessingPage } from './pages/ProcessingPage';
+import { ResultsPage } from './pages/ResultsPage';
+import { HistoryDashboardPage } from './pages/HistoryDashboardPage';
+import { SettingsProfilePage } from './pages/SettingsProfilePage';
+
+// Modals
 import { TemplateModal } from './components/templates/TemplateModal';
 import { HistoryDrawer } from './components/history/HistoryDrawer';
-import { HistoryPage } from './components/history/HistoryPage';
 import { SettingsModal } from './components/settings/SettingsModal';
 import { GuidedDemoModal } from './components/demo/GuidedDemoModal';
 
@@ -47,8 +46,8 @@ const createInitialSource = (): SourceDocument => {
 };
 
 export const App: React.FC = () => {
-  // Navigation: Workspace-first product experience!
-  const [activeView, setActiveView] = useState<'workspace' | 'history' | 'landing'>('workspace');
+  // Navigation: Multi-page product routing
+  const [activeView, setActiveView] = useState<AppPage>('home');
   const [hasResults, setHasResults] = useState<boolean>(false);
 
   // Source & Purpose State
@@ -147,6 +146,7 @@ export const App: React.FC = () => {
     if (selectedPurposes.length === 0) return;
 
     setIsTransforming(true);
+    setActiveView('processing');
     setCurrentPipelineStage('ingest');
     setCurrentPipelineIndex(0);
 
@@ -163,7 +163,7 @@ export const App: React.FC = () => {
 
       setGeneratedAssets(assets);
       setHasResults(true);
-      setActiveView('workspace');
+      setActiveView('results');
       refreshHistory();
 
       // Confetti celebration
@@ -174,6 +174,7 @@ export const App: React.FC = () => {
       });
     } catch (err) {
       console.error('Transformation error:', err);
+      setActiveView('workspace');
     } finally {
       setIsTransforming(false);
     }
@@ -183,10 +184,9 @@ export const App: React.FC = () => {
   const handleQuickDemo = () => {
     handleSelectSample('healthcare');
     handleSelectAllRecommended();
-    setActiveView('workspace');
     setTimeout(() => {
       handleStartTransform();
-    }, 150);
+    }, 100);
   };
 
   // Apply Template Pack
@@ -199,7 +199,7 @@ export const App: React.FC = () => {
     setActiveView('workspace');
   };
 
-  // Restore History Entry into active workspace
+  // Restore History Entry into active workspace and open Results
   const handleRestoreHistory = (entry: HistoryEntry) => {
     setSource({
       id: `restored-${entry.id}`,
@@ -215,10 +215,11 @@ export const App: React.FC = () => {
     if (entry.assets && entry.assets.length > 0) {
       setGeneratedAssets(entry.assets);
       setHasResults(true);
+      setActiveView('results');
     } else {
       setHasResults(false);
+      setActiveView('workspace');
     }
-    setActiveView('workspace');
   };
 
   const handleRegenerateSingleAsset = (assetId: string) => {
@@ -256,10 +257,11 @@ export const App: React.FC = () => {
       <Header
         onOpenTemplates={() => setIsTemplatesOpen(true)}
         onOpenHistory={() => setActiveView('history')}
-        onOpenSettings={() => setIsSettingsOpen(true)}
+        onOpenSettings={() => setActiveView('settings')}
         onOpenGuidedDemo={() => setIsGuidedDemoOpen(true)}
         onQuickDemo={handleQuickDemo}
         historyCount={historyEntries.length}
+        hasResults={hasResults}
         settings={settings}
         activeView={activeView}
         onNavigate={(view) => setActiveView(view)}
@@ -267,103 +269,82 @@ export const App: React.FC = () => {
 
       {/* Main Viewport */}
       <main style={{ flex: 1, position: 'relative', zIndex: 1, padding: '32px' }}>
-        {activeView === 'landing' ? (
-          /* PRODUCT OVERVIEW & SIGNATURE VISUAL */
-          <HeroSection
-            onStartTransforming={() => setActiveView('workspace')}
-            onExploreDemo={handleQuickDemo}
+        {activeView === 'home' && (
+          <LandingPage
+            onGetStarted={() => setActiveView('workspace')}
+            onTryDemo={handleQuickDemo}
           />
-        ) : activeView === 'history' ? (
-          /* FULL WORKING TRANSFORMATION HISTORY PAGE */
-          <HistoryPage
+        )}
+
+        {activeView === 'workspace' && (
+          <WorkflowPage
+            source={source}
+            onUpdateSource={(newSrc) => setSource(newSrc)}
+            onSelectSample={handleSelectSample}
+            selectedPurposes={selectedPurposes}
+            onTogglePurpose={handleTogglePurpose}
+            onSelectAllRecommended={handleSelectAllRecommended}
+            onGenerateCompletePack={handleGenerateCompletePack}
+            activeConfigPurpose={activeConfigPurpose}
+            onSetActiveConfigPurpose={(id) => setActiveConfigPurpose(id)}
+            configs={configs}
+            onUpdateConfigs={setConfigs}
+            onStartTransform={handleStartTransform}
+            isTransforming={isTransforming}
+          />
+        )}
+
+        {activeView === 'processing' && (
+          <ProcessingPage
+            currentStage={currentPipelineStage}
+            currentStageIndex={currentPipelineIndex}
+            sourceTitle={source.title}
+            wordCount={source.wordCount}
+            purposesCount={selectedPurposes.length}
+          />
+        )}
+
+        {activeView === 'results' && (
+          <ResultsPage
+            assets={generatedAssets}
+            source={source}
+            onBackToWorkflow={() => setActiveView('workspace')}
+            onRegenerateAsset={handleRegenerateSingleAsset}
+            onDeleteAsset={handleDeleteSingleAsset}
+            onToggleSaveAsset={handleToggleSaveAsset}
+          />
+        )}
+
+        {activeView === 'history' && (
+          <HistoryDashboardPage
             historyEntries={historyEntries}
-            onReopenEntry={handleRestoreHistory}
+            onViewEntry={handleRestoreHistory}
             onClearHistory={() => {
               StorageService.clearHistory();
               refreshHistory();
             }}
             onDeleteEntry={handleDeleteHistoryEntry}
-            onGoToWorkspace={() => setActiveView('workspace')}
+            onGoToWorkflow={() => setActiveView('workspace')}
           />
-        ) : (
-          /* PRIMARY WORKING WORKSPACE (SIH PROTOTYPE) */
-          <div style={{ maxWidth: 1440, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 24 }}>
-            {hasResults ? (
-              /* RESULTS MODE: MULTI-ASSET OUTPUT WORKSPACE */
-              <OutputWorkspace
-                assets={generatedAssets}
-                sourceTitle={source.title}
-                onBackToConfig={() => setHasResults(false)}
-                onRegenerateAsset={handleRegenerateSingleAsset}
-                onDeleteAsset={handleDeleteSingleAsset}
-                onToggleSaveAsset={handleToggleSaveAsset}
-              />
-            ) : (
-              <>
-                {/* Horizontal Progress Stepper: ① Source → ② Purpose → ③ Tune */}
-                <WorkflowStepper
-                  sourceReady={source.wordCount > 0}
-                  purposeCount={selectedPurposes.length}
-                />
+        )}
 
-                {/* CONFIGURATION MODE: 3-ZONE TRANSFORMATION WORKSPACE (24px gutter) */}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                  gap: 24,
-                  alignItems: 'start'
-                }}>
-                  {/* ZONE 1: SOURCE CONTENT & CONTENT INTELLIGENCE */}
-                  <SourceZone
-                    source={source}
-                    onUpdateSource={(newSrc) => setSource(newSrc)}
-                    onSelectSample={handleSelectSample}
-                  />
-
-                {/* ZONE 2: 5 SELECTABLE PURPOSE MODES & MULTI-TRANSFORMATION */}
-                <PurposeZone
-                  selectedPurposes={selectedPurposes}
-                  onTogglePurpose={handleTogglePurpose}
-                  onSelectAllRecommended={handleSelectAllRecommended}
-                  onGenerateCompletePack={handleGenerateCompletePack}
-                  activeConfigPurpose={activeConfigPurpose}
-                  onSetActiveConfigPurpose={(id) => setActiveConfigPurpose(id)}
-                  onStartTransform={handleStartTransform}
-                  isTransforming={isTransforming}
-                />
-
-                {/* ZONE 3: DYNAMIC CONFIGURATION & TUNING */}
-                <ConfigPanel
-                  activePurpose={activeConfigPurpose}
-                  configs={configs}
-                  onUpdateSummaryConfig={(c) => setConfigs({ ...configs, summary: { ...configs.summary, ...c } })}
-                  onUpdateQuizConfig={(c) => setConfigs({ ...configs, quiz: { ...configs.quiz, ...c } })}
-                  onUpdateSocialConfig={(c) => setConfigs({ ...configs, social: { ...configs.social, ...c } })}
-                  onUpdateScriptConfig={(c) => setConfigs({ ...configs, script: { ...configs.script, ...c } })}
-                  onUpdateFlashcardsConfig={(c) => setConfigs({ ...configs, flashcards: { ...configs.flashcards, ...c } })}
-                  onUpdateOutlineConfig={(c) => setConfigs({ ...configs, outline: { ...configs.outline, ...c } })}
-                  onStartTransform={handleStartTransform}
-                  isTransforming={isTransforming}
-                  selectedCount={selectedPurposes.length}
-                />
-              </div>
-              </>
-            )}
-          </div>
+        {activeView === 'settings' && (
+          <SettingsProfilePage
+            settings={settings}
+            onUpdateSettings={(newSettings) => {
+              StorageService.saveSettings(newSettings);
+              setSettings(newSettings);
+            }}
+            onClearHistory={() => {
+              StorageService.clearHistory();
+              refreshHistory();
+            }}
+          />
         )}
       </main>
 
       {/* Footer */}
       <Footer />
-
-      {/* 7-Stage Pipeline Modal */}
-      <PipelineModal
-        currentStage={currentPipelineStage}
-        currentStageIndex={currentPipelineIndex}
-        isOpen={isTransforming}
-        sourceTitle={source.title}
-        purposesCount={selectedPurposes.length}
-      />
 
       {/* Guided Architecture Walkthrough Modal */}
       <GuidedDemoModal
