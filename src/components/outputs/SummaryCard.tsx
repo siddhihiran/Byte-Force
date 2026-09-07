@@ -58,7 +58,8 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
       padding: '24px',
       display: 'flex',
       flexDirection: 'column',
-      gap: 20
+      gap: 24,
+      background: '#FFFFFF'
     }}>
       {/* Asset Header Toolbar */}
       <div style={{
@@ -72,18 +73,18 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <span className="badge badge-cyan">LEARN • EXECUTIVE SYNTHESIS</span>
-            <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
+            <span className="badge badge-primary">LEARN • EXECUTIVE SYNTHESIS</span>
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
               {asset.format}
             </span>
           </div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
             {asset.title}
           </h2>
         </div>
 
         {/* Actions Toolbar */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <button
             onClick={() => setIsEditing(!isEditing)}
             className={`btn btn-sm ${isEditing ? 'btn-primary' : 'btn-secondary'}`}
@@ -95,7 +96,7 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
             onClick={handleCopy}
             className="btn btn-secondary btn-sm"
           >
-            {copied ? <Check size={13} color="#10b981" /> : <Copy size={13} />}
+            {copied ? <Check size={13} color="var(--brand-mint)" /> : <Copy size={13} />}
             <span>{copied ? 'Copied' : 'Copy'}</span>
           </button>
           <button
@@ -118,23 +119,24 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
 
       {/* SECTION 1: OVERVIEW */}
       <div style={{
-        background: 'var(--bg-canvas)',
+        background: 'var(--bg-surface-subtle)',
         border: '1px solid var(--border-subtle)',
-        borderRadius: 'var(--radius-md)',
-        padding: '16px'
+        borderRadius: '14px',
+        padding: '18px'
       }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
+          gap: 7,
           marginBottom: 8,
-          fontSize: '0.785rem',
-          fontWeight: 800,
-          color: 'var(--brand-cyan)',
-          letterSpacing: '0.04em'
+          fontSize: '11px',
+          fontWeight: 700,
+          color: 'var(--brand-primary)',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase'
         }}>
           <FileText size={14} />
-          <span>EXECUTIVE OVERVIEW</span>
+          <span>Executive Overview</span>
         </div>
         {isEditing ? (
           <textarea
@@ -144,7 +146,7 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
             style={{ minHeight: 90 }}
           />
         ) : (
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>
+          <p style={{ fontSize: '13px', color: 'var(--text-primary)', lineHeight: 1.6, margin: 0 }}>
             {data.overview}
           </p>
         )}
@@ -155,17 +157,18 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
-          marginBottom: 10,
-          fontSize: '0.785rem',
-          fontWeight: 800,
-          color: '#ffffff',
-          letterSpacing: '0.04em'
+          gap: 7,
+          marginBottom: 12,
+          fontSize: '11px',
+          fontWeight: 700,
+          color: 'var(--text-secondary)',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase'
         }}>
-          <Sparkles size={14} color="#38bdf8" />
-          <span>KEY STRATEGIC INSIGHTS</span>
+          <Sparkles size={14} color="var(--brand-primary)" />
+          <span>Key Strategic Insights</span>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {data.keyInsights.map((insight, idx) => (
             <div
               key={idx}
@@ -173,29 +176,30 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
                 display: 'flex',
                 alignItems: 'flex-start',
                 gap: 12,
-                background: 'var(--bg-surface-elevated)',
+                background: '#FFFFFF',
                 border: '1px solid var(--border-subtle)',
-                borderRadius: 'var(--radius-sm)',
-                padding: '12px 14px'
+                borderRadius: '10px',
+                padding: '12px 16px',
+                boxShadow: 'var(--shadow-resting)'
               }}
             >
               <div style={{
                 width: 22,
                 height: 22,
                 borderRadius: '50%',
-                background: 'rgba(56, 189, 248, 0.1)',
-                color: 'var(--brand-cyan)',
+                background: 'var(--brand-primary-subtle)',
+                color: 'var(--brand-primary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '0.75rem',
-                fontWeight: 800,
+                fontSize: '11px',
+                fontWeight: 700,
                 flexShrink: 0,
                 marginTop: 1
               }}>
                 {idx + 1}
               </div>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-primary)', lineHeight: 1.5, margin: 0 }}>
                 {insight}
               </p>
             </div>
@@ -208,40 +212,41 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
-          marginBottom: 10,
-          fontSize: '0.785rem',
-          fontWeight: 800,
-          color: '#ffffff',
-          letterSpacing: '0.04em'
+          gap: 7,
+          marginBottom: 12,
+          fontSize: '11px',
+          fontWeight: 700,
+          color: 'var(--text-secondary)',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase'
         }}>
-          <BookMarked size={14} color="#818cf8" />
-          <span>CORE CONCEPT LEXICON</span>
+          <BookMarked size={14} color="var(--brand-primary)" />
+          <span>Core Concept Lexicon</span>
         </div>
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: 10
+          gap: 12
         }}>
           {data.importantConcepts.map((concept, idx) => (
             <div
               key={idx}
               style={{
-                background: 'rgba(99, 102, 241, 0.04)',
-                border: '1px solid rgba(99, 102, 241, 0.18)',
-                borderRadius: 'var(--radius-sm)',
-                padding: '12px 14px'
+                background: 'var(--bg-surface-subtle)',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '10px',
+                padding: '14px 16px'
               }}
             >
               <div style={{
-                fontWeight: 700,
-                fontSize: '0.85rem',
-                color: '#c7d2fe',
+                fontWeight: 600,
+                fontSize: '13px',
+                color: 'var(--text-primary)',
                 marginBottom: 4
               }}>
                 {concept.term}
               </div>
-              <div style={{ fontSize: '0.775rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+              <div style={{ fontSize: '12px', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                 {concept.explanation}
               </div>
             </div>
@@ -254,17 +259,18 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 8,
-          marginBottom: 10,
-          fontSize: '0.785rem',
-          fontWeight: 800,
-          color: '#34d399',
-          letterSpacing: '0.04em'
+          gap: 7,
+          marginBottom: 12,
+          fontSize: '11px',
+          fontWeight: 700,
+          color: 'var(--text-secondary)',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase'
         }}>
-          <ListChecks size={14} />
-          <span>ACTIONABLE TAKEAWAYS</span>
+          <ListChecks size={14} color="#1F7C67" />
+          <span>Actionable Takeaways</span>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {data.takeaways.map((takeaway, idx) => (
             <div
               key={idx}
@@ -272,12 +278,12 @@ ${data.takeaways.map(t => `1. ${t}`).join('\n')}
                 display: 'flex',
                 alignItems: 'flex-start',
                 gap: 10,
-                fontSize: '0.85rem',
-                color: 'var(--text-secondary)',
+                fontSize: '13px',
+                color: 'var(--text-primary)',
                 lineHeight: 1.5
               }}
             >
-              <span style={{ color: '#10b981', fontWeight: 800 }}>→</span>
+              <span style={{ color: '#1F7C67', fontWeight: 700 }}>→</span>
               <span>{takeaway}</span>
             </div>
           ))}

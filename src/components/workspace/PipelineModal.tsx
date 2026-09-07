@@ -25,8 +25,10 @@ export const PipelineModal: React.FC<PipelineModalProps> = ({
       <div className="modal-content animate-fade-in" style={{
         maxWidth: 580,
         padding: '28px',
-        border: '1px solid rgba(56, 189, 248, 0.3)',
-        boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.15)'
+        background: '#FFFFFF',
+        border: '1px solid var(--border-subtle)',
+        borderRadius: '16px',
+        boxShadow: '0 20px 48px rgba(30, 30, 46, 0.12)'
       }}>
         {/* Header */}
         <div style={{
@@ -38,28 +40,35 @@ export const PipelineModal: React.FC<PipelineModalProps> = ({
           marginBottom: 18
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div className="animate-pulse-glow" style={{
+            <div style={{
               width: 40,
               height: 40,
               borderRadius: 10,
-              background: 'linear-gradient(135deg, #0284c7 0%, #6366f1 100%)',
+              background: 'linear-gradient(135deg, #7C6FE8 0%, #6FD6C0 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 0 16px rgba(56, 189, 248, 0.3)'
+              boxShadow: '0 4px 12px rgba(124, 111, 232, 0.25)'
             }}>
-              <Cpu size={20} color="#ffffff" />
+              <Cpu size={20} color="#FFFFFF" />
             </div>
             <div>
-              <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#ffffff', letterSpacing: '0.02em' }}>
+              <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.01em' }}>
                 BYTEFORCE TRANSFORMATION ENGINE
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                 Orchestrating {purposesCount} purpose-built asset{purposesCount > 1 ? 's' : ''} from source
               </div>
             </div>
           </div>
-          <span className="badge badge-cyan" style={{ fontSize: '0.72rem', padding: '4px 10px' }}>
+          <span className="badge" style={{
+            fontSize: '0.72rem',
+            padding: '4px 10px',
+            background: 'rgba(124, 111, 232, 0.1)',
+            color: 'var(--brand-primary)',
+            border: '1px solid rgba(124, 111, 232, 0.25)',
+            fontWeight: 700
+          }}>
             STAGE {currentStageIndex + 1} OF 7
           </span>
         </div>
@@ -78,9 +87,9 @@ export const PipelineModal: React.FC<PipelineModalProps> = ({
           justifyContent: 'space-between'
         }}>
           <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 380 }}>
-            Source: <strong style={{ color: '#ffffff' }}>{sourceTitle}</strong>
+            Source: <strong style={{ color: 'var(--text-primary)' }}>{sourceTitle}</strong>
           </span>
-          <span style={{ color: 'var(--brand-cyan)', fontWeight: 700, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <span style={{ color: '#1F7C67', fontWeight: 700, fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Pipeline Active
           </span>
         </div>
@@ -101,12 +110,12 @@ export const PipelineModal: React.FC<PipelineModalProps> = ({
                   padding: '10px 14px',
                   borderRadius: 'var(--radius-md)',
                   background: isCurrent 
-                    ? 'rgba(56, 189, 248, 0.08)' 
+                    ? '#F3F1FC' 
                     : isPast 
-                    ? 'rgba(255, 255, 255, 0.02)' 
+                    ? '#FAFAFB' 
                     : 'transparent',
                   border: isCurrent 
-                    ? '1px solid rgba(56, 189, 248, 0.35)' 
+                    ? '1px solid rgba(124, 111, 232, 0.35)' 
                     : '1px solid transparent',
                   transition: 'all 0.2s ease'
                 }}
@@ -122,22 +131,24 @@ export const PipelineModal: React.FC<PipelineModalProps> = ({
                   fontSize: '0.72rem',
                   fontWeight: 700,
                   background: isPast 
-                    ? 'rgba(16, 185, 129, 0.15)' 
+                    ? '#EBFBF7' 
                     : isCurrent 
-                    ? 'var(--brand-cyan)' 
-                    : 'rgba(255, 255, 255, 0.05)',
+                    ? 'var(--brand-primary)' 
+                    : '#FAFAFB',
                   color: isPast 
-                    ? '#10b981' 
+                    ? '#1F7C67' 
                     : isCurrent 
-                    ? '#07090d' 
-                    : 'var(--text-dim)',
+                    ? '#FFFFFF' 
+                    : 'var(--text-muted)',
                   border: isPast 
-                    ? '1px solid rgba(16, 185, 129, 0.3)' 
-                    : 'none',
+                    ? '1px solid #BFEFDE' 
+                    : isCurrent 
+                    ? 'none' 
+                    : '1px solid var(--border-subtle)',
                   flexShrink: 0
                 }}>
                   {isPast ? (
-                    <CheckCircle2 size={16} color="#10b981" />
+                    <CheckCircle2 size={16} color="#1F7C67" />
                   ) : isCurrent ? (
                     <Loader2 size={15} className="animate-spin" style={{ animation: 'spinSlow 1s linear infinite' }} />
                   ) : (
@@ -155,15 +166,15 @@ export const PipelineModal: React.FC<PipelineModalProps> = ({
                     <span style={{
                       fontSize: '0.825rem',
                       fontWeight: 700,
-                      letterSpacing: '0.02em',
-                      color: isCurrent ? 'var(--brand-cyan)' : isPast ? '#ffffff' : 'var(--text-dim)'
+                      letterSpacing: '0.01em',
+                      color: isCurrent ? 'var(--brand-primary)' : isPast ? 'var(--text-primary)' : 'var(--text-muted)'
                     }}>
                       {stage.name}
                     </span>
                     {isCurrent && (
                       <span style={{
                         fontSize: '0.68rem',
-                        color: 'var(--brand-cyan)',
+                        color: 'var(--brand-primary)',
                         fontFamily: 'var(--font-mono)',
                         fontWeight: 600
                       }}>
@@ -173,7 +184,7 @@ export const PipelineModal: React.FC<PipelineModalProps> = ({
                   </div>
                   <div style={{
                     fontSize: '0.72rem',
-                    color: isCurrent ? 'var(--text-secondary)' : 'var(--text-dim)',
+                    color: isCurrent ? 'var(--text-secondary)' : 'var(--text-muted)',
                     marginTop: 2
                   }}>
                     {stage.description}
@@ -189,14 +200,14 @@ export const PipelineModal: React.FC<PipelineModalProps> = ({
           <div style={{
             height: 5,
             width: '100%',
-            background: 'rgba(255, 255, 255, 0.08)',
+            background: 'var(--border-subtle)',
             borderRadius: 3,
             overflow: 'hidden'
           }}>
             <div style={{
               height: '100%',
               width: `${((currentStageIndex + 1) / 7) * 100}%`,
-              background: 'linear-gradient(90deg, #38bdf8, #818cf8, #10b981)',
+              background: 'linear-gradient(90deg, #7C6FE8, #6FD6C0)',
               transition: 'width 0.35s cubic-bezier(0.16, 1, 0.3, 1)'
             }} />
           </div>

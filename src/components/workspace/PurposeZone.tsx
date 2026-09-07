@@ -11,7 +11,8 @@ import {
   CheckSquare,
   Square,
   PackageCheck,
-  Zap
+  Zap,
+  Sliders
 } from 'lucide-react';
 import { TransformationId, PurposeCategory } from '../../types';
 import { PURPOSE_CATEGORIES, PURPOSES } from '../../constants/purposes';
@@ -68,54 +69,73 @@ export const PurposeZone: React.FC<PurposeZoneProps> = ({
   };
 
   return (
-    <div className="glass-panel" style={{
+    <div className="bf-card" style={{
       display: 'flex',
       flexDirection: 'column',
-      gap: 16,
-      padding: '20px',
+      gap: 20,
+      padding: '24px',
       height: '100%'
     }}>
-      {/* Zone Header Strip */}
+      {/* 02 · CHOOSE PURPOSE Header */}
       <div style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         borderBottom: '1px solid var(--border-subtle)',
-        paddingBottom: 12
+        paddingBottom: 16
       }}>
-        <div>
-          <div style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '0.02em', color: '#ffffff' }}>
-            02 • CHOOSE PURPOSE
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{
+            width: 28,
+            height: 28,
+            borderRadius: 8,
+            background: 'var(--brand-primary-subtle)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'var(--brand-primary)'
+          }}>
+            <Sliders size={15} />
           </div>
-          <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>
-            What do you want to do with this content?
+          <div>
+            <h2 className="section-header-title">
+              02 · CHOOSE PURPOSE
+            </h2>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: 2 }}>
+              What do you want to create with this source?
+            </div>
           </div>
         </div>
 
         <button
           onClick={onSelectAllRecommended}
-          className="btn btn-ghost btn-sm"
-          style={{ fontSize: '0.7rem', padding: '3px 8px' }}
+          className="btn btn-secondary btn-sm"
+          style={{ fontSize: '11px', padding: '4px 10px' }}
           title="Select all recommended learning and presentation outputs"
         >
           <span>Select Recommended</span>
         </button>
       </div>
 
-      {/* Category Pills Filter */}
+      {/* Category Pills Filter: Active tab = solid primary accent bg with white text, inactive = transparent with text-secondary */}
       <div style={{
         display: 'flex',
-        gap: 3,
-        background: 'rgba(0, 0, 0, 0.4)',
-        padding: 3,
-        borderRadius: 'var(--radius-sm)',
+        gap: 4,
+        background: 'var(--bg-surface-subtle)',
+        padding: 4,
+        borderRadius: 'var(--radius-full)',
         border: '1px solid var(--border-subtle)',
         overflowX: 'auto'
       }}>
         <button
           onClick={() => setActiveCategoryFilter('all')}
           className={`tab-btn ${activeCategoryFilter === 'all' ? 'active' : ''}`}
-          style={{ fontSize: '0.725rem', padding: '4px 9px', flexShrink: 0 }}
+          style={{
+            fontSize: '12px',
+            padding: '5px 12px',
+            borderRadius: '9999px',
+            flexShrink: 0
+          }}
         >
           All
         </button>
@@ -125,13 +145,14 @@ export const PurposeZone: React.FC<PurposeZoneProps> = ({
             onClick={() => handleSelectModeCategory(c.id)}
             className={`tab-btn ${activeCategoryFilter === c.id ? 'active' : ''}`}
             style={{
-              fontSize: '0.725rem',
-              padding: '4px 9px',
+              fontSize: '12px',
+              padding: '5px 12px',
+              borderRadius: '9999px',
               flexShrink: 0,
               textTransform: 'capitalize'
             }}
           >
-            {c.label}
+            {c.label.toLowerCase()}
           </button>
         ))}
       </div>
@@ -140,18 +161,18 @@ export const PurposeZone: React.FC<PurposeZoneProps> = ({
       <div style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: 12,
+        gap: 16,
         overflowY: 'auto',
         maxHeight: 'calc(100vh - 430px)',
-        paddingRight: 3
+        paddingRight: 4
       }}>
         {filteredCategories.map(category => {
           const categoryPurposes = PURPOSES.filter(p => p.category === category.id);
           if (categoryPurposes.length === 0) return null;
 
           return (
-            <div key={category.id} style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {/* Category Subhead */}
+            <div key={category.id} style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {/* Category Subhead: Small uppercase eyebrow text in primary accent, not colored blocks */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -159,23 +180,21 @@ export const PurposeZone: React.FC<PurposeZoneProps> = ({
                 padding: '0 2px'
               }}>
                 <span style={{
-                  fontSize: '0.7rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.06em',
-                  color: category.id === 'summarize' ? 'var(--brand-cyan)' :
-                         category.id === 'learn' ? '#34d399' :
-                         category.id === 'assess' ? '#fbbf24' :
-                         category.id === 'present' ? '#a5b4fc' : '#f43f5e'
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  letterSpacing: '0.05em',
+                  color: 'var(--brand-primary)',
+                  textTransform: 'uppercase'
                 }}>
-                  {category.label.toUpperCase()}
+                  {category.label}
                 </span>
-                <span style={{ fontSize: '0.65rem', color: 'var(--text-dim)' }}>
+                <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
                   {category.tagline}
                 </span>
               </div>
 
-              {/* Purpose Cards */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {/* Purpose Cards: Icon in soft-tinted rounded square, title bold, description text-secondary, Configure as ghost button */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {categoryPurposes.map(purpose => {
                   const isSelected = selectedPurposes.includes(purpose.id);
                   const isConfigActive = activeConfigPurpose === purpose.id;
@@ -188,70 +207,86 @@ export const PurposeZone: React.FC<PurposeZoneProps> = ({
                         onSetActiveConfigPurpose(purpose.id);
                         onTogglePurpose(purpose.id);
                       }}
-                      className={`bf-card interactive ${isSelected ? 'active' : ''}`}
+                      className={`bf-card interactive ${isSelected ? 'selected' : ''}`}
                       style={{
-                        padding: '10px 12px',
+                        padding: '14px 16px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
-                        background: isSelected ? 'rgba(56, 189, 248, 0.07)' : 'var(--bg-surface)'
+                        borderRadius: '14px',
+                        background: '#FFFFFF',
+                        borderLeft: isSelected ? '3px solid var(--brand-primary)' : '1px solid var(--border-subtle)',
+                        boxShadow: isSelected ? 'var(--shadow-selected)' : 'var(--shadow-resting)'
                       }}
                     >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 10, overflow: 'hidden' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 12, overflow: 'hidden' }}>
                         {/* Checkbox Icon */}
                         <div style={{
-                          color: isSelected ? 'var(--brand-cyan)' : 'var(--text-dim)',
+                          color: isSelected ? 'var(--brand-primary)' : 'var(--border-medium)',
                           display: 'flex',
-                          alignItems: 'center'
+                          alignItems: 'center',
+                          flexShrink: 0
                         }}>
-                          {isSelected ? <CheckSquare size={16} /> : <Square size={16} />}
+                          {isSelected ? <CheckSquare size={18} color="var(--brand-primary)" /> : <Square size={18} />}
                         </div>
 
-                        {/* Icon */}
+                        {/* Icon in soft-tinted rounded square */}
                         <div style={{
-                          width: 28,
-                          height: 28,
-                          borderRadius: 6,
-                          background: isSelected ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255, 255, 255, 0.04)',
+                          width: 34,
+                          height: 34,
+                          borderRadius: 8,
+                          background: isSelected ? 'var(--brand-primary-subtle)' : 'var(--bg-surface-subtle)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          flexShrink: 0
+                          color: isSelected ? 'var(--brand-primary)' : 'var(--text-secondary)',
+                          flexShrink: 0,
+                          border: isSelected ? '1px solid rgba(124, 111, 232, 0.2)' : '1px solid var(--border-subtle)'
                         }}>
-                          <Icon size={14} color={isSelected ? 'var(--brand-cyan)' : 'var(--text-muted)'} />
+                          <Icon size={16} />
                         </div>
 
                         {/* Text */}
                         <div style={{ overflow: 'hidden' }}>
                           <div style={{
-                            fontSize: '0.825rem',
-                            fontWeight: 700,
-                            color: isSelected ? '#ffffff' : 'var(--text-secondary)'
+                            fontSize: '14px',
+                            fontWeight: 600,
+                            color: 'var(--text-primary)',
+                            lineHeight: 1.3
                           }}>
                             {purpose.title}
                           </div>
                           <div style={{
-                            fontSize: '0.675rem',
-                            color: 'var(--text-muted)',
+                            fontSize: '12px',
+                            color: 'var(--text-secondary)',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
-                            textOverflow: 'ellipsis'
+                            textOverflow: 'ellipsis',
+                            marginTop: 2
                           }}>
                             {purpose.tagline}
                           </div>
                         </div>
                       </div>
 
-                      {/* Tuning indicator */}
-                      <span style={{
-                        fontSize: '0.65rem',
-                        color: isConfigActive ? 'var(--brand-cyan)' : 'var(--text-dim)',
-                        fontWeight: 600,
-                        marginLeft: 8,
-                        flexShrink: 0
-                      }}>
-                        {isConfigActive ? 'Tuning' : 'Configure'}
-                      </span>
+                      {/* Right-aligned Configure Button (Ghost Style) */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onSetActiveConfigPurpose(purpose.id);
+                          if (!isSelected) onTogglePurpose(purpose.id);
+                        }}
+                        className={`btn btn-sm ${isConfigActive ? 'btn-secondary' : 'btn-ghost'}`}
+                        style={{
+                          fontSize: '11px',
+                          padding: '4px 10px',
+                          marginLeft: 8,
+                          flexShrink: 0,
+                          color: isConfigActive ? 'var(--brand-primary)' : 'var(--text-secondary)'
+                        }}
+                      >
+                        {isConfigActive ? 'Configuring' : 'Configure'}
+                      </button>
                     </div>
                   );
                 })}
@@ -261,14 +296,14 @@ export const PurposeZone: React.FC<PurposeZoneProps> = ({
         })}
       </div>
 
-      {/* Sticky Bottom Actions: Complete Pack + Primary Transform CTA */}
+      {/* Bottom Actions: Complete Pack + Primary Transform CTA */}
       <div style={{
         marginTop: 'auto',
         borderTop: '1px solid var(--border-subtle)',
-        paddingTop: 14,
+        paddingTop: 16,
         display: 'flex',
         flexDirection: 'column',
-        gap: 9
+        gap: 10
       }}>
         {/* GENERATE COMPLETE PACK Superpower Action */}
         <button
@@ -277,28 +312,33 @@ export const PurposeZone: React.FC<PurposeZoneProps> = ({
           className="btn btn-secondary btn-sm"
           style={{
             width: '100%',
-            padding: '9px 12px',
-            fontSize: '0.785rem',
-            border: '1px solid rgba(56, 189, 248, 0.35)',
-            background: 'rgba(56, 189, 248, 0.07)',
-            justifyContent: 'center'
+            padding: '10px 14px',
+            fontSize: '13px',
+            background: 'var(--brand-primary-subtle)',
+            borderColor: 'rgba(124, 111, 232, 0.25)',
+            color: 'var(--brand-primary)',
+            justifyContent: 'center',
+            fontWeight: 600
           }}
           title="Transform this source into all supported outputs in one click"
         >
-          <PackageCheck size={14} color="var(--brand-cyan)" />
-          <span style={{ color: 'var(--brand-cyan)', fontWeight: 700 }}>
-            GENERATE COMPLETE PACK (All 6 Outputs)
-          </span>
+          <PackageCheck size={15} color="var(--brand-primary)" />
+          <span>GENERATE COMPLETE PACK (All 6 Outputs)</span>
         </button>
 
         {/* Primary Transform Button */}
         <button
           onClick={onStartTransform}
           disabled={selectedPurposes.length === 0 || isTransforming}
-          className="btn btn-accent-glow"
-          style={{ width: '100%', padding: '12px 16px', fontSize: '0.875rem' }}
+          className="btn btn-primary"
+          style={{
+            width: '100%',
+            padding: '12px 18px',
+            fontSize: '14px',
+            fontWeight: 600
+          }}
         >
-          <Zap size={15} />
+          <Zap size={16} />
           <span>Transform Selected ({selectedPurposes.length}) →</span>
         </button>
       </div>

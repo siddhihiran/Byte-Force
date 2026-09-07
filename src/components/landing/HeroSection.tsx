@@ -79,22 +79,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           gap: 8,
           padding: '6px 14px',
           borderRadius: 'var(--radius-full)',
-          background: 'rgba(56, 189, 248, 0.08)',
-          border: '1px solid rgba(56, 189, 248, 0.25)',
-          boxShadow: '0 0 20px rgba(56, 189, 248, 0.1)'
+          background: '#F3F1FC',
+          border: '1px solid #E9E8F5',
+          boxShadow: 'var(--shadow-resting)'
         }} className="animate-fade-in">
           <div style={{
-            width: 6,
-            height: 6,
+            width: 7,
+            height: 7,
             borderRadius: '50%',
-            background: 'var(--brand-cyan)',
-            boxShadow: '0 0 8px var(--brand-cyan)'
+            background: 'var(--brand-primary)'
           }} />
           <span style={{
-            fontSize: '0.75rem',
+            fontSize: '0.725rem',
             fontWeight: 700,
             letterSpacing: '0.04em',
-            color: 'var(--brand-cyan)'
+            color: 'var(--brand-primary)'
           }}>
             SIH26154 • GEN AI PLATFORM FOR AUTOMATED CONTENT TRANSFORMATION
           </span>
@@ -104,32 +103,44 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div style={{
         display: 'grid',
         gridTemplateColumns: '1.25fr 0.75fr',
-        gap: 24,
+        gap: 28,
         alignItems: 'center',
-        margin: '0 auto 32px',
+        margin: '0 auto 36px',
         maxWidth: 1200
       }}>
         <div>
-          <div className="impact-badge" style={{ marginBottom: 20 }}>
-            <Sparkles size={14} />
+          <div className="badge" style={{
+            marginBottom: 18,
+            background: '#EBFBF7',
+            color: '#1F7C67',
+            border: '1px solid #BFEFDE',
+            padding: '6px 12px',
+            fontSize: '0.75rem',
+            fontWeight: 600,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6
+          }}>
+            <Sparkles size={14} color="#1F7C67" />
             Built for hackathon judging, research teams, and rapid content operations
           </div>
 
           <h1 style={{
-            fontSize: 'clamp(2.75rem, 5vw, 4.8rem)',
+            fontSize: 'clamp(2.5rem, 4.5vw, 4.2rem)',
             fontWeight: 800,
-            lineHeight: 1.02,
-            letterSpacing: '-0.05em',
+            lineHeight: 1.05,
+            letterSpacing: '-0.035em',
+            color: 'var(--text-primary)',
             marginBottom: 18
           }}>
             Turn one source into a full content engine.
           </h1>
 
           <p style={{
-            fontSize: 'clamp(1.06rem, 1.8vw, 1.28rem)',
+            fontSize: 'clamp(1rem, 1.6vw, 1.15rem)',
             color: 'var(--text-secondary)',
             lineHeight: 1.6,
-            maxWidth: 680,
+            maxWidth: 640,
             marginBottom: 28
           }}>
             ByteForce transforms research, notes, and reports into executive summaries, flashcards, quizzes, presentation outlines, scripts, and social content in a single workflow.
@@ -144,8 +155,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           }}>
             <button
               onClick={onStartTransforming}
-              className="btn btn-accent-glow btn-lg"
-              style={{ padding: '14px 28px' }}
+              className="btn btn-primary btn-lg"
+              style={{ padding: '14px 28px', fontSize: '0.95rem' }}
             >
               <span>TRANSFORM MY CONTENT</span>
               <ArrowRight size={17} />
@@ -154,21 +165,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <button
               onClick={onExploreDemo}
               className="btn btn-secondary btn-lg"
-              style={{ padding: '14px 24px' }}
+              style={{ padding: '14px 24px', fontSize: '0.95rem' }}
             >
-              <Zap size={16} color="var(--brand-cyan)" />
+              <Zap size={16} color="var(--brand-primary)" />
               <span>TRY DEMO</span>
             </button>
           </div>
 
-          <div className="tag-row">
-            <span>Research-to-output</span>
-            <span>Multi-format content</span>
-            <span>Judge-friendly demo</span>
+          <div className="tag-row" style={{ display: 'flex', gap: 8 }}>
+            <span className="badge" style={{ background: '#F3F1FC', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}>Research-to-output</span>
+            <span className="badge" style={{ background: '#F3F1FC', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}>Multi-format content</span>
+            <span className="badge" style={{ background: '#F3F1FC', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}>Judge-friendly demo</span>
           </div>
         </div>
 
-        <div className="glass-panel state-panel">
+        <div className="bf-card" style={{ padding: '24px', background: '#FFFFFF', border: '1px solid var(--border-subtle)' }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -177,55 +188,101 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             borderBottom: '1px solid var(--border-subtle)',
             marginBottom: 18
           }}>
-            <div style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.04em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
               PRODUCT SNAPSHOT
             </div>
-            <span className="badge badge-emerald" style={{ fontSize: '0.6rem' }}>LIVE</span>
+            <span className="badge" style={{
+              fontSize: '0.625rem',
+              background: '#EBFBF7',
+              color: '#1F7C67',
+              border: '1px solid #BFEFDE',
+              fontWeight: 700
+            }}>
+              LIVE
+            </span>
           </div>
 
           <div style={{ display: 'grid', gap: 12 }}>
-            <div className="mini-stat-card">
-              <div className="mini-stat-label"><FileText size={12} /> Source intake</div>
-              <strong>1 document</strong>
-              <span>PDF, TXT, DOCX, pasted notes</span>
+            <div style={{
+              background: '#FAFAFB',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-md)',
+              padding: '12px 14px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4
+            }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <FileText size={12} color="var(--brand-primary)" /> Source intake
+              </div>
+              <strong style={{ fontSize: '0.95rem', color: 'var(--text-primary)' }}>1 document</strong>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>PDF, TXT, DOCX, pasted notes</span>
             </div>
-            <div className="mini-stat-card">
-              <div className="mini-stat-label"><Layers size={12} /> Purpose engine</div>
-              <strong>6 output modes</strong>
-              <span>Summary, quiz, script, cards, outline, social</span>
+
+            <div style={{
+              background: '#FAFAFB',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-md)',
+              padding: '12px 14px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4
+            }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                <Layers size={12} color="var(--brand-primary)" /> Purpose engine
+              </div>
+              <strong style={{ fontSize: '0.95rem', color: 'var(--text-primary)' }}>6 output modes</strong>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Summary, quiz, script, cards, outline, social</span>
             </div>
-            <div className="mini-stat-card accent">
-              <div className="mini-stat-label"><Clock size={12} /> Active workflow</div>
-              <strong>2-minute turnaround</strong>
-              <span>Fast enough for demos and live judging</span>
+
+            <div style={{
+              background: '#F3F1FC',
+              border: '1px solid #E9E8F5',
+              borderRadius: 'var(--radius-md)',
+              padding: '12px 14px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4
+            }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--brand-primary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
+                <Clock size={12} /> Active workflow
+              </div>
+              <strong style={{ fontSize: '0.95rem', color: 'var(--brand-primary)' }}>2-minute turnaround</strong>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Fast enough for demos and live judging</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="metrics-strip" style={{ marginBottom: 28 }}>
-        <div className="metric-card">
-          <strong>6x</strong>
-          <span>content formats from one source</span>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+        gap: 14,
+        marginBottom: 32
+      }}>
+        <div className="bf-card" style={{ padding: '16px 20px', background: '#FFFFFF', border: '1px solid var(--border-subtle)' }}>
+          <strong style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--brand-primary)', display: 'block', marginBottom: 2 }}>6x</strong>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>content formats from one source</span>
         </div>
-        <div className="metric-card">
-          <strong>90%</strong>
-          <span>faster ideation for content teams</span>
+        <div className="bf-card" style={{ padding: '16px 20px', background: '#FFFFFF', border: '1px solid var(--border-subtle)' }}>
+          <strong style={{ fontSize: '1.4rem', fontWeight: 800, color: '#1F7C67', display: 'block', marginBottom: 2 }}>90%</strong>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>faster ideation for content teams</span>
         </div>
-        <div className="metric-card">
-          <strong>7-stage</strong>
-          <span>internal transformation engine</span>
+        <div className="bf-card" style={{ padding: '16px 20px', background: '#FFFFFF', border: '1px solid var(--border-subtle)' }}>
+          <strong style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--brand-primary)', display: 'block', marginBottom: 2 }}>7-stage</strong>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>internal transformation engine</span>
         </div>
-        <div className="metric-card">
-          <strong>SIH-ready</strong>
-          <span>clear evaluator story and product demo</span>
+        <div className="bf-card" style={{ padding: '16px 20px', background: '#FFFFFF', border: '1px solid var(--border-subtle)' }}>
+          <strong style={{ fontSize: '1.4rem', fontWeight: 800, color: '#B27B1A', display: 'block', marginBottom: 2 }}>SIH-ready</strong>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>clear evaluator story and product demo</span>
         </div>
       </div>
 
-      <div className="glass-panel" style={{
-        border: '1px solid rgba(255, 255, 255, 0.1)',
+      <div className="bf-card" style={{
+        border: '1px solid var(--border-subtle)',
         padding: '24px',
-        boxShadow: 'var(--shadow-lg), 0 0 50px -10px rgba(56, 189, 248, 0.12)',
+        background: '#FFFFFF',
+        boxShadow: 'var(--shadow-resting)',
         borderRadius: 'var(--radius-xl)'
       }}>
         <div style={{
@@ -243,16 +300,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               width: 8,
               height: 8,
               borderRadius: '50%',
-              background: '#10b981',
-              boxShadow: '0 0 10px #10b981'
+              background: '#1F7C67',
+              boxShadow: '0 0 8px rgba(111, 214, 192, 0.6)'
             }} />
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.02em' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.02em' }}>
               ORCHESTRATION PIPELINE: ONE SOURCE → UNDERSTAND → CHOOSE PURPOSE → MULTIPLE ASSETS
             </span>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span className="badge badge-cyan" style={{ fontSize: '0.65rem' }}>
+            <span className="badge" style={{
+              fontSize: '0.65rem',
+              background: '#EBFBF7',
+              color: '#1F7C67',
+              border: '1px solid #BFEFDE',
+              fontWeight: 700
+            }}>
               Deterministic Fallback Ready
             </span>
           </div>
@@ -264,32 +327,40 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           gap: 20,
           alignItems: 'center'
         }}>
-          <div className="bf-card" style={{ padding: '20px', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
+          <div className="bf-card" style={{ padding: '20px', background: '#FAFAFB', border: '1px solid var(--border-subtle)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <div style={{
                   width: 28,
                   height: 28,
                   borderRadius: 7,
-                  background: 'var(--brand-cyan-glow)',
+                  background: '#F3F1FC',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}>
-                  <FileText size={15} color="var(--brand-cyan)" />
+                  <FileText size={15} color="var(--brand-primary)" />
                 </div>
-                <span style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--brand-cyan)', letterSpacing: '0.04em' }}>
+                <span style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--brand-primary)', letterSpacing: '0.04em' }}>
                   SOURCE DOCUMENT
                 </span>
               </div>
-              <span className="badge badge-emerald" style={{ fontSize: '0.625rem' }}>READY ✓</span>
+              <span className="badge" style={{
+                fontSize: '0.625rem',
+                background: '#EBFBF7',
+                color: '#1F7C67',
+                border: '1px solid #BFEFDE',
+                fontWeight: 700
+              }}>
+                READY ✓
+              </span>
             </div>
 
-            <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#ffffff', marginBottom: 6 }}>
+            <div style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: 6 }}>
               AI in Healthcare — Research Brief.pdf
             </div>
 
-            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
               <span>1,180 Words</span>
               <span>•</span>
               <span>5 Sections</span>
@@ -298,9 +369,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
 
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              <span className="badge badge-muted" style={{ fontSize: '0.65rem' }}>Multimodal Fusion</span>
-              <span className="badge badge-muted" style={{ fontSize: '0.65rem' }}>Ambient Scribing</span>
-              <span className="badge badge-muted" style={{ fontSize: '0.65rem' }}>FDA SaMD</span>
+              <span className="badge" style={{ fontSize: '0.65rem', background: '#F3F1FC', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}>Multimodal Fusion</span>
+              <span className="badge" style={{ fontSize: '0.65rem', background: '#F3F1FC', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}>Ambient Scribing</span>
+              <span className="badge" style={{ fontSize: '0.65rem', background: '#F3F1FC', color: 'var(--text-secondary)', border: '1px solid var(--border-subtle)' }}>FDA SaMD</span>
             </div>
           </div>
 
@@ -316,27 +387,27 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               width: 50,
               height: 50,
               borderRadius: '50%',
-              background: 'linear-gradient(135deg, #0284c7 0%, #6366f1 100%)',
+              background: 'linear-gradient(135deg, #7C6FE8 0%, #6FD6C0 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 0 25px rgba(56, 189, 248, 0.45)',
-              border: '2px solid rgba(255, 255, 255, 0.3)'
-            }} className="animate-pulse-glow">
-              <Cpu size={24} color="#ffffff" />
+              boxShadow: '0 4px 16px rgba(124, 111, 232, 0.3)',
+              border: '2px solid #FFFFFF'
+            }}>
+              <Cpu size={24} color="#FFFFFF" />
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '0.725rem', fontWeight: 800, color: '#ffffff' }}>BYTEFORCE</div>
-              <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>7-Stage Engine</div>
+              <div style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--text-primary)' }}>BYTEFORCE</div>
+              <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>7-Stage Engine</div>
             </div>
           </div>
 
-          <div className="bf-card" style={{ padding: '20px', background: 'var(--bg-surface-elevated)' }}>
+          <div className="bf-card" style={{ padding: '20px', background: '#FFFFFF', border: '1px solid var(--border-subtle)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-              <span style={{ fontSize: '0.725rem', fontWeight: 700, color: '#a5b4fc', letterSpacing: '0.04em' }}>
+              <span style={{ fontSize: '0.725rem', fontWeight: 700, color: 'var(--brand-primary)', letterSpacing: '0.04em' }}>
                 PURPOSE-BUILT ASSETS (LIVE PREVIEW)
               </span>
-              <span style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>
+              <span style={{ fontSize: '0.675rem', color: 'var(--text-secondary)' }}>
                 Click tab to switch output
               </span>
             </div>
@@ -363,9 +434,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     key={item.id}
                     onClick={() => setActiveTeaserOutput(item.id as any)}
                     style={{
-                      background: active ? 'var(--brand-cyan-glow)' : 'rgba(255, 255, 255, 0.04)',
-                      color: active ? 'var(--brand-cyan)' : 'var(--text-muted)',
-                      border: active ? '1px solid var(--brand-cyan)' : '1px solid var(--border-subtle)',
+                      background: active ? 'var(--brand-primary)' : '#FAFAFB',
+                      color: active ? '#FFFFFF' : 'var(--text-secondary)',
+                      border: active ? '1px solid var(--brand-primary)' : '1px solid var(--border-subtle)',
                       borderRadius: 6,
                       padding: '5px 9px',
                       fontSize: '0.75rem',
@@ -386,17 +457,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
 
             <div style={{
-              background: 'var(--bg-canvas)',
+              background: '#FAFAFB',
               borderRadius: 'var(--radius-sm)',
               padding: '14px',
               border: '1px solid var(--border-subtle)',
               minHeight: 110
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-                <span style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--brand-cyan)' }}>
+                <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--brand-primary)' }}>
                   {teaserData[activeTeaserOutput].badge}
                 </span>
-                <span style={{ fontSize: '0.675rem', color: 'var(--text-muted)' }}>
+                <span style={{ fontSize: '0.675rem', color: 'var(--text-secondary)' }}>
                   {teaserData[activeTeaserOutput].meta}
                 </span>
               </div>
@@ -404,7 +475,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 fontSize: '0.825rem',
                 color: 'var(--text-secondary)',
                 lineHeight: 1.55,
-                whiteSpace: 'pre-line'
+                whiteSpace: 'pre-line',
+                margin: 0
               }}>
                 {teaserData[activeTeaserOutput].snippet}
               </p>
@@ -421,30 +493,30 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           borderTop: '1px solid var(--border-subtle)'
         }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-            <CheckCircle2 size={16} color="#10b981" style={{ flexShrink: 0, marginTop: 2 }} />
+            <CheckCircle2 size={16} color="#1F7C67" style={{ flexShrink: 0, marginTop: 2 }} />
             <div>
-              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff' }}>Prompt-Free Transformation</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>Prompt-Free Transformation</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
                 Choose intent-based outcomes rather than wrestling with prompt templates.
               </div>
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-            <CheckCircle2 size={16} color="#10b981" style={{ flexShrink: 0, marginTop: 2 }} />
+            <CheckCircle2 size={16} color="#1F7C67" style={{ flexShrink: 0, marginTop: 2 }} />
             <div>
-              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff' }}>Multi-Asset Generation</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>Multi-Asset Generation</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
                 Produce summaries, flashcards, diagnostic quizzes, and keynote scripts in one pass.
               </div>
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-            <ShieldCheck size={16} color="#10b981" style={{ flexShrink: 0, marginTop: 2 }} />
+            <ShieldCheck size={16} color="#1F7C67" style={{ flexShrink: 0, marginTop: 2 }} />
             <div>
-              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff' }}>Verifiable Grounding</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>Verifiable Grounding</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
                 Truthful structural validation tests completeness without fake AI scores.
               </div>
             </div>

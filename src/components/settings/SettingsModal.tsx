@@ -34,7 +34,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       <div 
         className="modal-content animate-fade-in" 
         onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: 540, padding: '28px', border: '1px solid rgba(56, 189, 248, 0.25)' }}
+        style={{
+          maxWidth: 540,
+          padding: '28px',
+          background: '#FFFFFF',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: '16px',
+          boxShadow: '0 20px 48px rgba(30, 30, 46, 0.12)'
+        }}
       >
         {/* Header */}
         <div style={{
@@ -50,20 +57,20 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               width: 36,
               height: 36,
               borderRadius: 10,
-              background: 'rgba(56, 189, 248, 0.12)',
-              border: '1px solid rgba(56, 189, 248, 0.25)',
+              background: 'linear-gradient(135deg, #7C6FE8 0%, #6FD6C0 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--brand-cyan)'
+              color: '#FFFFFF',
+              boxShadow: '0 2px 8px rgba(124, 111, 232, 0.25)'
             }}>
               <Settings size={18} />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', margin: 0 }}>
                 Transformation Engine Settings
               </h2>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                 Demo reliability & LLM provider configuration
               </div>
             </div>
@@ -82,8 +89,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           {/* DEMO MODE TOGGLE CARD */}
           <div style={{
-            background: 'rgba(56, 189, 248, 0.05)',
-            border: '1px solid rgba(56, 189, 248, 0.25)',
+            background: '#F3F1FC',
+            border: '1px solid #E9E8F5',
             borderRadius: 'var(--radius-md)',
             padding: '18px',
             display: 'flex',
@@ -96,17 +103,19 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 width: 36,
                 height: 36,
                 borderRadius: 8,
-                background: 'rgba(56, 189, 248, 0.15)',
+                background: '#FFFFFF',
+                border: '1px solid #E9E8F5',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#38bdf8',
-                flexShrink: 0
+                color: 'var(--brand-primary)',
+                flexShrink: 0,
+                boxShadow: 'var(--shadow-resting)'
               }}>
                 <Zap size={18} />
               </div>
               <div>
-                <div style={{ fontSize: '0.9rem', fontWeight: 800, color: '#ffffff' }}>
+                <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                   Deterministic Demo Engine
                 </div>
                 <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginTop: 4 }}>
@@ -121,7 +130,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 checked={formData.useDemoMode}
                 onChange={(e) => setFormData({ ...formData, useDemoMode: e.target.checked })}
                 className="checkbox-custom"
-                style={{ width: 20, height: 20 }}
+                style={{ width: 20, height: 20, accentColor: 'var(--brand-primary)' }}
               />
             </label>
           </div>
@@ -138,8 +147,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             opacity: formData.useDemoMode ? 0.6 : 1
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <Key size={16} color="var(--brand-indigo)" />
-              <span style={{ fontSize: '0.85rem', fontWeight: 800, color: '#ffffff' }}>
+              <Key size={16} color="var(--brand-primary)" />
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                 Live LLM Provider (Optional)
               </span>
             </div>
@@ -159,7 +168,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
 
             <div>
-              <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', marginBottom: 6 }}>
+              <label style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: 6 }}>
                 Client-Side API Key (Stored securely in local browser storage only)
               </label>
               <input
@@ -180,9 +189,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             alignItems: 'center',
             gap: 10,
             fontSize: '0.75rem',
-            color: '#10b981',
-            background: 'rgba(16, 185, 129, 0.08)',
-            border: '1px solid rgba(16, 185, 129, 0.2)',
+            color: '#1F7C67',
+            background: '#EBFBF7',
+            border: '1px solid #BFEFDE',
             padding: '10px 14px',
             borderRadius: 'var(--radius-sm)'
           }}>

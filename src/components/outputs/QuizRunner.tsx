@@ -75,7 +75,8 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
       padding: '24px',
       display: 'flex',
       flexDirection: 'column',
-      gap: 20
+      gap: 20,
+      background: '#FFFFFF'
     }}>
       {/* Header */}
       <div style={{
@@ -89,14 +90,14 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <span className="badge badge-indigo">
+            <span className="badge badge-primary">
               ASSESS • DIAGNOSTIC ASSESSMENT
             </span>
-            <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
               {asset.format}
             </span>
           </div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
             {asset.title}
           </h2>
         </div>
@@ -126,41 +127,42 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            fontSize: '0.8rem',
-            color: 'var(--text-muted)'
+            fontSize: '12px',
+            color: 'var(--text-secondary)'
           }}>
-            <span>Question <strong style={{ color: '#ffffff' }}>{currentQuestionIndex + 1}</strong> of {questions.length}</span>
-            <span style={{ color: 'var(--brand-cyan)', fontWeight: 600 }}>
+            <span>Question <strong style={{ color: 'var(--text-primary)' }}>{currentQuestionIndex + 1}</strong> of {questions.length}</span>
+            <span style={{ color: 'var(--brand-primary)', fontWeight: 600 }}>
               Target: {currentQ?.concept}
             </span>
           </div>
 
           <div style={{
-            height: 4,
-            background: 'rgba(255, 255, 255, 0.08)',
-            borderRadius: 2,
+            height: 6,
+            background: 'var(--bg-surface-subtle)',
+            borderRadius: 3,
             overflow: 'hidden'
           }}>
             <div style={{
               height: '100%',
               width: `${((currentQuestionIndex + 1) / questions.length) * 100}%`,
-              background: 'linear-gradient(90deg, #6366f1, #38bdf8)',
+              background: 'linear-gradient(90deg, var(--brand-primary), var(--brand-mint))',
               transition: 'width 0.2s ease'
             }} />
           </div>
 
           {/* Question Box */}
           <div style={{
-            background: 'var(--bg-canvas)',
+            background: 'var(--bg-surface-subtle)',
             border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-md)',
+            borderRadius: '14px',
             padding: '20px'
           }}>
             <h3 style={{
-              fontSize: '1.1rem',
-              fontWeight: 700,
+              fontSize: '16px',
+              fontWeight: 600,
               lineHeight: 1.5,
-              color: '#f8fafc'
+              color: 'var(--text-primary)',
+              margin: 0
             }}>
               {currentQ?.question}
             </h3>
@@ -173,31 +175,32 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
               const isCorrect = idx === currentQ.correctIndex;
 
               let optionStyle: React.CSSProperties = {
-                padding: '14px 16px',
-                borderRadius: 'var(--radius-sm)',
+                padding: '14px 18px',
+                borderRadius: '10px',
                 border: '1px solid var(--border-subtle)',
-                background: 'var(--bg-surface)',
+                background: '#FFFFFF',
                 cursor: isAnswerSubmitted ? 'default' : 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 transition: 'all var(--transition-fast)',
-                textAlign: 'left'
+                textAlign: 'left',
+                boxShadow: 'var(--shadow-resting)'
               };
 
               if (!isAnswerSubmitted) {
                 if (isSelected) {
-                  optionStyle.borderColor = 'var(--brand-cyan)';
-                  optionStyle.background = 'rgba(56, 189, 248, 0.08)';
-                  optionStyle.boxShadow = '0 0 15px rgba(56, 189, 248, 0.15)';
+                  optionStyle.borderColor = 'var(--brand-primary)';
+                  optionStyle.background = 'var(--brand-primary-subtle)';
+                  optionStyle.boxShadow = 'var(--shadow-selected)';
                 }
               } else {
                 if (isCorrect) {
-                  optionStyle.borderColor = '#10b981';
-                  optionStyle.background = 'rgba(16, 185, 129, 0.12)';
+                  optionStyle.borderColor = 'var(--brand-mint)';
+                  optionStyle.background = 'var(--brand-mint-subtle)';
                 } else if (isSelected && !isCorrect) {
-                  optionStyle.borderColor = '#f43f5e';
-                  optionStyle.background = 'rgba(244, 63, 94, 0.12)';
+                  optionStyle.borderColor = 'var(--brand-rose)';
+                  optionStyle.background = '#FDF2F8';
                 }
               }
 
@@ -206,32 +209,33 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
                   key={idx}
                   onClick={() => handleSelectOption(idx)}
                   style={optionStyle}
+                  className={!isAnswerSubmitted ? "bf-card interactive" : ""}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div style={{
-                      width: 26,
-                      height: 26,
+                      width: 28,
+                      height: 28,
                       borderRadius: '50%',
-                      background: isSelected ? 'var(--brand-cyan)' : 'rgba(255, 255, 255, 0.05)',
-                      color: isSelected ? '#06080c' : 'var(--text-secondary)',
+                      background: isSelected ? 'var(--brand-primary)' : 'var(--bg-surface-subtle)',
+                      color: isSelected ? '#FFFFFF' : 'var(--text-secondary)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '0.75rem',
-                      fontWeight: 800,
+                      fontSize: '12px',
+                      fontWeight: 700,
                       flexShrink: 0
                     }}>
                       {String.fromCharCode(65 + idx)}
                     </div>
-                    <span style={{ fontSize: '0.875rem', color: '#ffffff' }}>
+                    <span style={{ fontSize: '14px', color: 'var(--text-primary)', fontWeight: 500 }}>
                       {option}
                     </span>
                   </div>
 
                   {isAnswerSubmitted && (
                     <div>
-                      {isCorrect && <CheckCircle2 size={18} color="#10b981" />}
-                      {isSelected && !isCorrect && <XCircle size={18} color="#f43f5e" />}
+                      {isCorrect && <CheckCircle2 size={18} color="#1F7C67" />}
+                      {isSelected && !isCorrect && <XCircle size={18} color="#E11D48" />}
                     </div>
                   )}
                 </div>
@@ -241,45 +245,27 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
 
           {/* Rationale / Explanation Box */}
           {isAnswerSubmitted && (
-            <div className="animate-fade-in" style={{
-              background: 'rgba(15, 23, 42, 0.85)',
-              border: '1px solid rgba(56, 189, 248, 0.25)',
-              borderRadius: 'var(--radius-sm)',
+            <div className="animate-fade-in callout-lavender" style={{
               padding: '16px',
               display: 'flex',
               flexDirection: 'column',
-              gap: 6
+              gap: 8
             }}>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                fontSize: '0.75rem',
-                fontWeight: 800,
-                color: selectedOption === currentQ.correctIndex ? '#34d399' : '#fb7185'
-              }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 700, fontSize: '12px', color: 'var(--brand-primary)' }}>
                 <HelpCircle size={14} />
-                <span>
-                  {selectedOption === currentQ.correctIndex 
-                    ? 'CORRECT • FACTUAL VERIFICATION' 
-                    : 'INCORRECT • SOURCE RATIONALE'}
-                </span>
+                <span>EXPLANATION & SOURCE GROUNDING</span>
               </div>
-              <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.55 }}>
-                {currentQ.explanation}
+              <p style={{ fontSize: '13px', color: 'var(--text-primary)', lineHeight: 1.5, margin: 0 }}>
+                {currentQ?.explanation}
               </p>
+              <div style={{ fontSize: '11px', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: 4 }}>
+                Source Grounded: Verified against ingested research facts.
+              </div>
             </div>
           )}
 
-          {/* Action Footer */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            gap: 12,
-            borderTop: '1px solid var(--border-subtle)',
-            paddingTop: 16
-          }}>
+          {/* Bottom Controls */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 10, marginTop: 4 }}>
             {!isAnswerSubmitted ? (
               <button
                 onClick={handleSubmitAnswer}
@@ -287,125 +273,90 @@ export const QuizRunner: React.FC<QuizRunnerProps> = ({ asset, onRegenerate }) =
                 className="btn btn-primary"
                 style={{ minWidth: 140 }}
               >
-                Submit Answer
+                <span>Confirm Answer</span>
               </button>
             ) : (
               <button
                 onClick={handleNext}
-                className="btn btn-accent-glow"
+                className="btn btn-primary"
                 style={{ minWidth: 140 }}
               >
-                <span>{currentQuestionIndex + 1 === questions.length ? 'View Results' : 'Next Question'}</span>
-                <ArrowRight size={15} />
+                <span>{currentQuestionIndex + 1 === questions.length ? 'View Diagnostic Report' : 'Next Question'}</span>
+                <ArrowRight size={14} />
               </button>
             )}
           </div>
         </>
       ) : (
-        /* QUIZ RESULTS SCREEN */
+        /* QUIZ REPORT / SCORE CARD */
         <div className="animate-fade-in" style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: 20,
-          padding: '24px 16px',
-          textAlign: 'center'
+          gap: 24,
+          padding: '24px 0'
         }}>
           <div style={{
-            width: 72,
-            height: 72,
+            width: 80,
+            height: 80,
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, #0284c7 0%, #a855f7 100%)',
+            background: percentage >= 70 ? 'var(--brand-mint-subtle)' : 'var(--brand-primary-subtle)',
+            border: `2px solid ${percentage >= 70 ? 'var(--brand-mint)' : 'var(--brand-primary)'}`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 0 35px rgba(56, 189, 248, 0.4)'
+            color: percentage >= 70 ? '#1F7C67' : 'var(--brand-primary)'
           }}>
-            <Award size={36} color="#ffffff" />
+            <Award size={40} />
           </div>
 
-          <div>
-            <h3 style={{ fontSize: '1.65rem', fontWeight: 800, marginBottom: 4, color: '#ffffff' }}>
+          <div style={{ textAlign: 'center' }}>
+            <h3 style={{ fontSize: '20px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 6 }}>
               Diagnostic Assessment Complete
             </h3>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              Evaluated against source document facts
+            <div style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
+              You scored <strong style={{ color: 'var(--text-primary)' }}>{score}</strong> out of <strong style={{ color: 'var(--text-primary)' }}>{questions.length}</strong> ({percentage}%)
             </div>
-          </div>
-
-          {/* Score Badge */}
-          <div style={{
-            background: 'var(--bg-canvas)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-md)',
-            padding: '16px 36px',
-            display: 'flex',
-            alignItems: 'baseline',
-            gap: 8
-          }}>
-            <span style={{ fontSize: '2.5rem', fontWeight: 900, color: '#10b981' }}>
-              {score}
-            </span>
-            <span style={{ fontSize: '1.25rem', color: 'var(--text-muted)' }}>
-              / {questions.length}
-            </span>
-            <span style={{
-              fontSize: '1rem',
-              fontWeight: 700,
-              color: 'var(--brand-cyan)',
-              marginLeft: 12
-            }}>
-              ({percentage}%)
-            </span>
           </div>
 
           {/* Concepts to Revise */}
-          <div style={{
-            width: '100%',
-            maxWidth: 480,
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: 'var(--radius-md)',
-            padding: '16px',
-            textAlign: 'left'
-          }}>
+          {quizData.conceptsToRevise && quizData.conceptsToRevise.length > 0 && (
             <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              fontSize: '0.8rem',
-              fontWeight: 700,
-              color: '#f59e0b',
-              marginBottom: 10
+              width: '100%',
+              maxWidth: 500,
+              background: 'var(--bg-surface-subtle)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: '14px',
+              padding: '16px'
             }}>
-              <BookOpen size={15} />
-              <span>RECOMMENDED CONCEPTS TO REVISE</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '12px', fontWeight: 700, color: 'var(--brand-primary)', marginBottom: 8 }}>
+                <BookOpen size={14} />
+                <span>RECOMMENDED TOPICS FOR REVISION</span>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {quizData.conceptsToRevise.map((c, i) => (
+                  <span key={i} className="badge badge-primary">
+                    {c}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {quizData.conceptsToRevise.map((c, i) => (
-                <div key={i} style={{ fontSize: '0.825rem', color: 'var(--text-secondary)' }}>
-                  • {c}
-                </div>
-              ))}
-            </div>
-          </div>
+          )}
 
-          {/* Actions */}
-          <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
+          <div style={{ display: 'flex', gap: 10 }}>
             <button
               onClick={handleRestart}
-              className="btn btn-primary"
-              style={{ minWidth: 140 }}
+              className="btn btn-secondary"
             >
               <RotateCcw size={14} />
-              <span>Retry Quiz</span>
+              <span>Retry Diagnostic Quiz</span>
             </button>
             <button
               onClick={onRegenerate}
-              className="btn btn-secondary"
+              className="btn btn-primary"
             >
               <Sparkles size={14} />
-              <span>New Questions</span>
+              <span>Generate New Questions</span>
             </button>
           </div>
         </div>

@@ -26,50 +26,52 @@ export const ValidationBadge: React.FC<ValidationBadgeProps> = ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      background: 'rgba(16, 185, 129, 0.04)',
-      border: '1px solid rgba(16, 185, 129, 0.22)',
-      borderRadius: 'var(--radius-sm)',
-      padding: '8px 14px',
-      fontSize: '0.725rem',
-      color: '#34d399',
+      background: 'var(--brand-mint-subtle)',
+      border: '1px solid rgba(111, 214, 192, 0.4)',
+      borderRadius: '10px',
+      padding: '10px 16px',
+      fontSize: '12px',
+      color: '#1F7C67',
       flexWrap: 'wrap',
       gap: 12
     }}>
       {/* Left: Quality Check Title & Grounding */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
           gap: 6,
-          fontWeight: 800,
-          color: '#10b981',
-          letterSpacing: '0.04em'
+          fontWeight: 700,
+          color: '#1F7C67',
+          letterSpacing: '0.04em',
+          fontSize: '11px',
+          textTransform: 'uppercase'
         }}>
-          <ShieldCheck size={14} color="#10b981" />
+          <ShieldCheck size={15} color="#1F7C67" />
           <span>QUALITY AUDIT</span>
         </div>
 
         {sourceTitle && (
-          <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem' }}>
-            Based on: <strong style={{ color: '#ffffff' }}>{sourceTitle}</strong>
+          <span style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>
+            Based on: <strong style={{ color: 'var(--text-primary)' }}>{sourceTitle}</strong>
           </span>
         )}
       </div>
 
       {/* Right: Truthful Heuristic Verification Indicators */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-        <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <CheckCircle2 size={12} color="#10b981" />
+      <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', fontSize: '12px', color: 'var(--text-secondary)' }}>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+          <CheckCircle2 size={13} color="#278E77" />
           <span>Source Context: Verified</span>
         </span>
 
-        <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <CheckCircle2 size={12} color="#10b981" />
+        <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+          <CheckCircle2 size={13} color="#278E77" />
           <span>Structure: Compliant</span>
         </span>
 
-        <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <CheckCircle2 size={12} color="#10b981" />
+        <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+          <CheckCircle2 size={13} color="#278E77" />
           <span>Requested Format: Valid</span>
         </span>
 
@@ -77,11 +79,14 @@ export const ValidationBadge: React.FC<ValidationBadgeProps> = ({
           display: 'flex',
           alignItems: 'center',
           gap: 4,
-          background: 'rgba(16, 185, 129, 0.1)',
-          padding: '2px 7px',
-          borderRadius: 4,
+          background: '#FFFFFF',
+          padding: '2px 8px',
+          borderRadius: '6px',
+          border: '1px solid rgba(111, 214, 192, 0.4)',
           fontFamily: 'var(--font-mono)',
-          fontSize: '0.675rem'
+          fontSize: '11px',
+          color: '#1F7C67',
+          fontWeight: 600
         }}>
           <span>Missing Sections: {current.missingSections}</span>
         </span>
@@ -89,11 +94,11 @@ export const ValidationBadge: React.FC<ValidationBadgeProps> = ({
         <span style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 4,
-          color: 'var(--brand-cyan)',
-          fontWeight: 700
+          gap: 5,
+          color: 'var(--brand-primary)',
+          fontWeight: 600
         }}>
-          <FileCheck size={12} color="var(--brand-cyan)" />
+          <FileCheck size={13} color="var(--brand-primary)" />
           <span>Source-grounded ✓</span>
         </span>
       </div>

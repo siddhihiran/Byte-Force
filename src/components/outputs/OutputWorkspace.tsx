@@ -46,11 +46,11 @@ export const OutputWorkspace: React.FC<OutputWorkspaceProps> = ({
 
   if (assets.length === 0) {
     return (
-      <div className="glass-panel" style={{ padding: '48px', textAlign: 'center', maxWidth: 600, margin: '40px auto' }}>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: 8, color: '#ffffff' }}>
+      <div className="bf-card" style={{ padding: '48px 32px', textAlign: 'center', maxWidth: 560, margin: '40px auto' }}>
+        <h3 style={{ fontSize: '18px', fontWeight: 600, marginBottom: 8, color: 'var(--text-primary)' }}>
           No Active Assets
         </h3>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: 20 }}>
+        <p style={{ color: 'var(--text-secondary)', fontSize: '13px', marginBottom: 20 }}>
           All outputs from this session have been cleared. Return to configure new transformations.
         </p>
         <button onClick={onBackToConfig} className="btn btn-primary">
@@ -130,49 +130,48 @@ export const OutputWorkspace: React.FC<OutputWorkspaceProps> = ({
 
   return (
     <div style={{
-      maxWidth: 1280,
+      maxWidth: 1320,
       margin: '0 auto',
       display: 'flex',
       flexDirection: 'column',
-      gap: 18
+      gap: 20
     }}>
-      {/* Workspace Provenance Banner */}
-      <div className="glass-panel animate-fade-in" style={{
-        padding: '14px 20px',
-        border: '1px solid rgba(56, 189, 248, 0.25)',
-        background: 'linear-gradient(135deg, rgba(15, 20, 32, 0.95) 0%, rgba(10, 14, 24, 0.95) 100%)',
+      {/* Workspace Provenance Banner (Crisp White Card) */}
+      <div className="bf-card" style={{
+        padding: '16px 24px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        gap: 14
+        gap: 16
       }}>
         {/* Left: Provenance Title */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{
-            width: 34,
-            height: 34,
-            borderRadius: 8,
-            background: 'linear-gradient(135deg, #10b981 0%, #38bdf8 100%)',
+            width: 36,
+            height: 36,
+            borderRadius: 10,
+            background: 'var(--brand-mint-subtle)',
+            border: '1px solid rgba(111, 214, 192, 0.4)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 0 16px rgba(16, 185, 129, 0.35)',
+            color: '#1F7C67',
             flexShrink: 0
           }}>
-            <CheckCircle2 size={18} color="#06080c" />
+            <CheckCircle2 size={18} />
           </div>
           <div>
             <div style={{
-              fontSize: '0.9rem',
-              fontWeight: 800,
-              letterSpacing: '0.01em',
-              color: '#ffffff'
+              fontSize: '14px',
+              fontWeight: 600,
+              color: 'var(--text-primary)',
+              letterSpacing: '-0.01em'
             }}>
               ONE SOURCE. {assets.length} PURPOSE-BUILT ASSETS. ONE WORKSPACE.
             </div>
-            <div style={{ fontSize: '0.725rem', color: 'var(--text-secondary)' }}>
-              Source Origin: <strong style={{ color: 'var(--brand-cyan)' }}>{sourceTitle}</strong>
+            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: 2 }}>
+              Source Origin: <strong style={{ color: 'var(--brand-primary)' }}>{sourceTitle}</strong>
             </div>
           </div>
         </div>
@@ -184,14 +183,14 @@ export const OutputWorkspace: React.FC<OutputWorkspaceProps> = ({
             <button
               onClick={() => setViewMode('tabs')}
               className={`tab-btn ${viewMode === 'tabs' ? 'active' : ''}`}
-              style={{ fontSize: '0.75rem', padding: '4px 10px' }}
+              style={{ fontSize: '12px', padding: '4px 12px' }}
             >
               Tabs
             </button>
             <button
               onClick={() => setViewMode('grid')}
               className={`tab-btn ${viewMode === 'grid' ? 'active' : ''}`}
-              style={{ fontSize: '0.75rem', padding: '4px 10px' }}
+              style={{ fontSize: '12px', padding: '4px 12px' }}
             >
               <Grid size={12} /> Grid
             </button>
@@ -216,7 +215,7 @@ export const OutputWorkspace: React.FC<OutputWorkspaceProps> = ({
 
           <button
             onClick={onBackToConfig}
-            className="btn btn-accent-glow btn-sm"
+            className="btn btn-primary btn-sm"
           >
             <Plus size={13} />
             <span>Add Output</span>
@@ -226,14 +225,14 @@ export const OutputWorkspace: React.FC<OutputWorkspaceProps> = ({
 
       {/* TABS VIEW */}
       {viewMode === 'tabs' ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {/* Output Selector Tabs Strip */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             borderBottom: '1px solid var(--border-subtle)',
-            paddingBottom: 4,
+            paddingBottom: 6,
             gap: 12,
             overflowX: 'auto'
           }}>
@@ -247,29 +246,30 @@ export const OutputWorkspace: React.FC<OutputWorkspaceProps> = ({
                     key={asset.id}
                     onClick={() => setActiveAssetId(asset.id)}
                     style={{
-                      background: isActive ? 'var(--bg-surface-elevated)' : 'transparent',
-                      border: isActive ? '1px solid var(--brand-cyan)' : '1px solid var(--border-subtle)',
-                      borderBottom: isActive ? '2px solid var(--brand-cyan)' : '1px solid var(--border-subtle)',
-                      borderRadius: 'var(--radius-sm)',
-                      padding: '7px 14px',
-                      color: isActive ? '#ffffff' : 'var(--text-muted)',
+                      background: isActive ? '#FFFFFF' : 'transparent',
+                      border: isActive ? '1px solid var(--border-subtle)' : '1px solid transparent',
+                      borderBottom: isActive ? '2px solid var(--brand-primary)' : '1px solid transparent',
+                      borderRadius: '8px',
+                      padding: '8px 14px',
+                      color: isActive ? 'var(--brand-primary)' : 'var(--text-secondary)',
+                      boxShadow: isActive ? 'var(--shadow-resting)' : 'none',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: 7,
-                      fontWeight: isActive ? 700 : 500,
-                      fontSize: '0.825rem',
+                      gap: 8,
+                      fontWeight: isActive ? 600 : 500,
+                      fontSize: '13px',
                       transition: 'all var(--transition-fast)',
                       whiteSpace: 'nowrap'
                     }}
                   >
-                    <Icon size={14} color={isActive ? 'var(--brand-cyan)' : 'var(--text-dim)'} />
+                    <Icon size={14} color={isActive ? 'var(--brand-primary)' : 'var(--text-muted)'} />
                     <span>{asset.title}</span>
-                    <span className="badge badge-muted" style={{ fontSize: '0.625rem', padding: '1px 5px' }}>
+                    <span className="badge badge-muted" style={{ fontSize: '10px', padding: '1px 6px' }}>
                       {asset.category.toUpperCase()}
                     </span>
                     {asset.isSaved && (
-                      <BookmarkCheck size={12} color="#10b981" />
+                      <BookmarkCheck size={13} color="var(--brand-mint)" />
                     )}
                   </button>
                 );
@@ -315,7 +315,7 @@ export const OutputWorkspace: React.FC<OutputWorkspaceProps> = ({
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(460px, 1fr))',
-          gap: 18
+          gap: 20
         }}>
           {assets.map((asset) => (
             <div key={asset.id} style={{ position: 'relative' }}>
@@ -330,14 +330,14 @@ export const OutputWorkspace: React.FC<OutputWorkspaceProps> = ({
                 <button
                   onClick={() => onToggleSaveAsset(asset.id)}
                   className={`btn btn-sm ${asset.isSaved ? 'btn-primary' : 'btn-secondary'}`}
-                  style={{ padding: '3px 8px' }}
+                  style={{ padding: '4px 8px' }}
                 >
                   <Bookmark size={12} />
                 </button>
                 <button
                   onClick={() => onDeleteAsset(asset.id)}
                   className="btn btn-ghost btn-sm"
-                  style={{ padding: '3px 8px', color: 'var(--brand-rose)' }}
+                  style={{ padding: '4px 8px', color: 'var(--brand-rose)' }}
                 >
                   <Trash2 size={12} />
                 </button>
@@ -348,33 +348,31 @@ export const OutputWorkspace: React.FC<OutputWorkspaceProps> = ({
         </div>
       )}
 
-      {/* Golden Journey Continuous Loop Bar */}
-      <div className="glass-panel" style={{
-        padding: '12px 18px',
+      {/* Golden Journey Continuous Loop Bar (Pure White Card) */}
+      <div className="bf-card" style={{
+        padding: '14px 24px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        gap: 12,
-        border: '1px solid var(--border-subtle)',
-        background: 'rgba(10, 14, 22, 0.9)'
+        gap: 12
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>Workflow Continuity:</span>
+          <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Workflow Continuity:</span>
           <span style={{
-            fontSize: '0.725rem',
-            color: '#34d399',
-            fontWeight: 700,
+            fontSize: '12px',
+            color: '#1F7C67',
+            fontWeight: 600,
             display: 'flex',
             alignItems: 'center',
-            gap: 4
+            gap: 5
           }}>
-            <CheckCircle2 size={12} color="#10b981" />
+            <CheckCircle2 size={13} color="#278E77" />
             Source Grounded in "{sourceTitle}"
           </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <button
             onClick={onBackToConfig}
             className="btn btn-secondary btn-sm"

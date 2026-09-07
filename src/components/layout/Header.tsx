@@ -38,11 +38,11 @@ export const Header: React.FC<HeaderProps> = ({
       position: 'sticky',
       top: 0,
       zIndex: 50,
-      background: 'rgba(9, 12, 19, 0.85)',
-      backdropFilter: 'blur(24px)',
-      WebkitBackdropFilter: 'blur(24px)',
+      background: 'rgba(255, 255, 255, 0.92)',
+      backdropFilter: 'blur(20px)',
+      WebkitBackdropFilter: 'blur(20px)',
       borderBottom: '1px solid var(--border-subtle)',
-      padding: '0 24px',
+      padding: '0 32px',
       height: 64,
       display: 'flex',
       alignItems: 'center',
@@ -50,13 +50,13 @@ export const Header: React.FC<HeaderProps> = ({
       gap: 16
     }}>
       {/* Brand & Main View Navigation */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
         <button 
           onClick={() => onNavigate('workspace')}
           style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: 11, 
+            gap: 12, 
             background: 'none', 
             border: 'none', 
             cursor: 'pointer',
@@ -65,72 +65,70 @@ export const Header: React.FC<HeaderProps> = ({
           }}
           aria-label="ByteForce Home"
         >
+          {/* Logo Mark: Soft gradient rounded-square badge (indigo→mint) */}
           <div style={{
             width: 34,
             height: 34,
-            borderRadius: 9,
-            background: 'linear-gradient(135deg, #0284c7 0%, #4f46e5 100%)',
+            borderRadius: 10,
+            background: 'var(--grad-badge)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 0 20px rgba(56, 189, 248, 0.35)',
-            border: '1px solid rgba(255, 255, 255, 0.2)'
+            boxShadow: '0 2px 8px rgba(124, 111, 232, 0.25)'
           }}>
-            <Zap size={18} color="#ffffff" fill="#ffffff" />
+            <Zap size={18} color="#FFFFFF" fill="#FFFFFF" />
           </div>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <span style={{ 
                 fontSize: '1.05rem', 
-                fontWeight: 800, 
-                letterSpacing: '-0.03em', 
-                color: '#ffffff' 
+                fontWeight: 700, 
+                letterSpacing: '-0.02em', 
+                color: 'var(--text-primary)' 
               }}>
                 BYTEFORCE
               </span>
-              <span className="badge badge-cyan" style={{ fontSize: '0.625rem', padding: '1px 5px' }}>
+              <span className="badge badge-primary" style={{ fontSize: '0.625rem', padding: '1px 6px' }}>
                 SIH26154
               </span>
             </div>
-            <div style={{ fontSize: '0.675rem', color: 'var(--text-muted)', fontWeight: 500, letterSpacing: '0.01em' }}>
+            <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', fontWeight: 400 }}>
               Transform Once. Create Everywhere.
             </div>
           </div>
         </button>
 
-        {/* View Switcher Tabs */}
+        {/* View Switcher Tabs: Pill-shaped tabs with active = light indigo fill */}
         <nav style={{
           display: 'flex',
           alignItems: 'center',
-          background: 'rgba(0, 0, 0, 0.35)',
+          background: 'var(--bg-surface-subtle)',
           padding: 3,
-          borderRadius: 'var(--radius-sm)',
+          borderRadius: 'var(--radius-full)',
           border: '1px solid var(--border-subtle)',
           gap: 2
         }} aria-label="Main Navigation">
           <button
             onClick={() => onNavigate('workspace')}
-            className={`tab-btn ${activeView === 'workspace' ? 'active' : ''}`}
-            style={{ fontSize: '0.775rem', padding: '5px 12px' }}
+            className={`nav-pill ${activeView === 'workspace' ? 'active' : ''}`}
           >
-            <Layers size={13} color={activeView === 'workspace' ? 'var(--brand-cyan)' : 'var(--text-dim)'} />
+            <Layers size={13} />
             <span>Workspace</span>
           </button>
           
           <button
             onClick={() => onNavigate('history')}
-            className={`tab-btn ${activeView === 'history' ? 'active' : ''}`}
-            style={{ fontSize: '0.775rem', padding: '5px 12px' }}
+            className={`nav-pill ${activeView === 'history' ? 'active' : ''}`}
           >
-            <History size={13} color={activeView === 'history' ? 'var(--brand-cyan)' : 'var(--text-dim)'} />
+            <History size={13} />
             <span>History</span>
             {historyCount > 0 && (
               <span style={{
-                background: 'var(--brand-cyan)',
-                color: '#07090d',
+                background: 'var(--brand-primary)',
+                color: '#FFFFFF',
                 fontWeight: 700,
                 fontSize: '0.625rem',
-                padding: '1px 5px',
+                padding: '1px 6px',
                 borderRadius: 99
               }}>
                 {historyCount}
@@ -140,10 +138,9 @@ export const Header: React.FC<HeaderProps> = ({
 
           <button
             onClick={() => onNavigate('landing')}
-            className={`tab-btn ${activeView === 'landing' ? 'active' : ''}`}
-            style={{ fontSize: '0.775rem', padding: '5px 12px' }}
+            className={`nav-pill ${activeView === 'landing' ? 'active' : ''}`}
           >
-            <Compass size={13} color={activeView === 'landing' ? 'var(--brand-cyan)' : 'var(--text-dim)'} />
+            <Compass size={13} />
             <span>Overview</span>
           </button>
         </nav>
@@ -156,9 +153,9 @@ export const Header: React.FC<HeaderProps> = ({
           onClick={onOpenGuidedDemo}
           className="btn btn-secondary btn-sm"
           title="Step-by-Step Architecture Tour for Evaluators"
-          style={{ height: 32 }}
+          style={{ height: 34 }}
         >
-          <HelpCircle size={13} color="#818cf8" />
+          <HelpCircle size={13} color="var(--brand-primary)" />
           <span>Guided Tour</span>
         </button>
 
@@ -167,9 +164,9 @@ export const Header: React.FC<HeaderProps> = ({
           onClick={onOpenTemplates}
           className="btn btn-secondary btn-sm"
           title="Curated Purpose Packs"
-          style={{ height: 32 }}
+          style={{ height: 34 }}
         >
-          <Sparkles size={13} color="#38bdf8" />
+          <Sparkles size={13} color="var(--brand-primary)" />
           <span>Templates</span>
         </button>
 
@@ -177,7 +174,7 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           onClick={onQuickDemo}
           className="btn btn-primary btn-sm"
-          style={{ height: 32, padding: '0 14px' }}
+          style={{ height: 34, padding: '0 14px' }}
           title="Launch Deterministic Demo with AI in Healthcare"
         >
           <Zap size={13} />
@@ -187,10 +184,9 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Engine Status / Settings */}
         <button
           onClick={onOpenSettings}
-          className="btn btn-ghost btn-sm"
+          className="btn btn-secondary btn-sm"
           style={{
-            height: 32,
-            border: '1px solid var(--border-subtle)',
+            height: 34,
             padding: '0 10px',
             gap: 7
           }}
@@ -200,13 +196,13 @@ export const Header: React.FC<HeaderProps> = ({
             width: 7,
             height: 7,
             borderRadius: '50%',
-            background: settings.useDemoMode ? '#10b981' : '#38bdf8',
-            boxShadow: settings.useDemoMode ? '0 0 8px #10b981' : '0 0 8px #38bdf8'
+            background: settings.useDemoMode ? 'var(--brand-mint)' : 'var(--brand-primary)',
+            boxShadow: settings.useDemoMode ? '0 0 6px var(--brand-mint)' : '0 0 6px var(--brand-primary)'
           }} />
           <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             {settings.useDemoMode ? 'Demo Engine' : 'Live API'}
           </span>
-          <Settings size={12} color="var(--text-dim)" />
+          <Settings size={12} color="var(--text-muted)" />
         </button>
       </div>
     </header>

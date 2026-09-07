@@ -32,7 +32,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
       badge: 'STEP 1 OF 6 • SOURCE INGESTION',
       title: 'ONE SOURCE: No Prompt Engineering Required',
       icon: FileText,
-      color: '#38bdf8',
+      color: '#7C6FE8',
       summary: 'Users provide one authoritative document instead of repeatedly pasting snippets into chat prompt boxes.',
       details: [
         'Document: "Introduction to Renewable Energy: Grid Parity, Intermittency & Storage.pdf"',
@@ -44,7 +44,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
       badge: 'STEP 2 OF 6 • CONTENT INTELLIGENCE',
       title: 'UNDERSTAND: Automated Structural Extraction',
       icon: Cpu,
-      color: '#818cf8',
+      color: '#1F7C67',
       summary: 'ByteForce analyzes the semantic architecture of the source before running generative models.',
       details: [
         'Detected Topics: Levelized Cost of Energy (LCOE), Intermittency, Duck Curve, Storage Hierarchy.',
@@ -56,7 +56,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
       badge: 'STEP 3 OF 6 • PURPOSE & INTENT',
       title: 'CHOOSE PURPOSE: What do you want to create?',
       icon: Sliders,
-      color: '#a855f7',
+      color: '#B27B1A',
       summary: 'Replace prompt writing with intended outcomes organized across 5 purpose modes.',
       details: [
         'Modes: Summarize, Learn, Assess, Present, and Publish.',
@@ -68,7 +68,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
       badge: 'STEP 4 OF 6 • TRANSFORMATION ENGINE',
       title: 'TRANSFORM: 7-Stage Orchestration Pipeline',
       icon: Zap,
-      color: '#10b981',
+      color: '#7C6FE8',
       summary: 'Structured pipeline replaces generic loading spinners with explicit architecture.',
       details: [
         '01 Ingest → 02 Understand → 03 Intent → 04 Transform → 05 Validate → 06 Format → 07 Deliver.',
@@ -80,7 +80,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
       badge: 'STEP 5 OF 6 • QUALITY SIGNALS',
       title: 'VALIDATE: Structural & Factual Verification',
       icon: ShieldCheck,
-      color: '#f59e0b',
+      color: '#1F7C67',
       summary: 'Outputs undergo real heuristic checks rather than fabricated AI confidence scores.',
       details: [
         'Structure Validated: Verified presence of overview, key insights, concepts, and takeaways.',
@@ -92,7 +92,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
       badge: 'STEP 6 OF 6 • ASSET WORKSPACE',
       title: 'MULTIPLE OUTPUTS: One Source → Ready-to-Use Assets',
       icon: Layers,
-      color: '#34d399',
+      color: '#7C6FE8',
       summary: 'Deliver interactive, editable assets in a unified tabbed and grid comparison workspace.',
       details: [
         'Interactive 3D Flashcards with card flipping and mastery tracking.',
@@ -126,7 +126,14 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
       <div 
         className="modal-content animate-fade-in" 
         onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: 640, padding: '28px', border: '1px solid rgba(56, 189, 248, 0.25)' }}
+        style={{
+          maxWidth: 640,
+          padding: '28px',
+          background: '#FFFFFF',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: '16px',
+          boxShadow: '0 20px 48px rgba(30, 30, 46, 0.12)'
+        }}
       >
         {/* Header */}
         <div style={{
@@ -142,19 +149,19 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
               width: 36,
               height: 36,
               borderRadius: 10,
-              background: 'linear-gradient(135deg, #0284c7 0%, #10b981 100%)',
+              background: 'linear-gradient(135deg, #7C6FE8 0%, #6FD6C0 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 0 16px rgba(56, 189, 248, 0.3)'
+              boxShadow: '0 2px 8px rgba(124, 111, 232, 0.25)'
             }}>
-              <Zap size={18} color="#ffffff" />
+              <Zap size={18} color="#FFFFFF" />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', margin: 0 }}>
                 Architecture Walkthrough
               </h2>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                 SIH26154: Content Transformation Operating Layer
               </div>
             </div>
@@ -167,7 +174,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
 
         {/* Step Progress Pills */}
         <div style={{ display: 'flex', gap: 6, marginBottom: 20 }}>
-          {steps.map((s, idx) => (
+          {steps.map((_s, idx) => (
             <div
               key={idx}
               onClick={() => setCurrentStep(idx)}
@@ -178,8 +185,8 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
                 background: idx === currentStep 
                   ? active.color 
                   : idx < currentStep 
-                  ? 'rgba(255, 255, 255, 0.3)' 
-                  : 'rgba(255, 255, 255, 0.08)',
+                  ? 'var(--brand-primary)' 
+                  : 'var(--border-subtle)',
                 cursor: 'pointer',
                 transition: 'all 0.25s ease'
               }}
@@ -190,7 +197,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
         {/* Step Content Card */}
         <div style={{
           background: 'var(--bg-canvas)',
-          border: `1.5px solid ${active.color}40`,
+          border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-md)',
           padding: '24px',
           display: 'flex',
@@ -198,40 +205,42 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
           gap: 16
         }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span style={{ fontSize: '0.725rem', fontWeight: 800, color: active.color, letterSpacing: '0.05em' }}>
+            <span style={{ fontSize: '0.725rem', fontWeight: 700, color: active.color, letterSpacing: '0.04em' }}>
               {active.badge}
             </span>
             <div style={{
               width: 34,
               height: 34,
               borderRadius: 8,
-              background: `${active.color}15`,
-              border: `1px solid ${active.color}35`,
+              background: '#FFFFFF',
+              border: '1px solid var(--border-subtle)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: active.color
+              color: active.color,
+              boxShadow: 'var(--shadow-resting)'
             }}>
               <IconComponent size={18} />
             </div>
           </div>
 
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', lineHeight: 1.35, letterSpacing: '-0.01em', margin: 0 }}>
+          <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.35, letterSpacing: '-0.01em', margin: 0 }}>
             {active.title}
           </h3>
 
-          <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.65, margin: 0 }}>
+          <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.6, margin: 0 }}>
             {active.summary}
           </p>
 
           <div style={{
-            background: 'var(--bg-surface)',
+            background: '#FFFFFF',
             borderRadius: 'var(--radius-sm)',
             padding: '16px',
             border: '1px solid var(--border-subtle)',
             display: 'flex',
             flexDirection: 'column',
-            gap: 10
+            gap: 10,
+            boxShadow: 'var(--shadow-resting)'
           }}>
             {active.details.map((detail, dIdx) => (
               <div key={dIdx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: '0.825rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>
@@ -260,7 +269,7 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
             <span>Previous</span>
           </button>
 
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             Step {currentStep + 1} of {steps.length}
           </span>
 
@@ -269,9 +278,9 @@ export const GuidedDemoModal: React.FC<GuidedDemoModalProps> = ({
             className="btn btn-primary btn-sm"
             style={{
               background: currentStep === steps.length - 1 
-                ? 'linear-gradient(135deg, #10b981 0%, #38bdf8 100%)' 
+                ? 'linear-gradient(135deg, #7C6FE8 0%, #6FD6C0 100%)' 
                 : undefined,
-              boxShadow: currentStep === steps.length - 1 ? '0 0 20px rgba(16, 185, 129, 0.4)' : undefined
+              boxShadow: currentStep === steps.length - 1 ? '0 2px 8px rgba(124, 111, 232, 0.25)' : undefined
             }}
           >
             <span>{currentStep === steps.length - 1 ? 'Execute Transformation Now →' : 'Next Step'}</span>

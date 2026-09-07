@@ -77,14 +77,19 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <span className="badge badge-cyan">
+            <span className="badge" style={{
+              background: 'rgba(124, 111, 232, 0.1)',
+              color: 'var(--brand-primary)',
+              border: '1px solid rgba(124, 111, 232, 0.25)',
+              fontWeight: 700
+            }}>
               PRESENT • SLIDE DECK OUTLINE
             </span>
-            <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
+            <span style={{ fontSize: '0.725rem', color: 'var(--text-secondary)' }}>
               {data.slides.length} Keynote Slides • Audience: {data.targetAudience}
             </span>
           </div>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.015em' }}>
             {data.title}
           </h2>
         </div>
@@ -101,7 +106,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
             onClick={handleCopy}
             className="btn btn-secondary btn-sm"
           >
-            {copied ? <Check size={13} color="#10b981" /> : <Copy size={13} />}
+            {copied ? <Check size={13} color="#1F7C67" /> : <Copy size={13} />}
             <span>{copied ? 'Copied' : 'Copy Deck'}</span>
           </button>
           <button
@@ -133,15 +138,15 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
         padding: '12px 16px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Presentation size={15} color="var(--brand-cyan)" />
+          <Presentation size={15} color="var(--brand-primary)" />
           <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-            Theme: <strong style={{ color: '#ffffff' }}>{data.theme}</strong>
+            Theme: <strong style={{ color: 'var(--text-primary)' }}>{data.theme}</strong>
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <UserCheck size={15} color="#818cf8" />
+          <UserCheck size={15} color="#1F7C67" />
           <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-            Audience: <strong style={{ color: '#ffffff' }}>{data.targetAudience}</strong>
+            Audience: <strong style={{ color: 'var(--text-primary)' }}>{data.targetAudience}</strong>
           </span>
         </div>
       </div>
@@ -167,30 +172,31 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
 
       {/* ACTIVE SLIDE VIEWER CANVAS */}
       <div style={{
-        background: 'linear-gradient(145deg, #0d121c 0%, #080b11 100%)',
-        border: '1.5px solid rgba(56, 189, 248, 0.3)',
+        background: '#FAFAFB',
+        border: '1px solid var(--border-subtle)',
         borderRadius: 'var(--radius-lg)',
-        padding: '26px',
+        padding: '24px',
         display: 'flex',
         flexDirection: 'column',
         gap: 16,
-        boxShadow: 'var(--shadow-md)'
+        boxShadow: 'var(--shadow-resting)'
       }}>
         {/* Slide Title */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          borderBottom: '1px solid var(--border-subtle)',
           paddingBottom: 12
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{
-              background: 'var(--brand-cyan)',
-              color: '#07090d',
-              fontWeight: 800,
+              background: '#F3F1FC',
+              border: '1px solid #E9E8F5',
+              color: 'var(--brand-primary)',
+              fontWeight: 700,
               fontSize: '0.725rem',
-              padding: '2px 8px',
+              padding: '3px 9px',
               borderRadius: 4
             }}>
               SLIDE {activeSlide.slideNumber}
@@ -208,12 +214,12 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
                 style={{ fontSize: '1rem', fontWeight: 700 }}
               />
             ) : (
-              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#ffffff' }}>
+              <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
                 {activeSlide.title}
               </h3>
             )}
           </div>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             {activeSlideIndex + 1} of {data.slides.length}
           </span>
         </div>
@@ -227,17 +233,18 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
                 display: 'flex',
                 alignItems: 'flex-start',
                 gap: 12,
-                background: 'rgba(255, 255, 255, 0.02)',
+                background: '#FFFFFF',
                 padding: '10px 14px',
                 borderRadius: 'var(--radius-sm)',
-                border: '1px solid rgba(255, 255, 255, 0.05)'
+                border: '1px solid var(--border-subtle)',
+                boxShadow: 'var(--shadow-resting)'
               }}
             >
               <div style={{
                 width: 7,
                 height: 7,
                 borderRadius: '50%',
-                background: 'var(--brand-cyan)',
+                background: 'var(--brand-primary)',
                 marginTop: 6,
                 flexShrink: 0
               }} />
@@ -254,7 +261,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
                   style={{ fontSize: '0.85rem' }}
                 />
               ) : (
-                <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                <span style={{ fontSize: '0.875rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>
                   {bullet}
                 </span>
               )}
@@ -265,8 +272,8 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
         {/* Speaker Notes */}
         <div style={{
           marginTop: 6,
-          background: 'rgba(99, 102, 241, 0.06)',
-          border: '1px solid rgba(99, 102, 241, 0.2)',
+          background: '#F3F1FC',
+          border: '1px solid #E9E8F5',
           borderRadius: 'var(--radius-sm)',
           padding: '14px',
           display: 'flex',
@@ -276,7 +283,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
           <div style={{
             fontSize: '0.725rem',
             fontWeight: 700,
-            color: '#a5b4fc',
+            color: 'var(--brand-primary)',
             display: 'flex',
             alignItems: 'center',
             gap: 6
@@ -296,7 +303,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
               style={{ minHeight: 70, fontSize: '0.8rem' }}
             />
           ) : (
-            <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.55, fontStyle: 'italic' }}>
+            <p style={{ fontSize: '0.825rem', color: 'var(--text-secondary)', lineHeight: 1.55, fontStyle: 'italic', margin: 0 }}>
               "{activeSlide.speakerNotes}"
             </p>
           )}
@@ -307,7 +314,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+          borderTop: '1px solid var(--border-subtle)',
           paddingTop: 12
         }}>
           <button
@@ -319,7 +326,7 @@ export const PresentationOutlineCard: React.FC<PresentationOutlineCardProps> = (
             <span>Previous Slide</span>
           </button>
 
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             Slide {activeSlideIndex + 1} of {data.slides.length}
           </span>
 

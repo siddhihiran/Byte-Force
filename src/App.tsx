@@ -18,6 +18,7 @@ import { StorageService, AppSettings } from './services/StorageService';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { HeroSection } from './components/landing/HeroSection';
+import { WorkflowStepper } from './components/workspace/WorkflowStepper';
 import { SourceZone } from './components/workspace/SourceZone';
 import { PurposeZone } from './components/workspace/PurposeZone';
 import { ConfigPanel } from './components/workspace/ConfigPanel';
@@ -265,7 +266,7 @@ export const App: React.FC = () => {
       />
 
       {/* Main Viewport */}
-      <main style={{ flex: 1, position: 'relative', zIndex: 1, padding: '24px 16px' }}>
+      <main style={{ flex: 1, position: 'relative', zIndex: 1, padding: '32px' }}>
         {activeView === 'landing' ? (
           /* PRODUCT OVERVIEW & SIGNATURE VISUAL */
           <HeroSection
@@ -286,7 +287,7 @@ export const App: React.FC = () => {
           />
         ) : (
           /* PRIMARY WORKING WORKSPACE (SIH PROTOTYPE) */
-          <div style={{ maxWidth: 1400, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div style={{ maxWidth: 1440, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 24 }}>
             {hasResults ? (
               /* RESULTS MODE: MULTI-ASSET OUTPUT WORKSPACE */
               <OutputWorkspace
@@ -298,19 +299,26 @@ export const App: React.FC = () => {
                 onToggleSaveAsset={handleToggleSaveAsset}
               />
             ) : (
-              /* CONFIGURATION MODE: 3-ZONE TRANSFORMATION WORKSPACE */
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'minmax(300px, 1fr) minmax(360px, 1.25fr) minmax(280px, 1fr)',
-                gap: 18,
-                alignItems: 'start'
-              }}>
-                {/* ZONE 1: SOURCE CONTENT & CONTENT INTELLIGENCE */}
-                <SourceZone
-                  source={source}
-                  onUpdateSource={(newSrc) => setSource(newSrc)}
-                  onSelectSample={handleSelectSample}
+              <>
+                {/* Horizontal Progress Stepper: ① Source → ② Purpose → ③ Tune */}
+                <WorkflowStepper
+                  sourceReady={source.wordCount > 0}
+                  purposeCount={selectedPurposes.length}
                 />
+
+                {/* CONFIGURATION MODE: 3-ZONE TRANSFORMATION WORKSPACE (24px gutter) */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+                  gap: 24,
+                  alignItems: 'start'
+                }}>
+                  {/* ZONE 1: SOURCE CONTENT & CONTENT INTELLIGENCE */}
+                  <SourceZone
+                    source={source}
+                    onUpdateSource={(newSrc) => setSource(newSrc)}
+                    onSelectSample={handleSelectSample}
+                  />
 
                 {/* ZONE 2: 5 SELECTABLE PURPOSE MODES & MULTI-TRANSFORMATION */}
                 <PurposeZone
@@ -339,6 +347,7 @@ export const App: React.FC = () => {
                   selectedCount={selectedPurposes.length}
                 />
               </div>
+              </>
             )}
           </div>
         )}

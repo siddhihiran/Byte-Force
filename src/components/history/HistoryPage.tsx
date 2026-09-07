@@ -49,19 +49,26 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
               width: 36,
               height: 36,
               borderRadius: 10,
-              background: 'rgba(56, 189, 248, 0.12)',
-              border: '1px solid rgba(56, 189, 248, 0.25)',
+              background: '#F3F1FC',
+              border: '1px solid #E9E8F5',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--brand-cyan)'
+              color: 'var(--brand-primary)'
             }}>
               <History size={18} />
             </div>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em', margin: 0 }}>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em', margin: 0 }}>
               Transformation History
             </h1>
-            <span className="badge badge-cyan" style={{ fontSize: '0.72rem', padding: '3px 9px' }}>
+            <span className="badge" style={{
+              fontSize: '0.72rem',
+              padding: '3px 9px',
+              background: '#EBFBF7',
+              color: '#1F7C67',
+              border: '1px solid #BFEFDE',
+              fontWeight: 700
+            }}>
               {historyEntries.length} Saved Run{historyEntries.length !== 1 ? 's' : ''}
             </span>
           </div>
@@ -83,7 +90,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
             <button
               onClick={onClearHistory}
               className="btn btn-secondary btn-sm"
-              style={{ color: 'var(--brand-rose)' }}
+              style={{ color: '#E11D48' }}
             >
               <Trash2 size={14} />
               <span>Clear All</span>
@@ -115,13 +122,16 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: 16
+          gap: 16,
+          background: '#FFFFFF',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: '16px'
         }}>
           <div style={{
             width: 56,
             height: 56,
             borderRadius: 14,
-            background: 'rgba(255, 255, 255, 0.03)',
+            background: '#FAFAFB',
             border: '1px solid var(--border-subtle)',
             display: 'flex',
             alignItems: 'center',
@@ -130,10 +140,10 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
             <History size={26} color="var(--text-muted)" />
           </div>
           <div>
-            <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: '#ffffff', marginBottom: 6 }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }}>
               {searchTerm ? 'No Matching Transformations Found' : 'No Transformation History Yet'}
             </h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', maxWidth: 420, margin: 0, lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', maxWidth: 420, margin: 0, lineHeight: 1.5 }}>
               {searchTerm ? 'Try a different search term or clear the filter.' : 'When you ingest a source and transform it into assets, it will be automatically saved here for instant re-opening.'}
             </p>
           </div>
@@ -153,21 +163,31 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 gap: 14,
-                position: 'relative'
+                position: 'relative',
+                background: '#FFFFFF',
+                border: '1px solid var(--border-subtle)',
+                borderRadius: '14px',
+                boxShadow: 'var(--shadow-resting)'
               }}
             >
               {/* Header */}
               <div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10, marginBottom: 10 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <FileText size={16} color="var(--brand-cyan)" />
-                    <span className="badge badge-cyan" style={{ fontSize: '0.65rem' }}>
+                    <FileText size={16} color="var(--brand-primary)" />
+                    <span className="badge" style={{
+                      fontSize: '0.65rem',
+                      background: '#F3F1FC',
+                      color: 'var(--brand-primary)',
+                      border: '1px solid #E9E8F5',
+                      fontWeight: 700
+                    }}>
                       {entry.sourceType.toUpperCase()}
                     </span>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>
                       {entry.timestamp}
                     </span>
                     <button
@@ -176,7 +196,7 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                         onDeleteEntry(entry.id);
                       }}
                       className="btn btn-ghost btn-sm"
-                      style={{ padding: '2px 6px', color: 'var(--brand-rose)' }}
+                      style={{ padding: '2px 6px', color: '#E11D48' }}
                       title="Delete entry"
                     >
                       <Trash2 size={13} />
@@ -184,11 +204,11 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                   </div>
                 </div>
 
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#ffffff', marginBottom: 6, lineHeight: 1.3 }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6, lineHeight: 1.3 }}>
                   {entry.sourceTitle}
                 </h3>
 
-                <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                <div style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
                   <span>{entry.wordCount} words</span>
                   <span>•</span>
                   <span>{entry.assets.length} Generated Output Asset{entry.assets.length !== 1 ? 's' : ''}</span>
@@ -197,7 +217,12 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({
                 {/* Purpose Tags */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
                   {entry.purposes.map((p, i) => (
-                    <span key={i} className="badge badge-muted" style={{ fontSize: '0.65rem' }}>
+                    <span key={i} className="badge" style={{
+                      fontSize: '0.65rem',
+                      background: '#F3F1FC',
+                      color: 'var(--text-secondary)',
+                      border: '1px solid var(--border-subtle)'
+                    }}>
                       {p.replace('_', ' ').toUpperCase()}
                     </span>
                   ))}

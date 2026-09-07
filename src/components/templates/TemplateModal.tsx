@@ -38,7 +38,14 @@ export const TemplateModal: React.FC<TemplateModalProps> = ({
       <div 
         className="modal-content animate-fade-in" 
         onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: 760, padding: '28px', border: '1px solid rgba(56, 189, 248, 0.25)' }}
+        style={{
+          maxWidth: 760,
+          padding: '28px',
+          background: '#FFFFFF',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: '16px',
+          boxShadow: '0 20px 48px rgba(30, 30, 46, 0.12)'
+        }}
       >
         {/* Header */}
         <div style={{
@@ -54,20 +61,20 @@ export const TemplateModal: React.FC<TemplateModalProps> = ({
               width: 36,
               height: 36,
               borderRadius: 10,
-              background: 'rgba(56, 189, 248, 0.12)',
-              border: '1px solid rgba(56, 189, 248, 0.25)',
+              background: 'linear-gradient(135deg, #7C6FE8 0%, #6FD6C0 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: 'var(--brand-cyan)'
+              color: '#FFFFFF',
+              boxShadow: '0 2px 8px rgba(124, 111, 232, 0.25)'
             }}>
               <Sparkles size={18} />
             </div>
             <div>
-              <h2 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
+              <h2 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', margin: 0 }}>
                 Curated Transformation Presets
               </h2>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                 1-Click presets for Study, Exam Prep, Presentation, Social, and Executive Briefs
               </div>
             </div>
@@ -97,7 +104,10 @@ export const TemplateModal: React.FC<TemplateModalProps> = ({
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   gap: 14,
-                  background: 'var(--bg-canvas)'
+                  background: '#FAFAFB',
+                  border: '1px solid var(--border-subtle)',
+                  borderRadius: '14px',
+                  boxShadow: 'var(--shadow-resting)'
                 }}
               >
                 <div>
@@ -111,23 +121,30 @@ export const TemplateModal: React.FC<TemplateModalProps> = ({
                       width: 36,
                       height: 36,
                       borderRadius: 8,
-                      background: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid var(--border-subtle)',
+                      background: '#F3F1FC',
+                      border: '1px solid #E9E8F5',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--brand-cyan)'
+                      color: 'var(--brand-primary)'
                     }}>
                       <IconComponent size={18} />
                     </div>
                     {pack.badge && (
-                      <span className="badge badge-cyan" style={{ fontSize: '0.68rem', padding: '2px 8px' }}>
+                      <span className="badge" style={{
+                        fontSize: '0.68rem',
+                        padding: '2px 8px',
+                        background: '#EBFBF7',
+                        color: '#1F7C67',
+                        border: '1px solid #BFEFDE',
+                        fontWeight: 700
+                      }}>
                         {pack.badge}
                       </span>
                     )}
                   </div>
 
-                  <h3 style={{ fontSize: '1rem', fontWeight: 800, color: '#ffffff', marginBottom: 6 }}>
+                  <h3 style={{ fontSize: '0.975rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 6 }}>
                     {pack.name}
                   </h3>
                   <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: 12, margin: 0 }}>
@@ -136,7 +153,12 @@ export const TemplateModal: React.FC<TemplateModalProps> = ({
 
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 10 }}>
                     {pack.recommendedPurposes.map((p, i) => (
-                      <span key={i} className="badge badge-muted" style={{ fontSize: '0.65rem' }}>
+                      <span key={i} className="badge" style={{
+                        fontSize: '0.65rem',
+                        background: '#F3F1FC',
+                        color: 'var(--text-secondary)',
+                        border: '1px solid var(--border-subtle)'
+                      }}>
                         {p.replace('_', ' ').toUpperCase()}
                       </span>
                     ))}
